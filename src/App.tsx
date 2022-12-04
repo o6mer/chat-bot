@@ -1,12 +1,11 @@
-import './App.css'
+import ChatWindown from "./Components/Chat/ChatWindow";
 
 function App() {
-
   return (
-    <div className="">
-     
+    <div className="w-full h-full flex justify-center items-center">
+      <ChatWindown />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
