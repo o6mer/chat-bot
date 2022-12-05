@@ -11,19 +11,16 @@ const SignupPage = () => {
   const signupHandler = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      console.log(email, password, username);
       const res = await axios.post("http://localhost:3001/api/user/signup", {
         email,
         password,
         username,
       });
-      console.log(res.data);
-    } catch (err) {
-      alert(err);
+    } catch (err: any) {
+      alert(err.response.data.message);
     }
 
     clearForm();
-    // const newUser = await res.json();
   };
 
   const clearForm = () => {
