@@ -1,7 +1,6 @@
 import React, { FormEvent, useState } from "react";
-import { TypeMessage } from "./ChatField";
 
-const ChatKeyboard = ({ addMessage }: any) => {
+const ChatKeyboard = ({ sendMessage }: any) => {
   const [messageContent, setMessageContent] = useState<string>("");
 
   const submitHandler = (e: React.FormEvent) => {
@@ -13,8 +12,7 @@ const ChatKeyboard = ({ addMessage }: any) => {
       time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     };
 
-    addMessage(newMessage);
-
+    sendMessage(newMessage);
     setMessageContent("");
   };
 

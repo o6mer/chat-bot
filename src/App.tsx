@@ -1,10 +1,13 @@
 import ChatWindown from "./Components/Chat/ChatWindow";
+import GeneralContext from "./Contexts/GeneralContext";
 
 function App() {
   return (
-    <div className="w-full h-full flex justify-center items-center">
-      <ChatWindown />
-    </div>
+    <GeneralContext>
+      <div className="w-full h-full flex justify-center items-center">
+        <ChatWindown />
+      </div>
+    </GeneralContext>
   );
 }
 
