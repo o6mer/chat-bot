@@ -8,7 +8,12 @@ import ChatWindow from "./Components/Chat/ChatWindow";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
+    element: <App />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/signup",
     element: <App />,
     errorElement: <ErrorPage />,
   },
