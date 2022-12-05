@@ -4,10 +4,12 @@ import ChatHeader from "./ChatHeader/ChatHeader";
 
 const ChatWindow = () => {
   return (
-    <main className="w-72 bg-gray-200">
-      <ChatHeader />
-      <ChatField />
-    </main>
+    <div className="w-full h-full flex justify-center items-center">
+      <main className="w-72 bg-gray-200">
+        <ChatHeader />
+        <ChatField />
+      </main>
+    </div>
   );
 };
 

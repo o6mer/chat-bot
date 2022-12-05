@@ -1,12 +1,13 @@
 import ChatWindown from "./Components/Chat/ChatWindow";
 import GeneralContext from "./Contexts/GeneralContext";
-
+import ReactDOM from "react-dom/client";
+import LandingPage from "./Components/Landing/LandingPage";
 function App() {
+
+  
   return (
     <GeneralContext>
-      <div className="w-full h-full flex justify-center items-center">
-        <ChatWindown />
-      </div>
+      <LandingPage />
     </GeneralContext>
   );
 }
