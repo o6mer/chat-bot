@@ -1,4 +1,5 @@
 import React, { FormEvent, useState } from "react";
+import { TMessage, TTextMessage } from "../../../Types/Types";
 
 const ChatKeyboard = ({ sendMessage }: any) => {
   const [messageContent, setMessageContent] = useState<string>("");
@@ -6,10 +7,11 @@ const ChatKeyboard = ({ sendMessage }: any) => {
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newMessage = {
+    const newMessage: TMessage = {
       content: messageContent,
       writer: "user",
       time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+      type: "text",
     };
 
     sendMessage(newMessage);

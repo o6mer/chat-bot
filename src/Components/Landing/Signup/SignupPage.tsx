@@ -1,21 +1,31 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useContext, useState } from "react";
 import LabeldInput from "../../General/LabeldInput";
 import axios from "axios";
-import { clear } from "console";
+import { GeneralContext } from "../../../Contexts/GeneralContext";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
+  const { setUser }: any = useContext(GeneralContext);
+
+  const navigate = useNavigate();
+
   const signupHandler = async (e: FormEvent) => {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:3001/api/user/signup", {
-        email,
-        password,
-        username,
+        email: email,
+        password: password,
+        username: username,
       });
+
+      const userData = res.data;
+
+      setUser(userData);
+      navigate("/chat");
     } catch (err: any) {
       alert(err.response.data.message);
     }

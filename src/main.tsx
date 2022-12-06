@@ -5,8 +5,14 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import ErrorPage from "./Components/General/ErrorPage";
 import ChatWindow from "./Components/Chat/ChatWindow";
+import GeneralContext from "./Contexts/GeneralContext";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: "/login",
     element: <App />,
@@ -26,6 +32,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <GeneralContext>
+      <RouterProvider router={router} />
+    </GeneralContext>
   </React.StrictMode>
 );

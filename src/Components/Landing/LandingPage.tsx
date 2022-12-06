@@ -9,6 +9,7 @@ const LandingPage = () => {
   return (
     <main className="h-screen -screen flex justify-center items-center">
       <div className="bg-gray-400 p-4">
+        {location.pathname === "/" && <LoginPage />}
         {location.pathname === "/login" && <LoginPage />}
         {location.pathname === "/signup" && <SignupPage />}
       </div>

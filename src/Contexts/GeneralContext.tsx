@@ -1,23 +1,16 @@
 import React, { createContext, useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import { TUser } from "../Types/Types";
 
 export const GeneralContext = createContext({});
 
 const GeneralProvider = ({ children }: any) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<TUser>();
   const [darkMode, setDarkMode] = useState(false);
   const [socket, setSocket]: any = useState();
-
-  useEffect(() => {
-    setSocket(
-      io("http://localhost:3001/", {
-        closeOnBeforeunload: false,
-      })
-    );
-  }, []);
-
   return (
-    <GeneralContext.Provider value={{ user, setUser, darkMode, socket }}>
+    <GeneralContext.Provider
+      value={{ user, setUser, darkMode, socket, setSocket }}
+    >
       {children}
     </GeneralContext.Provider>
   );
