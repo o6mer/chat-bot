@@ -4,8 +4,9 @@ import App from "./App";
 import "./index.css";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import ErrorPage from "./Components/General/ErrorPage";
-import ChatWindow from "./Components/Chat/ChatWindow";
+import Chat from "./Components/Chat/Chat";
 import GeneralContext from "./Contexts/GeneralContext";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/chat",
-    element: <ChatWindow />,
+    element: <Chat />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
     errorElement: <ErrorPage />,
   },
 ]);

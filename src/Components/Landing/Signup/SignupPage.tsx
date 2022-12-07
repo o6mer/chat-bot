@@ -20,12 +20,13 @@ const SignupPage = () => {
         email: email,
         password: password,
         username: username,
+        roll: "admin",
       });
 
       const userData = res.data;
 
       setUser(userData);
-      navigate("/chat");
+      navigate("/dashboard");
     } catch (err: any) {
       alert(err.response.data.message);
     }

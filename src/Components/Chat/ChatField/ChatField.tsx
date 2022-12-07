@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import GeneralProvider, {
-  GeneralContext,
-} from "../../../Contexts/GeneralContext";
+import { GeneralContext } from "../../../Contexts/GeneralContext";
 import ChatKeyboard from "./ChatKeyboard";
 import TextMessage from "../ChatMessages/TextMessage";
 import { TMessage } from "../../../Types/Types";
@@ -23,8 +21,6 @@ const ChatField = () => {
 
   useEffect(() => {
     if (!socket) return;
-
-    
 
     socket.on("connect", () => {
       console.log("connected");

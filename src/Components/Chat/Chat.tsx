@@ -2,7 +2,7 @@ import React from "react";
 import ChatField from "./ChatField/ChatField";
 import ChatHeader from "./ChatHeader/ChatHeader";
 
-const ChatWindow = () => {
+const Chat = () => {
   return (
     <div className="w-full h-full flex justify-center items-center">
       <main className="w-72 bg-gray-200">
@@ -13,4 +13,4 @@ const ChatWindow = () => {
   );
 };
 
-export default ChatWindow;
+export default Chat;

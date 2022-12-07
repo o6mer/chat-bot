@@ -1,5 +1,5 @@
-import React, { FormEvent, useState } from "react";
-import { TMessage, TTextMessage } from "../../../Types/Types";
+import React, { useState } from "react";
+import { TMessage } from "../../../Types/Types";
 
 const ChatKeyboard = ({ sendMessage }: any) => {
   const [messageContent, setMessageContent] = useState<string>("");
@@ -10,7 +10,7 @@ const ChatKeyboard = ({ sendMessage }: any) => {
     const newMessage: TMessage = {
       content: messageContent,
       writer: "user",
-      time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+      time: getForamtedTime(),
       type: "text",
     };
 
@@ -20,6 +20,12 @@ const ChatKeyboard = ({ sendMessage }: any) => {
 
   const typeHandler = (e: React.FormEvent<HTMLInputElement>): void => {
     setMessageContent(e.currentTarget.value);
+  };
+
+  const getForamtedTime = (): string => {
+    const currentTime = new Date().toLocaleTimeString().slice(0, 4);
+
+    return Number(currentTime[0]) < 10 ? `0${currentTime}` : currentTime;
   };
 
   return (
