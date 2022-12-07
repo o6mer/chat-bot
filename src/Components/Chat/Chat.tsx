@@ -1,6 +1,6 @@
 import React from "react";
-import ChatField from "./ChatField/ChatField";
-import ChatHeader from "./ChatHeader/ChatHeader";
+import ChatField from "./Field/ChatField";
+import ChatHeader from "./Header/ChatHeader";
 
 const Chat = () => {
   return (

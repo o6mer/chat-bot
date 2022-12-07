@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { GeneralContext } from "../../../Contexts/GeneralContext";
 import ChatKeyboard from "./ChatKeyboard";
-import TextMessage from "../ChatMessages/TextMessage";
+import TextMessage from "../Messages/TextMessage";
 import { TMessage } from "../../../Types/Types";
-import InputMessage from "../ChatMessages/InputMessage";
+import InputMessage from "../Messages/InputMessage";
 import { io } from "socket.io-client";
 
 const ChatField = () => {
