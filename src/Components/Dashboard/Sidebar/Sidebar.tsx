@@ -1,10 +1,11 @@
 import React from "react";
+import { TChat } from "../../../Types/Types";
 import SectionBreak from "../General/SectionBreak";
 import SidebarChatsList from "./ChatList/SidebarChatsList";
 import SidebarFilters from "./Filters/SidebarFilters";
 import SidebarHeader from "./Header/SidebarHeader";
 
-const SideBar = () => {
+const SideBar = ({chatList} : {chatList?: Array<TChat>}) => {
   return (
     <aside className="flex flex-col h-full w-[20%] p-2 outline-[3px] outline outline-gray-200">
       <SidebarHeader />
@@ -13,9 +14,9 @@ const SideBar = () => {
 
       <SidebarFilters />
 
-      <SidebarChatsList />
+      <SidebarChatsList chatList={chatList} />
     </aside>
   );
 };
 
-export default SideBar
+export default SideBar;

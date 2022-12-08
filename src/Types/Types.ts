@@ -8,7 +8,7 @@ export type TUser = {
 
 export type TMessage = {
   writer: string;
-  time: string;
+  time: Date;
   type: string;
   content?: any;
   children?: any;
@@ -16,12 +16,20 @@ export type TMessage = {
 
 export type TTextMessage = {
   writer: string;
-  time: string;
+  time: Date;
   content?: string;
 };
 
 export type TInputMessage = {
   writer: string;
-  time: string;
+  time: Date;
   content?: any;
+};
+
+export type TChat = {
+  _id: string;
+  costumer: { id: string; name?: string };
+  isOpen: boolean;
+  messages: Array<TMessage>;
+  creationTime: Date;
 };
