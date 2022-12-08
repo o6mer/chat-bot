@@ -1,7 +1,7 @@
 import React, { FormEvent, useContext, useState } from "react";
 import LabeldInput from "../../General/LabeldInput";
 import axios from "axios";
-import { GeneralContext } from "../../../Contexts/GeneralContext";
+import { GeneralContext } from "../../../Contextx/GeneralContext";
 import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {

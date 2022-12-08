@@ -1,23 +1,21 @@
 import React from "react";
 import SectionBreak from "../General/SectionBreak";
-import SidebarChatsList from "./SidebarChatList/SidebarChatsList";
-import SidebarFilters from "./SidebarFilters/SidebarFilters";
-import SidebarHeader from "./SidebarHeader/SidebarHeader";
+import SidebarChatsList from "./ChatList/SidebarChatsList";
+import SidebarFilters from "./Filters/SidebarFilters";
+import SidebarHeader from "./Header/SidebarHeader";
 
-const SideBarChats = () => {
+const SideBar = () => {
   return (
-    <aside className="flex flex-col h-full w-[20%] p-2">
+    <aside className="flex flex-col h-full w-[20%] p-2 outline-[3px] outline outline-gray-200">
       <SidebarHeader />
 
       <SectionBreak />
 
       <SidebarFilters />
 
-      <SectionBreak />
-      
       <SidebarChatsList />
     </aside>
   );
 };
 
-export default SideBarChats;
+export default SideBar

@@ -11,3 +11,25 @@ body {
   width: 100%;
   height: 100%;
 }
+
+/* width */
+.dashboard-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  visibility: hidden;
+}
+
+/* Track */
+.dashboard-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f163;
+}
+
+/* Handle */
+.dashboard-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.523);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+.dashboard-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

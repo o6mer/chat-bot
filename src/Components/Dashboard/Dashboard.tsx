@@ -1,10 +1,12 @@
 import React from "react";
-import SideBarChats from "./Sidebar/Sidebar";
+import MainFrame from "./MainFrame/MainFrame";
+import SideBar from "./Sidebar/Sidebar";
 
 const Dashboard = () => {
   return (
-    <main className="w-full h-full">
-      <SideBarChats />
+    <main className="w-full h-full flex">
+      <SideBar />
+      <MainFrame />
     </main>
   );
 };

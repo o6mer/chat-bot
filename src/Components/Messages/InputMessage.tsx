@@ -1,5 +1,5 @@
 import React from "react";
-import { TInputMessage } from "../../../Types/Types";
+import { TInputMessage } from "../../Types/Types";
 import Message from "./Message";
 
 const InputMessage = ({ writer, time, content }: TInputMessage) => {
