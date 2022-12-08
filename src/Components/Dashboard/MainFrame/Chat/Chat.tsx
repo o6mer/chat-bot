@@ -49,8 +49,8 @@ const Chat = () => {
   const addMessage = (message: TMessage) => {
     setCurrentChatData((prev: any) => {
       prev.messages = [...prev.messages, message];
-      console.log(prev.messages);
-      return { ...prev };
+      const updatedChat: TChat = { ...prev };
+      return updatedChat;
     });
   };
 
