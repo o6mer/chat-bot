@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GeneralContext } from "../../../Contextx/GeneralContext";
+import { GeneralContext } from "../../../Contexts/GeneralContext";
 import ChatKeyboard from "./ChatKeyboard";
 import TextMessage from "../../Messages/TextMessage";
 import { TMessage } from "../../../Types/Types";
@@ -25,7 +25,7 @@ const ChatField = () => {
     socket.on("connect", () => {
       console.log("connected");
 
-      socket.emit("newConnection");
+      socket.emit("newUserConnection");
 
       socket.on("recieveMessage", (recievedMessage: TMessage) => {
         addMessage(recievedMessage);
