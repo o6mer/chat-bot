@@ -5,7 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import ErrorPage from "./Components/General/ErrorPage";
 import Chat from "./Components/Chat/Chat";
-import GeneralContext from "./Contexts/GeneralContext";
+import GeneralContext from "./Contextx/GeneralContext";
 import Dashboard from "./Components/Dashboard/Dashboard";
 
 const router = createBrowserRouter([

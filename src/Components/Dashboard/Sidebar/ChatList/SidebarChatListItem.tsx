@@ -3,7 +3,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 
 const SidebarChatListItem = () => {
   return (
-    <div className="flex gap-2 w-full p-2 rounded-md cursor-pointer items-center transition-all hover:bg-slate-200">
+    <li className="flex gap-2 w-full p-2 rounded-md cursor-pointer items-center transition-all hover:bg-slate-200">
       <div className="flex items-center">
         <AccountCircleOutlinedIcon />
       </div>
@@ -14,7 +14,7 @@ const SidebarChatListItem = () => {
           <p>00:00</p>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 
