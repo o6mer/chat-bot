@@ -13,7 +13,6 @@ const Chat = () => {
 
   useEffect(() => {
     socket?.emit("getChatData", currentChatId, (chatData: TChat) => {
-      console.log(chatData);
       setCurrentChatData(chatData);
     });
   }, [currentChatId]);

@@ -23,8 +23,6 @@ const LoginPage = () => {
       const userData = res.data;
       setUser(userData);
 
-      console.log(userData);
-
       if (userData.roll == "admin") return navigate("/dashboard");
       if (userData.roll == "user") return navigate("/chat");
     } catch (err: any) {
