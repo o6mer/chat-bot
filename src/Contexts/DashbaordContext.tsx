@@ -1,16 +1,16 @@
 import React, { createContext, useEffect, useState } from "react";
 import { TChat, TUser } from "../Types/Types";
 
-export const GeneralContext = createContext({});
+export const DashboardContext = createContext({});
 
-const GeneralProvider = ({ children }: any) => {
+const DashboardContextProvider = ({ children }: any) => {
   const [user, setUser] = useState<TUser>();
   const [darkMode, setDarkMode] = useState(false);
   const [socket, setSocket]: any = useState();
   const [currentChatId, setCurrentChatId] = useState<TChat>();
 
   return (
-    <GeneralContext.Provider
+    <DashboardContext.Provider
       value={{
         user,
         setUser,
@@ -22,8 +22,8 @@ const GeneralProvider = ({ children }: any) => {
       }}
     >
       {children}
-    </GeneralContext.Provider>
+    </DashboardContext.Provider>
   );
 };
 
-export default GeneralProvider;
+export default DashboardContextProvider;

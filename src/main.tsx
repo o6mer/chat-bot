@@ -5,8 +5,9 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import ErrorPage from "./Components/General/ErrorPage";
 import Chat from "./Components/Chat/Chat";
-import GeneralContext from "./Contexts/GeneralContext";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import DashboardContextProvider from "./Contexts/DashbaordContext";
+import CostumerContextProvider from "./Contexts/CostumerContext";
 
 const router = createBrowserRouter([
   {
@@ -38,8 +39,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <GeneralContext>
-      <RouterProvider router={router} />
-    </GeneralContext>
+    <DashboardContextProvider>
+      <CostumerContextProvider>
+        <RouterProvider router={router} />
+      </CostumerContextProvider>
+    </DashboardContextProvider>
   </React.StrictMode>
 );

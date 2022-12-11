@@ -6,12 +6,12 @@ const ChatMessage = ({ writer, time, children }: TMessage) => {
   return (
     <div
       className={`flex flex-col max-w-[80%] w-max py-1 px-2 rounded-md ${
-        writer === "user" ? "self-end bg-slate-200" : "bg-blue-200"
+        writer === "costumer" ? "self-end bg-slate-200" : "bg-blue-200"
       }`}
     >
       <div className="flex justify-between gap-4 items-center">
         <p>{writer}</p>
-        <p>{time}</p>
+        <p>{time.toString()}</p>
       </div>
       <div className="w-full flex">{children}</div>
     </div>

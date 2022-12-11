@@ -6,15 +6,7 @@ const ChatKeyboard = ({ sendMessage }: any) => {
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
-
-    const newMessage: TMessage = {
-      content: messageContent,
-      writer: "user",
-      time: getForamtedTime(),
-      type: "text",
-    };
-
-    sendMessage(newMessage);
+    sendMessage(messageContent);
     setMessageContent("");
   };
 

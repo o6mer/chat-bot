@@ -3,8 +3,6 @@ import { TMessage } from "../../../../../Types/Types";
 import TextMessage from "../../../../Messages/TextMessage";
 
 const ChatMain = ({ messages }: { messages?: Array<TMessage> }) => {
-  console.log(messages);
-
   return (
     <div className=" h-full flex flex-col gap-1 overflow-y-scroll dashboard-scrollbar p-2">
       {/* <TextMessage writer={"user"} time="00:00" content="message  " /> */}

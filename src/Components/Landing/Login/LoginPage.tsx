@@ -1,14 +1,14 @@
 import React, { FormEvent, useContext, useState } from "react";
 import LabeldInput from "../../General/LabeldInput";
 import axios from "axios";
-import { GeneralContext } from "../../../Contexts/GeneralContext";
+import { DashboardContext } from "../../../Contexts/DashbaordContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setUser }: any = useContext(GeneralContext);
+  const { setUser }: any = useContext(DashboardContext);
 
   const navigate = useNavigate();
 
@@ -22,8 +22,6 @@ const LoginPage = () => {
 
       const userData = res.data;
       setUser(userData);
-
-      console.log(userData);
 
       if (userData.roll == "admin") return navigate("/dashboard");
       if (userData.roll == "user") return navigate("/chat");

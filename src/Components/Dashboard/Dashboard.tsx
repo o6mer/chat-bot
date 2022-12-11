@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GeneralContext } from "../../Contexts/GeneralContext";
 import MainFrame from "./MainFrame/MainFrame";
 import SideBar from "./Sidebar/Sidebar";
 import { io } from "socket.io-client";
 import { TChat, TMessage } from "../../Types/Types";
+import { DashboardContext } from "../../Contexts/DashbaordContext";
 
 const Dashboard = () => {
-  const { socket, setSocket }: any = useContext(GeneralContext);
+  const { socket, setSocket }: any = useContext(DashboardContext);
 
   const [chatList, setChatList] = useState<Array<TChat>>();
 
@@ -38,6 +38,7 @@ const Dashboard = () => {
   };
 
   const onNewChat = (newChat: TChat) => {
+    console.log("new chat: ", newChat);
     setChatList((prev: any) => [...prev, newChat]);
   };
 
@@ -45,6 +46,7 @@ const Dashboard = () => {
     <main className="w-full h-full flex">
       <SideBar chatList={chatList} />
       <MainFrame />
+      <button onClick={() => socket.emit("deleteAllChats")}>delte</button>
     </main>
   );
 };
