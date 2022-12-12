@@ -3,20 +3,26 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import { TChat } from "../../../../Types/Types";
 import { DashboardContext } from "../../../../Contexts/DashbaordContext";
 
-const SidebarChatListItem = ({ costumerName, isOpen, messages, id }: TChat) => {
+const SidebarChatListItem = ({
+  costumerName,
+  isOpen,
+  isSeen,
+  messages,
+  id,
+}: TChat) => {
   const { setCurrentChatId }: any = useContext(DashboardContext);
-  const [opened, setOpened] = useState(isOpen);
+  const [seen, setSeen] = useState(isSeen);
   const lastMessage = messages.at(-1);
 
   const chatSelectHandler = () => {
     setCurrentChatId(id);
-    setOpened(true);
+    setSeen(true);
   };
 
   return (
     <li
       className={`flex gap-2 w-full p-2 rounded-md cursor-pointer items-center transition-all hover:bg-slate-200 ${
-        opened ? "font-normal" : "font-bold"
+        seen ? "font-normal" : "font-bold"
       }`}
       onClick={chatSelectHandler}
     >

@@ -7,7 +7,7 @@ const DashboardContextProvider = ({ children }: any) => {
   const [user, setUser] = useState<TUser>();
   const [darkMode, setDarkMode] = useState(false);
   const [socket, setSocket]: any = useState();
-  const [currentChatId, setCurrentChatId] = useState<TChat>();
+  const [currentChatId, setCurrentChatId] = useState<string>();
 
   return (
     <DashboardContext.Provider

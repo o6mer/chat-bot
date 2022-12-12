@@ -32,6 +32,7 @@ export type TChat = {
   id: string;
   costumerName: string;
   isOpen: boolean;
+  isSeen: boolean;
   messages: Array<TMessage>;
   creationTime: Date | string;
 };

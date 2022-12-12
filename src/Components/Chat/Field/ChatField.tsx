@@ -23,10 +23,13 @@ const ChatField = () => {
 
       socket.emit("newUserConnection", onNewUserConnection);
 
-      socket.on("receiveMessage", ({ message }: { message: TMessage }) => {
-        console.log("received message", message);
-        addMessage(message);
-      });
+      socket.on(
+        "receiveMessage",
+        ({ message, id }: { message: TMessage; id: string }) => {
+          console.log("received message", message);
+          addMessage(message);
+        }
+      );
     });
   }, [socket]);
 
@@ -35,11 +38,14 @@ const ChatField = () => {
   };
 
   const sendMessage = (messageContent: string) => {
-    socket.emit("sendMessage", {
-      id: chatId,
-      messageContent,
-      
-    });
+    socket.emit(
+      "sendMessage",
+      {
+        id: chatId,
+        messageContent,
+      },
+      addMessage
+    );
   };
 
   const addMessage = (message: TMessage): void => {
