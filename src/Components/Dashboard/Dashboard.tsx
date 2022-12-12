@@ -80,11 +80,14 @@ const Dashboard = () => {
     );
   };
 
+  const deleteAllChats = () => {
+    socket.emit("deleteAllChats")
+  }
+
   return (
     <main className="w-full h-full flex">
-      <SideBar chatList={chatList} />
+      <SideBar chatList={chatList} deleteAllChats={deleteAllChats}/>
       <MainFrame sendMessage={sendMessage} currentChatData={currentChatData} />
-      <button onClick={() => socket.emit("deleteAllChats")}>delte</button>
     </main>
   );
 };
