@@ -1,24 +1,14 @@
 import React from "react";
+import { TChat } from "../../../../Types/Types";
 import SidebarChatListItem from "./SidebarChatListItem";
 
-const SidebarChatsList = () => {
+const SidebarChatsList = ({ chatList }: { chatList?: Array<TChat> }) => {
   return (
     <section className="w-full h-full overflow-y-scroll dashboard-scrollbar">
       <ul className="h-full flex flex-col gap-1 ">
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
-        <SidebarChatListItem />
+        {chatList?.map((chat, index) => {
+          return <SidebarChatListItem {...chat} key={chat.id || index} />;
+        })}
       </ul>
     </section>
   );

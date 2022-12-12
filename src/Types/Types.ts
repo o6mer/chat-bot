@@ -3,12 +3,14 @@ import React from "react";
 export type TUser = {
   username: string;
   email: string;
+  password: string;
   roll: string;
+  id: string;
 };
 
 export type TMessage = {
   writer: string;
-  time: string;
+  time: Date | string;
   type: string;
   content?: any;
   children?: any;
@@ -16,12 +18,21 @@ export type TMessage = {
 
 export type TTextMessage = {
   writer: string;
-  time: string;
+  time: Date | string;
   content?: string;
 };
 
 export type TInputMessage = {
   writer: string;
-  time: string;
+  time: Date | string;
   content?: any;
+};
+
+export type TChat = {
+  id: string;
+  costumerName: string;
+  isOpen: boolean;
+  isSeen: boolean;
+  messages: Array<TMessage>;
+  creationTime: Date | string;
 };
