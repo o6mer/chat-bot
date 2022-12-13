@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TChat } from "../../../Types/Types";
 import SectionBreak from "../General/SectionBreak";
 import SidebarChatsList from "./ChatList/SidebarChatsList";
@@ -14,6 +14,8 @@ const SideBar = ({
   deleteAllChats: () => void;
   setFilteredChatList: (filter: string) => void;
 }) => {
+  const [sortBy, setSortBy] = useState("new");
+
   return (
     <aside className="flex flex-col h-full w-[20%] p-2 outline-[3px] outline outline-gray-200">
       <SidebarHeader />
@@ -23,9 +25,11 @@ const SideBar = ({
       <SidebarFilters
         setFilteredChatList={setFilteredChatList}
         chatListLength={chatList?.length}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
       />
 
-      <SidebarChatsList chatList={chatList} />
+      <SidebarChatsList sortBy={sortBy} chatList={chatList} />
       <button onClick={deleteAllChats}>Delete</button>
     </aside>
   );
