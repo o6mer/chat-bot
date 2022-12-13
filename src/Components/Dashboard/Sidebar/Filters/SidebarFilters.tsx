@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
+import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import { Menu, MenuItem, Select } from "@mui/material";
 import { useSocket } from "../../../../Hooks/useSocket";
 const SidebarFilters = ({
   setFilteredChatList,
+  chatListLength,
 }: {
   setFilteredChatList: (filter: string) => void;
+  chatListLength?: number;
 }) => {
   const [filter, setfilter] = useState("Open");
   const [anchorEl, setAnchorEl] = useState(null);
@@ -26,7 +29,7 @@ const SidebarFilters = ({
   };
 
   return (
-    <section className="w-full flex justify-between p-2">
+    <section className="w-full flex justify-between px-4 py-2">
       <div className="flex gap-1 text-sm font-bold items-center cursor-pointer text-black">
         <button
           id="basic-button"
@@ -36,8 +39,9 @@ const SidebarFilters = ({
           onClick={handleClick}
           className="flex gap-1 text-sm font-bold items-center capitalize"
         >
-          <TuneOutlinedIcon fontSize="small" />
+          <p className="">{chatListLength}</p>
           <p>{filter}</p>
+          <ExpandMoreOutlinedIcon fontSize="small" />
         </button>
         <Menu
           id="basic-menu"

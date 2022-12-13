@@ -20,7 +20,10 @@ const SideBar = ({
 
       <SectionBreak />
 
-      <SidebarFilters setFilteredChatList={setFilteredChatList} />
+      <SidebarFilters
+        setFilteredChatList={setFilteredChatList}
+        chatListLength={chatList?.length}
+      />
 
       <SidebarChatsList chatList={chatList} />
       <button onClick={deleteAllChats}>Delete</button>

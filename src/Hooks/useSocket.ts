@@ -98,6 +98,7 @@ export const useSocket = () => {
   const setFilteredChatList = (filter: string) => {
     if (filter === chatFitler) return;
 
+    console.log(filter);
     setChatFilter(filter);
 
     socket?.emit("getFilteredChatList", filter, (chatList: Array<TChat>) => {

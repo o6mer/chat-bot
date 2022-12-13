@@ -20,9 +20,8 @@ const MainFrame = ({
       {currentChatId ? (
         <>
           <Chat
-            messages={currentChatData?.messages}
+            currentChatData={currentChatData}
             sendMessage={sendMessage}
-            customerName={currentChatData?.customerName}
             setChatStatus={setChatStatus}
           />
           <InfoSidebar currentChatData={currentChatData} />
