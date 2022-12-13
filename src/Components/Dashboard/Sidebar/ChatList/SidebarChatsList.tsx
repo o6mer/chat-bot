@@ -27,8 +27,8 @@ const SidebarChatsList = ({
       });
     if (sortBy === "old")
       return list?.sort((a: TChat, b: TChat): any => {
-        if (a.creationTime < b.creationTime) return 1;
         if (a.creationTime > b.creationTime) return -1;
+        if (a.creationTime < b.creationTime) return 1;
         return 0;
       });
     return list;
