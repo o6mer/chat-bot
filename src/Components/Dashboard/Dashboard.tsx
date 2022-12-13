@@ -4,13 +4,27 @@ import SideBar from "./Sidebar/Sidebar";
 import { useSocket } from "../../Hooks/useSocket";
 
 const Dashboard = () => {
-  const { chatList, deleteAllChats, sendMessage, currentChatData } =
-    useSocket();
+  const {
+    chatList,
+    deleteAllChats,
+    sendMessage,
+    currentChatData,
+    setChatStatus,
+    setFilteredChatList,
+  } = useSocket();
 
   return (
     <main className="w-full h-full flex">
-      <SideBar chatList={chatList} deleteAllChats={deleteAllChats} />
-      <MainFrame sendMessage={sendMessage} currentChatData={currentChatData} />
+      <SideBar
+        chatList={chatList}
+        deleteAllChats={deleteAllChats}
+        setFilteredChatList={setFilteredChatList}
+      />
+      <MainFrame
+        sendMessage={sendMessage}
+        currentChatData={currentChatData}
+        setChatStatus={setChatStatus}
+      />
     </main>
   );
 };

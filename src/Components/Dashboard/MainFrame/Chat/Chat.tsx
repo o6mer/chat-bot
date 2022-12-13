@@ -8,15 +8,17 @@ import ChatMain from "./Main/ChatMain";
 const Chat = ({
   messages,
   sendMessage,
-  costumerName,
+  customerName,
+  setChatStatus,
 }: {
   messages?: Array<TMessage>;
   sendMessage: (msg: string) => void;
-  costumerName?: string;
+  customerName?: string;
+  setChatStatus: (status: string, id: string) => void;
 }) => {
   return (
     <div className="h-full p-2 flex flex-col grow">
-      <ChatHeader costumerName={costumerName} />
+      <ChatHeader customerName={customerName} setChatStatus={setChatStatus} />
       <SectionBreak />
       <ChatMain messages={messages} />
       <ChatKeyboard sendMessage={sendMessage} />

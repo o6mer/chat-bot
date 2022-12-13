@@ -1,15 +1,14 @@
-import React, { createContext, useEffect, useState } from "react";
-import { TChat, TUser } from "../Types/Types";
+import { createContext, useState } from "react";
 
-export const CostumerContext = createContext({});
+export const CustomerContext = createContext({});
 
-const CostumerContextProvider = ({ children }: any) => {
+const CustomerContextProvider = ({ children }: any) => {
   const [chatId, setChatId] = useState<String>("");
   const [darkMode, setDarkMode] = useState(false);
   const [socket, setSocket]: any = useState();
 
   return (
-    <CostumerContext.Provider
+    <CustomerContext.Provider
       value={{
         chatId,
         setChatId,
@@ -20,8 +19,8 @@ const CostumerContextProvider = ({ children }: any) => {
       }}
     >
       {children}
-    </CostumerContext.Provider>
+    </CustomerContext.Provider>
   );
 };
 
-export default CostumerContextProvider;
+export default CustomerContextProvider;

@@ -4,8 +4,8 @@ import { TChat } from "../../../../Types/Types";
 import { DashboardContext } from "../../../../Contexts/DashbaordContext";
 
 const SidebarChatListItem = ({
-  costumerName,
-  isOpen,
+  customerName,
+  status,
   isSeen,
   messages,
   id,
@@ -30,7 +30,7 @@ const SidebarChatListItem = ({
         <AccountCircleOutlinedIcon />
       </div>
       <div className="flex flex-col w-full">
-        <p>{costumerName || "costumer"}</p>
+        <p>{customerName || "Customer"}</p>
         <div className={`flex justify-between `}>
           <p>{lastMessage?.content || "last message"}</p>
           <p>{lastMessage?.time?.toString() || "00:00"}</p>

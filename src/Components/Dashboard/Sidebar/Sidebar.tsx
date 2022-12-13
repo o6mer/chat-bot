@@ -8,9 +8,11 @@ import SidebarHeader from "./Header/SidebarHeader";
 const SideBar = ({
   chatList,
   deleteAllChats,
+  setFilteredChatList,
 }: {
   chatList?: Array<TChat>;
   deleteAllChats: () => void;
+  setFilteredChatList: (filter: string) => void;
 }) => {
   return (
     <aside className="flex flex-col h-full w-[20%] p-2 outline-[3px] outline outline-gray-200">
@@ -18,7 +20,7 @@ const SideBar = ({
 
       <SectionBreak />
 
-      <SidebarFilters />
+      <SidebarFilters setFilteredChatList={setFilteredChatList} />
 
       <SidebarChatsList chatList={chatList} />
       <button onClick={deleteAllChats}>Delete</button>

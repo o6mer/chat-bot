@@ -4,13 +4,13 @@ import TextMessage from "../../Messages/TextMessage";
 import { TMessage } from "../../../Types/Types";
 import InputMessage from "../../Messages/InputMessage";
 import { io } from "socket.io-client";
-import { CostumerContext } from "../../../Contexts/CostumerContext";
+import { CustomerContext } from "../../../Contexts/CustomerContext";
 
 const ChatField = () => {
   const [messagesList, setMessagesList] = useState<TMessage[]>([]);
 
   const { socket, setSocket, chatId, setChatId }: any =
-    useContext(CostumerContext);
+    useContext(CustomerContext);
 
   useEffect(() => {
     setSocket(io("http://localhost:3001/", {}));

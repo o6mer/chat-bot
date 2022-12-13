@@ -7,9 +7,11 @@ import InfoSidebar from "./InfoSidebar/InfoSidebar";
 const MainFrame = ({
   sendMessage,
   currentChatData,
+  setChatStatus,
 }: {
   sendMessage: (msg: string) => void;
   currentChatData?: TChat;
+  setChatStatus: (status: string, id: string) => void;
 }) => {
   const { currentChatId }: any = useContext(DashboardContext);
 
@@ -20,7 +22,8 @@ const MainFrame = ({
           <Chat
             messages={currentChatData?.messages}
             sendMessage={sendMessage}
-            costumerName={currentChatData?.costumerName}
+            customerName={currentChatData?.customerName}
+            setChatStatus={setChatStatus}
           />
           <InfoSidebar currentChatData={currentChatData} />
         </>

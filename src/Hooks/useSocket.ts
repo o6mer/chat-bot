@@ -5,8 +5,9 @@ import { io } from "socket.io-client";
 
 export const useSocket = () => {
   const [chatList, setChatList] = useState<Array<TChat>>();
+  const [chatFitler, setChatFilter] = useState("open");
   const [currentChatData, setCurrentChatData] = useState<TChat>();
-  const { user, socket, setSocket, currentChatId }: any =
+  const { user, socket, setSocket, currentChatId, setCurrentChatId }: any =
     useContext(DashboardContext);
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export const useSocket = () => {
     return () => {
       socket?.removeAllListeners();
     };
-  }, [socket]);
+  }, [socket, chatFitler]);
 
   useEffect(() => {
     socket?.emit("getChatData", currentChatId, (chat: TChat) => {
@@ -44,8 +45,10 @@ export const useSocket = () => {
   };
 
   const onNewChat = (newChat: TChat) => {
-    console.log("new chat: ", newChat);
-    setChatList((prev: any) => [...prev, newChat]);
+    setChatList((prev: any) => {
+      if (newChat.status !== chatFitler) return [...prev];
+      return [...prev, newChat];
+    });
     socket.emit("joinChat", newChat.id);
   };
 
@@ -77,9 +80,37 @@ export const useSocket = () => {
     );
   };
 
+  const setChatStatus = (status: string, chatId: string) => {
+    socket.emit("setChatStatus", status, chatId);
+    setCurrentChatId("");
+    setChatList((prev: any) =>
+      prev.filter((chat: TChat) => {
+        // if (chat.status !== status) return;
+        return chat.id !== chatId;
+      })
+    );
+  };
+
   const deleteAllChats = () => {
     socket.emit("deleteAllChats");
   };
 
-  return { chatList, deleteAllChats, sendMessage, currentChatData };
+  const setFilteredChatList = (filter: string) => {
+    if (filter === chatFitler) return;
+
+    setChatFilter(filter);
+
+    socket?.emit("getFilteredChatList", filter, (chatList: Array<TChat>) => {
+      setChatList([...chatList]);
+    });
+  };
+
+  return {
+    chatList,
+    deleteAllChats,
+    sendMessage,
+    currentChatData,
+    setChatStatus,
+    setFilteredChatList,
+  };
 };

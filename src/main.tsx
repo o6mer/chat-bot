@@ -7,7 +7,7 @@ import ErrorPage from "./Components/General/ErrorPage";
 import Chat from "./Components/Chat/Chat";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import DashboardContextProvider from "./Contexts/DashbaordContext";
-import CostumerContextProvider from "./Contexts/CostumerContext";
+import CustomerContextProvider from "./Contexts/CustomerContext";
 
 const router = createBrowserRouter([
   {
@@ -40,9 +40,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <DashboardContextProvider>
-      <CostumerContextProvider>
+      <CustomerContextProvider>
         <RouterProvider router={router} />
-      </CostumerContextProvider>
+      </CustomerContextProvider>
     </DashboardContextProvider>
   </React.StrictMode>
 );
