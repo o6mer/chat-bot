@@ -22,7 +22,7 @@ const InfoSidebarConvoInfo = ({
           <p>{id}</p>
         </div>
         <div className="w-full flex justify-between items-center p-2">
-          <p>Creatino Time</p>
+          <p>Creation Time</p>
           <p>{creationTime?.toString()}</p>
         </div>
       </div>

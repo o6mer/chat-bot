@@ -10,7 +10,7 @@ const SidebarChatListItem = ({
   messages,
   id,
 }: TChat) => {
-  const { setCurrentChatId }: any = useContext(DashboardContext);
+  const { currentChatId, setCurrentChatId }: any = useContext(DashboardContext);
   const [seen, setSeen] = useState(isSeen);
   const lastMessage = messages.at(-1);
 
@@ -21,9 +21,9 @@ const SidebarChatListItem = ({
 
   return (
     <li
-      className={`flex gap-2 w-full p-2 rounded-md cursor-pointer items-center transition-all hover:bg-slate-200 ${
-        seen ? "font-normal" : "font-bold"
-      }`}
+      className={`flex gap-2 w-full p-2 rounded-md cursor-pointer items-center transition-all  ${
+        currentChatId === id ? "bg-slate-200" : "bg-white"
+      } hover:bg-slate-200 ${seen ? "font-normal" : "font-bold"}`}
       onClick={chatSelectHandler}
     >
       <div className="flex items-center">
