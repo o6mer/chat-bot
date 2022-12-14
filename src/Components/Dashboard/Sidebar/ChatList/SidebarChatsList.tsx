@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TChat } from "../../../../Types/Types";
 import SidebarChatListItem from "./SidebarChatListItem";
+import date from "date-and-time";
 
 const SidebarChatsList = ({
   chatList,
@@ -9,30 +10,44 @@ const SidebarChatsList = ({
   chatList?: Array<TChat>;
   sortBy: string;
 }) => {
-  const [sortedList, setSortedList] = useState(chatList);
+  const [sortedList, setSortedList] = useState(sortList(chatList, sortBy));
 
   useEffect(() => {
     setSortedList(sortList(chatList, sortBy));
   }, [sortBy, chatList]);
 
-  const sortList = (
+  function sortList(
     list?: Array<TChat>,
     sortBy?: string
-  ): Array<TChat> | undefined => {
-    if (sortBy === "new")
-      return list?.sort((a: TChat, b: TChat): any => {
-        if (a.creationTime > b.creationTime) return 1;
-        if (a.creationTime < b.creationTime) return -1;
-        return 0;
+  ): Array<TChat> | undefined {
+    if (sortBy === "new") {
+      list?.sort((a, b) => {
+        return (
+          date
+            .parse(b?.creationTime.toString(), "DD MM YYYY HH:mm:ss")
+            .getTime() -
+          date
+            .parse(a?.creationTime.toString(), "DD MM YYYY HH:mm:ss")
+            .getTime()
+        );
       });
-    if (sortBy === "old")
-      return list?.sort((a: TChat, b: TChat): any => {
-        if (a.creationTime > b.creationTime) return -1;
-        if (a.creationTime < b.creationTime) return 1;
-        return 0;
+      return list;
+    }
+    if (sortBy === "old") {
+      list?.sort((a, b) => {
+        return (
+          date
+            .parse(a?.creationTime.toString(), "DD MM YYYY HH:mm:ss")
+            .getTime() -
+          date
+            .parse(b?.creationTime.toString(), "DD MM YYYY HH:mm:ss")
+            .getTime()
+        );
       });
+      return list;
+    }
     return list;
-  };
+  }
 
   return (
     <section className="w-full h-full overflow-y-scroll dashboard-scrollbar">
