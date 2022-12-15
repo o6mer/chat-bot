@@ -3,8 +3,8 @@ import ChatKeyboard from "./ChatKeyboard";
 import TextMessage from "../../Messages/TextMessage";
 import { TMessage } from "../../../Types/Types";
 import InputMessage from "../../Messages/InputMessage";
-import { io } from "socket.io-client";
 import { CustomerContext } from "../../../Contexts/CustomerContext";
+import { io } from "socket.io-client";
 
 const socket = io("http://localhost:3001/", {
   closeOnBeforeunload: false,
