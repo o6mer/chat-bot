@@ -41,7 +41,7 @@ const ChatKeyboard = ({
         onChange={typingHandler}
         onKeyDown={checkSubmit}
       />
-      <ChatKeyboardActions />
+      <ChatKeyboardActions setMessage={setMessage} />
     </form>
   );
 };
