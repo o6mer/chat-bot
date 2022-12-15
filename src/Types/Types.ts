@@ -36,3 +36,9 @@ export type TChat = {
   messages: Array<TMessage>;
   creationTime: Date | string;
 };
+
+export type TTemplate = {
+  header: string;
+  content: string;
+  id: string;
+};

@@ -2,7 +2,7 @@ import React from "react";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import EmojiKeyboard from "./EmojiKeyboard";
 import TemplatesKeyboard from "./TemplatesKeyboard";
-import AttachFileOutlinedIcon from "@mui/icons-material/AttachFileOutlined";
+import AddFileKeyboard from "./AddFileKeyboard";
 
 const ChatKeyboardActions = ({
   setMessage,
@@ -12,9 +12,7 @@ const ChatKeyboardActions = ({
   return (
     <div className="w-full flex justify-between  items-centerp-2 text-gray-600">
       <div className="flex gap-1">
-        <button type="button">
-          <AttachFileOutlinedIcon fontSize="small" />
-        </button>
+        <AddFileKeyboard />
         <EmojiKeyboard setMessage={setMessage} />
         <TemplatesKeyboard setMessage={setMessage} />
       </div>

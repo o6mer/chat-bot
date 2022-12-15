@@ -24,8 +24,10 @@ const ChatKeyboard = ({
   };
 
   const checkSubmit = (e: any) => {
-    if (e.keyCode == 13 && e.shiftKey == true)
+    if (e.keyCode == 13 && e.shiftKey == true) {
+      e.preventDefault();
       formRef?.current?.requestSubmit();
+    }
   };
 
   return (
