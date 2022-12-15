@@ -1,38 +1,42 @@
 import { useContext, useEffect, useState } from "react";
 import { DashboardContext } from "../Contexts/DashbaordContext";
 import { TChat, TMessage } from "../Types/Types";
-import { io } from "socket.io-client";
+import io from "socket.io-client";
+
+const socket = io("http://localhost:3001/", {
+  closeOnBeforeunload: false,
+});
 
 export const useSocket = () => {
+  const [isConnected, setIsConnected] = useState(socket.connected);
+
   const [chatList, setChatList] = useState<Array<TChat>>();
-  const [chatFitler, setChatFilter] = useState("open");
+  const [chatFilter, setChatFilter] = useState<string>("open");
   const [currentChatData, setCurrentChatData] = useState<TChat>();
-  const { user, socket, setSocket, currentChatId, setCurrentChatId }: any =
+  const { user, currentChatId, setCurrentChatId }: any =
     useContext(DashboardContext);
 
   useEffect(() => {
-    setSocket(
-      io("http://localhost:3001/", {
-        closeOnBeforeunload: false,
-      })
-    );
-  }, []);
-
-  useEffect(() => {
-    if (!socket) return;
-
     socket.on("connect", () => {
+      setIsConnected(true);
       socket.emit("newAdminConnection", onNewAdminConnection);
-      console.log("admin connected");
-
-      socket.on("newChatStarted", onNewChat);
-      socket.on("receiveMessage", onReceiveMessage);
+    });
+    socket.on("newChatStarted", onNewChat);
+    socket.on("receiveMessage", onReceiveMessage);
+    socket.on("chatStatusChanged", onChatStatusChanged);
+    socket.on("disconnect", () => {
+      setIsConnected(false);
     });
 
     return () => {
-      socket?.removeAllListeners();
+      socket.off("connect");
+      socket.off("newAdminConnection");
+      socket.off("newChatStarted");
+      socket.off("receiveMessage");
+      socket.off("chatStatusChanged");
+      socket.off("disconnect");
     };
-  }, [socket, chatFitler]);
+  }, [chatFilter]);
 
   useEffect(() => {
     socket?.emit("getChatData", currentChatId, (chat: TChat) => {
@@ -41,13 +45,15 @@ export const useSocket = () => {
   }, [currentChatId]);
 
   const onNewAdminConnection = (prevChatList: Array<any>) => {
+    console.log("admin connected");
     setChatList(prevChatList);
   };
 
   const onNewChat = (newChat: TChat) => {
     setChatList((prev: any) => {
-      if (newChat.status !== chatFitler) return [...prev];
-      return [...prev, newChat];
+      if (newChat.status === chatFilter) return [...prev, newChat];
+      if (newChat.status !== chatFilter)
+        return prev.filter((chat: TChat) => chat.id === newChat.id);
     });
     socket.emit("joinChat", newChat.id);
   };
@@ -60,6 +66,14 @@ export const useSocket = () => {
     id: string;
   }) => {
     addMessage(message);
+  };
+
+  const onChatStatusChanged = (newChat: TChat) => {
+    setChatList((prev: any) => {
+      if (newChat.status === chatFilter) return [...prev, newChat];
+      if (newChat.status !== chatFilter)
+        return prev.filter((chat: TChat) => chat.id !== newChat.id);
+    });
   };
 
   const addMessage = (message: TMessage) => {
@@ -96,12 +110,9 @@ export const useSocket = () => {
   };
 
   const setFilteredChatList = (filter: string) => {
-    if (filter === chatFitler) return;
-
-    console.log(filter);
-    setChatFilter(filter);
-
+    // if (filter === chatFilter) return;
     socket?.emit("getFilteredChatList", filter, (chatList: Array<TChat>) => {
+      setChatFilter(filter);
       setChatList([...chatList]);
     });
   };
