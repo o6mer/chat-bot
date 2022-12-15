@@ -39,6 +39,7 @@ export const useSocket = () => {
   }, [chatFilter]);
 
   useEffect(() => {
+    if (!isConnected) return;
     socket?.emit("getChatData", currentChatId, (chat: TChat) => {
       setCurrentChatData(chat);
     });
@@ -55,6 +56,7 @@ export const useSocket = () => {
       if (newChat.status !== chatFilter)
         return prev.filter((chat: TChat) => chat.id === newChat.id);
     });
+    if (!isConnected) return;
     socket.emit("joinChat", newChat.id);
   };
 
@@ -83,6 +85,7 @@ export const useSocket = () => {
   };
 
   const sendMessage = (messageContent: string) => {
+    if (!isConnected) return;
     socket?.emit(
       "sendMessage",
       {
@@ -95,6 +98,7 @@ export const useSocket = () => {
   };
 
   const setChatStatus = (status: string, chatId: string) => {
+    if (!isConnected) return;
     socket.emit("setChatStatus", status, chatId);
     setCurrentChatId("");
     setChatList((prev: any) =>
@@ -111,6 +115,7 @@ export const useSocket = () => {
 
   const setFilteredChatList = (filter: string) => {
     // if (filter === chatFilter) return;
+    if (!isConnected) return;
     socket?.emit("getFilteredChatList", filter, (chatList: Array<TChat>) => {
       setChatFilter(filter);
       setChatList([...chatList]);

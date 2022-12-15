@@ -6,38 +6,47 @@ import InputMessage from "../../Messages/InputMessage";
 import { io } from "socket.io-client";
 import { CustomerContext } from "../../../Contexts/CustomerContext";
 
+const socket = io("http://localhost:3001/", {
+  closeOnBeforeunload: false,
+});
+
 const ChatField = () => {
+  const [isConnected, setIsConnected] = useState(socket.connected);
   const [messagesList, setMessagesList] = useState<TMessage[]>([]);
 
-  const { socket, setSocket, chatId, setChatId }: any =
-    useContext(CustomerContext);
+  const { chatId, setChatId }: any = useContext(CustomerContext);
 
   useEffect(() => {
-    setSocket(io("http://localhost:3001/", {}));
+    socket.on("connect", () => {
+      setIsConnected(true);
+      socket.emit("newUserConnection", onNewUserConnection);
+    });
+
+    socket.on(
+      "receiveMessage",
+      ({ message, id }: { message: TMessage; id: string }) => {
+        addMessage(message);
+      }
+    );
+
+    socket.on("disconnect", () => {
+      setIsConnected(false);
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("receiveMessage");
+      socket.off("disconnect");
+    };
   }, []);
 
-  useEffect(() => {
-    if (!socket) return;
-    socket?.on("connect", () => {
-      console.log("connected");
-
-      socket.emit("newUserConnection", onNewUserConnection);
-
-      socket.on(
-        "receiveMessage",
-        ({ message, id }: { message: TMessage; id: string }) => {
-          console.log("received message", message);
-          addMessage(message);
-        }
-      );
-    });
-  }, [socket]);
-
   const onNewUserConnection = (chatId: string) => {
+    console.log("connected");
     setChatId(chatId);
   };
 
   const sendMessage = (messageContent: string) => {
+    if (!isConnected) return;
     socket.emit(
       "sendMessage",
       {
