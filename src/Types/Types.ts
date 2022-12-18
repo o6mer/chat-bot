@@ -38,7 +38,7 @@ export type TChat = {
 };
 
 export type TTemplate = {
-  header: string;
-  content: string;
-  id: string;
+  header?: string;
+  content?: string;
+  id?: string;
 };

@@ -15,6 +15,12 @@ const templateList = [
     content: "content2 content2 content2 content2 content2 ",
     id: "bxbzxbxbzx2",
   },
+  {
+    header: "not template",
+    content:
+      "not template not template not template not template not template ",
+    id: "qwwtwgsadg",
+  },
 ];
 
 const TemplatesKeyboard = ({
@@ -24,7 +30,7 @@ const TemplatesKeyboard = ({
 }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [filteredTemplateList, setFilteredTemplateList] =
-    useState<Array<TTemplate>>(templateList);
+    useState<Array<TTemplate | undefined>>(templateList);
   const [selectedTemplate, setSelectedTemplate] = useState<
     TTemplate | undefined
   >(filteredTemplateList[0]);
@@ -44,14 +50,14 @@ const TemplatesKeyboard = ({
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget);
-    e.stopPropagation();
-    setSearch(e.currentTarget.value);
+    const searchValue = e.currentTarget.value;
+    setSearch(searchValue);
+    setFilteredTemplateList(
+      templateList.map((template) => {
+        if (template.header.includes(searchValue)) return template;
+      })
+    );
   };
-
-  // useEffect(() => {
-  //   //filter template list logic
-  // }, [search]);
 
   return (
     <>
@@ -100,7 +106,7 @@ const TemplatesKeyboard = ({
                   {...template}
                   setSelectedTemplate={setSelectedTemplate}
                   submitTemplate={submitTemplate}
-                  key={index + template.header}
+                  key={index}
                 />
               ))}
             </ul>

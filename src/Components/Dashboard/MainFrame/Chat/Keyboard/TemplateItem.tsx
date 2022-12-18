@@ -8,9 +8,9 @@ const TemplateItem = ({
   setSelectedTemplate,
   submitTemplate,
 }: {
-  header: string;
-  content: string;
-  id: string;
+  header?: string;
+  content?: string;
+  id?: string;
   setSelectedTemplate: React.Dispatch<
     React.SetStateAction<TTemplate | undefined>
   >;
