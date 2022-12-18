@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Menu } from "@mui/material";
 import BookOutlinedIcon from "@mui/icons-material/BookOutlined";
 import { TTemplate } from "../../../../../Types/Types";
+import TemplateItem from "./TemplateItem";
 
 const templateList = [
   {
     header: "template",
     content: "content content content content content ",
-    id: "1",
+    id: "dasfsafadsdfs",
   },
   {
     header: "template2",
     content: "content2 content2 content2 content2 content2 ",
-    id: "2",
+    id: "bxbzxbxbzx2",
   },
 ];
 
@@ -24,8 +25,10 @@ const TemplatesKeyboard = ({
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [filteredTemplateList, setFilteredTemplateList] =
     useState<Array<TTemplate>>(templateList);
-  const [selectedTemplate, setSelectedTemplate] = useState<TTemplate>();
-  const [search, setSearch] = useState<string>();
+  const [selectedTemplate, setSelectedTemplate] = useState<
+    TTemplate | undefined
+  >(filteredTemplateList[0]);
+  const [search, setSearch] = useState<string>("");
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -41,12 +44,14 @@ const TemplatesKeyboard = ({
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+    console.log(e.currentTarget);
+    e.stopPropagation();
+    setSearch(e.currentTarget.value);
   };
 
-  useEffect(() => {
-    //filter template list logic
-  }, [search]);
+  // useEffect(() => {
+  //   //filter template list logic
+  // }, [search]);
 
   return (
     <>
@@ -78,12 +83,15 @@ const TemplatesKeyboard = ({
           horizontal: "left",
         }}
       >
-        <div className="w-max max-w-lg flex flex-col p-2 gap-2">
+        <div className="w-96 flex flex-col p-2 gap-2">
           <input
             type="text"
             placeholder="Search template..."
-            onChange={handleSearch}
+            onKeyDown={(e: any) => {
+              e.stopPropagation();
+            }}
             value={search}
+            onChange={handleSearch}
           />
           <div className="flex justify-between gap-2 ">
             <ul className="w-max flex flex-col">
@@ -101,43 +109,6 @@ const TemplatesKeyboard = ({
         </div>
       </Menu>
     </>
-  );
-};
-
-const TemplateItem = ({
-  header,
-  content,
-  id,
-  setSelectedTemplate,
-  submitTemplate,
-}: {
-  header: string;
-  content: string;
-  id: string;
-  setSelectedTemplate: React.Dispatch<
-    React.SetStateAction<TTemplate | undefined>
-  >;
-  submitTemplate: () => void;
-}) => {
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    if (e.detail === 2) {
-      submitTemplate();
-    }
-  };
-
-  return (
-    <li
-      key={id}
-      className="w-max cursor-pointer hover:bg-gray-200"
-      onClick={(e) => {
-        handleClick(e);
-
-        const template: TTemplate = { header, content, id };
-        setSelectedTemplate(template);
-      }}
-    >
-      {header}
-    </li>
   );
 };
 

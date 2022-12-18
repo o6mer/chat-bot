@@ -20,7 +20,7 @@ export const useSocket = () => {
       setIsConnected(true);
     });
 
-    if (!socket.connected) return;
+    // if (!socket.connected) return;
     socket.emit("newAdminConnection", onNewAdminConnection);
 
     socket.on("newChatStarted", onNewChat);
