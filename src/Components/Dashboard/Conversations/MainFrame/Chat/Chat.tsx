@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TChat, TMessage } from "../../../../Types/Types";
-import SectionBreak from "../../General/SectionBreak";
+import { TChat, TMessage } from "../../../../../Types/Types";
+import SectionBreak from "../../../General/SectionBreak";
 import ChatHeader from "./Header/ChatHeader";
 import ChatKeyboard from "./Keyboard/ChatKeyboard";
 import ChatMain from "./Main/ChatMain";

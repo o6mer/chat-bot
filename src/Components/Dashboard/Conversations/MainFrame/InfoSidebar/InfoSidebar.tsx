@@ -1,6 +1,6 @@
 import React from "react";
-import { TChat } from "../../../../Types/Types";
-import SectionBreak from "../../General/SectionBreak";
+import { TChat } from "../../../../../Types/Types";
+import SectionBreak from "../../../General/SectionBreak";
 import InfoSidebarConvoInfo from "./ConvoInfo/InfoSidebarConvoInfo";
 import InfoSidebarHeader from "./Header/InfoSidebarHeader";
 

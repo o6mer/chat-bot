@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { TChat } from "../../../../Types/Types";
-import { DashboardContext } from "../../../../Contexts/DashbaordContext";
+import { TChat } from "../../../../../Types/Types";
+import { DashboardContext } from "../../../../../Contexts/DashbaordContext";
 
 const SidebarChatListItem = ({
   customerName,

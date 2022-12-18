@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import BeenhereOutlinedIcon from "@mui/icons-material/BeenhereOutlined";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
-import { DashboardContext } from "../../../../../Contexts/DashbaordContext";
+import { DashboardContext } from "../../../../../../Contexts/DashbaordContext";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 const ChatHeader = ({
   customerName,

@@ -8,6 +8,7 @@ import Chat from "./Components/Chat/Chat";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import DashboardContextProvider from "./Contexts/DashbaordContext";
 import CustomerContextProvider from "./Contexts/CustomerContext";
+import AdminsControlls from "./Components/Dashboard/AdminControlls/AdminsControlls";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admins-controlls",
+    element: <AdminsControlls />,
     errorElement: <ErrorPage />,
   },
 ]);

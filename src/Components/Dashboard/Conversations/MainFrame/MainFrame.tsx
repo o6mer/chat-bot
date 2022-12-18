@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { DashboardContext } from "../../../Contexts/DashbaordContext";
-import { TChat, TMessage } from "../../../Types/Types";
+import { DashboardContext } from "../../../../Contexts/DashbaordContext";
+import { TChat, TMessage } from "../../../../Types/Types";
 import Chat from "./Chat/Chat";
 import InfoSidebar from "./InfoSidebar/InfoSidebar";
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { TMessage } from "../../../../../Types/Types";
-import TextMessage from "../../../../Messages/TextMessage";
+import { TMessage } from "../../../../../../Types/Types";
+import TextMessage from "../../../../../Messages/TextMessage";
 
 const ChatMain = ({ messages }: { messages?: Array<TMessage> }) => {
   return (

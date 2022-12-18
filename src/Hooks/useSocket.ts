@@ -18,10 +18,8 @@ export const useSocket = () => {
   useEffect(() => {
     socket.on("connect", () => {
       setIsConnected(true);
+      socket.emit("newAdminConnection", onNewAdminConnection);
     });
-
-    // if (!socket.connected) return;
-    socket.emit("newAdminConnection", onNewAdminConnection);
 
     socket.on("newChatStarted", onNewChat);
     socket.on("receiveMessage", onReceiveMessage);

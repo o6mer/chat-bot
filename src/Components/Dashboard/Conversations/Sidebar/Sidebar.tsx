@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { TChat } from "../../../Types/Types";
-import SectionBreak from "../General/SectionBreak";
+import { TChat } from "../../../../Types/Types";
+import SectionBreak from "../../General/SectionBreak";
 import SidebarChatsList from "./ChatList/SidebarChatsList";
 import SidebarFilters from "./Filters/SidebarFilters";
 import SidebarHeader from "./Header/SidebarHeader";

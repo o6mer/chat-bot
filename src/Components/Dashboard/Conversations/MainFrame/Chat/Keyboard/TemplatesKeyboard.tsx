@@ -11,14 +11,13 @@ const templateList = [
     id: "dasfsafadsdfs",
   },
   {
-    header: "template2",
+    header: "booooo",
     content: "content2 content2 content2 content2 content2 ",
     id: "bxbzxbxbzx2",
   },
   {
-    header: "not template",
-    content:
-      "not template not template not template not template not template ",
+    header: "zaaaa",
+    content: " template  template  template  template  template ",
     id: "qwwtwgsadg",
   },
 ];
@@ -33,7 +32,7 @@ const TemplatesKeyboard = ({
     useState<Array<TTemplate | undefined>>(templateList);
   const [selectedTemplate, setSelectedTemplate] = useState<
     TTemplate | undefined
-  >(filteredTemplateList[0]);
+  >();
   const [search, setSearch] = useState<string>("");
 
   const open = Boolean(anchorEl);
@@ -53,9 +52,11 @@ const TemplatesKeyboard = ({
     const searchValue = e.currentTarget.value;
     setSearch(searchValue);
     setFilteredTemplateList(
-      templateList.map((template) => {
-        if (template.header.includes(searchValue)) return template;
-      })
+      templateList
+        .map((template) => {
+          if (template.header.includes(searchValue)) return template;
+        })
+        .filter((template) => template !== undefined)
     );
   };
 
@@ -101,16 +102,22 @@ const TemplatesKeyboard = ({
           />
           <div className="flex justify-between gap-2 ">
             <ul className="w-max flex flex-col">
-              {filteredTemplateList?.map((template, index) => (
-                <TemplateItem
-                  {...template}
-                  setSelectedTemplate={setSelectedTemplate}
-                  submitTemplate={submitTemplate}
-                  key={index}
-                />
-              ))}
+              {filteredTemplateList.length ? (
+                filteredTemplateList?.map((template, index, arr) => (
+                  <TemplateItem
+                    {...template}
+                    setSelectedTemplate={setSelectedTemplate}
+                    submitTemplate={submitTemplate}
+                    key={index}
+                  />
+                ))
+              ) : (
+                <p>template not found...</p>
+              )}
             </ul>
-            <div className="flex flex-wrap">{selectedTemplate?.content}</div>
+            <div className="flex flex-wrap">
+              {filteredTemplateList.length ? selectedTemplate?.content : ""}
+            </div>
           </div>
         </div>
       </Menu>
