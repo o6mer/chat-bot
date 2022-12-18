@@ -9,7 +9,6 @@ const socket = io("http://localhost:3001/", {
 
 export const useSocket = () => {
   const [isConnected, setIsConnected] = useState(socket.connected);
-
   const [chatList, setChatList] = useState<Array<TChat>>();
   const [chatFilter, setChatFilter] = useState<string>("open");
   const [currentChatData, setCurrentChatData] = useState<TChat>();
@@ -19,8 +18,11 @@ export const useSocket = () => {
   useEffect(() => {
     socket.on("connect", () => {
       setIsConnected(true);
-      socket.emit("newAdminConnection", onNewAdminConnection);
     });
+
+    if (!socket.connected) return;
+    socket.emit("newAdminConnection", onNewAdminConnection);
+
     socket.on("newChatStarted", onNewChat);
     socket.on("receiveMessage", onReceiveMessage);
     socket.on("chatStatusChanged", onChatStatusChanged);
@@ -46,7 +48,7 @@ export const useSocket = () => {
   }, [currentChatId]);
 
   const onNewAdminConnection = (prevChatList: Array<any>) => {
-    console.log("admin connected");
+    console.log("admin connected", prevChatList);
     setChatList(prevChatList);
   };
 

@@ -87,11 +87,12 @@ const TemplatesKeyboard = ({
           />
           <div className="flex justify-between gap-2 ">
             <ul className="w-max flex flex-col">
-              {filteredTemplateList?.map((template) => (
+              {filteredTemplateList?.map((template, index) => (
                 <TemplateItem
                   {...template}
                   setSelectedTemplate={setSelectedTemplate}
                   submitTemplate={submitTemplate}
+                  key={index + template.header}
                 />
               ))}
             </ul>
