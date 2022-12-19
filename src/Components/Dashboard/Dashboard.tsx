@@ -1,94 +1,54 @@
 import React, { useContext, useEffect, useState } from "react";
-import MainFrame from "./MainFrame/MainFrame";
-import SideBar from "./Sidebar/Sidebar";
-import { io } from "socket.io-client";
-import { TChat, TMessage } from "../../Types/Types";
+import MainFrame from "./Conversations/MainFrame/MainFrame";
+import SideBar from "./Conversations/Sidebar/Sidebar";
+import { useSocket } from "../../Hooks/useSocket";
+import Conversations from "./Conversations/Conversations";
+import NavigationBar from "./General/NavigationBar";
 import { DashboardContext } from "../../Contexts/DashbaordContext";
-import { kStringMaxLength } from "buffer";
+import AdminControlls from "./AdminControlls/AdminsControlls";
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+declare module "@mui/material/styles" {
+  interface Theme {
+    status: {
+      danger: string;
+    };
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    status?: {
+      danger?: string;
+    };
+  }
+}
 
 const Dashboard = () => {
-  const [chatList, setChatList] = useState<Array<TChat>>();
-  const [currentChatData, setCurrentChatData] = useState<TChat>();
-  const { user, socket, setSocket, currentChatId }: any =
-    useContext(DashboardContext);
+  const { screen }: any = useContext(DashboardContext);
+  // const socket = useSocket();
 
-  useEffect(() => {
-    setSocket(
-      io("http://localhost:3001/", {
-        closeOnBeforeunload: false,
-      })
-    );
-  }, []);
-
-  useEffect(() => {
-    if (!socket) return;
-
-    socket.on("connect", () => {
-      socket.emit("newAdminConnection", onNewAdminConnection);
-      console.log("admin connected");
-
-      socket.on("newChatStarted", onNewChat);
-      socket.on("receiveMessage", onReceiveMessage);
-    });
-
-    return () => {
-      socket?.removeAllListeners();
-    };
-  }, [socket]);
-
-  useEffect(() => {
-    socket?.emit("getChatData", currentChatId, (chat: TChat) => {
-      setCurrentChatData(chat);
-    });
-  }, [currentChatId]);
-
-  const onNewAdminConnection = (prevChatList: Array<any>) => {
-    setChatList(prevChatList);
-  };
-
-  const onNewChat = (newChat: TChat) => {
-    console.log("new chat: ", newChat);
-    setChatList((prev: any) => [...prev, newChat]);
-    socket.emit("joinChat", newChat.id);
-  };
-
-  const onReceiveMessage = ({
-    message,
-    id,
-  }: {
-    message: TMessage;
-    id: string;
-  }) => {
-    addMessage(message);
-  };
-
-  const addMessage = (message: TMessage) => {
-    setCurrentChatData((prev: any) => {
-      return { ...prev, messages: [...prev.messages, message] };
-    });
-  };
-
-  const sendMessage = (messageContent: string) => {
-    socket?.emit(
-      "sendMessage",
-      {
-        id: currentChatId,
-        messageContent,
-        user: user?.username || "admin",
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: "#F0F5F9",
+        main: "#1E2022",
+        dark: "#1E2022",
+        contrastText: "#1E2022",
       },
-      addMessage
-    );
-  };
-
-  const deleteAllChats = () => {
-    socket.emit("deleteAllChats")
-  }
-
+      secondary: {
+        light: "#ff7961",
+        main: "#f44336",
+        dark: "#ba000d",
+        contrastText: "#000",
+      },
+    },
+  });
   return (
-    <main className="w-full h-full flex">
-      <SideBar chatList={chatList} deleteAllChats={deleteAllChats}/>
-      <MainFrame sendMessage={sendMessage} currentChatData={currentChatData} />
-    </main>
+    <ThemeProvider theme={theme}>
+      <main className="w-full h-full flex">
+        <NavigationBar />
+        {screen === 1 && <Conversations />}
+        {screen === 2 && <AdminControlls />}
+      </main>
+    </ThemeProvider>
   );
 };
 
