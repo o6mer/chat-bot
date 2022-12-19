@@ -1,14 +1,15 @@
-import React, { FormEvent, useRef, useState } from "react";
-import { TMessage } from "../../../../../Types/Types";
+import React, { FormEvent, useRef, useState, useContext } from "react";
+import {
+  SocketContext,
+  TSocketContext,
+} from "../../../../../../Contexts/SocketContext";
 import ChatKeyboardActions from "./ChatKeyboardActions";
 
-const ChatKeyboard = ({
-  sendMessage,
-}: {
-  sendMessage: (msg: string) => void;
-}) => {
+const ChatKeyboard = ({}: {}) => {
   const [message, setMessage] = useState<string>();
   const formRef = useRef<HTMLFormElement>(null);
+
+  const { sendMessage } = useContext(SocketContext) as TSocketContext;
 
   const sendMessageHandler = (e: FormEvent) => {
     if (!message) return;

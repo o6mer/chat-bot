@@ -3,16 +3,19 @@ import BeenhereOutlinedIcon from "@mui/icons-material/BeenhereOutlined";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
 import { DashboardContext } from "../../../../../../Contexts/DashbaordContext";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
+import {
+  SocketContext,
+  TSocketContext,
+} from "../../../../../../Contexts/SocketContext";
 const ChatHeader = ({
   customerName,
   chatStatus,
-  setChatStatus,
 }: {
   customerName?: string;
   chatStatus?: string;
-  setChatStatus: (status: string, id: string) => void;
 }) => {
   const { currentChatId }: any = useContext(DashboardContext);
+  const { setChatStatus } = useContext(SocketContext) as TSocketContext;
 
   return (
     <header className="w-full text-lg p-2 font-bold flex justify-between items-center">

@@ -9,6 +9,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import DashboardContextProvider from "./Contexts/DashbaordContext";
 import CustomerContextProvider from "./Contexts/CustomerContext";
 import AdminsControlls from "./Components/Dashboard/AdminControlls/AdminsControlls";
+import SocketContextProvider from "./Contexts/SocketContext";
 
 const router = createBrowserRouter([
   {
@@ -41,9 +42,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <DashboardContextProvider>
-      <CustomerContextProvider>
-        <RouterProvider router={router} />
-      </CustomerContextProvider>
+      <SocketContextProvider>
+        <CustomerContextProvider>
+          <RouterProvider router={router} />
+        </CustomerContextProvider>
+      </SocketContextProvider>
     </DashboardContextProvider>
   </React.StrictMode>
 );

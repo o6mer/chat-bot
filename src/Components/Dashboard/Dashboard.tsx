@@ -23,7 +23,7 @@ declare module "@mui/material/styles" {
 
 const Dashboard = () => {
   const { screen }: any = useContext(DashboardContext);
-  const socket = useSocket();
+  // const socket = useSocket();
 
   const theme = createTheme({
     palette: {
@@ -45,7 +45,7 @@ const Dashboard = () => {
     <ThemeProvider theme={theme}>
       <main className="w-full h-full flex">
         <NavigationBar />
-        {screen === 1 && <Conversations {...socket} />}
+        {screen === 1 && <Conversations />}
         {screen === 2 && <AdminControlls />}
       </main>
     </ThemeProvider>

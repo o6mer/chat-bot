@@ -1,24 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import { Menu, MenuItem, Select } from "@mui/material";
-import { useSocket } from "../../../../Hooks/useSocket";
+import {
+  SocketContext,
+  TSocketContext,
+} from "../../../../../Contexts/SocketContext";
 const SidebarFilters = ({
-  setFilteredChatList,
   sortBy,
   setSortBy,
   chatListLength,
 }: {
-  setFilteredChatList: (filter: string) => void;
   sortBy: string;
   setSortBy: (sory: string) => void;
   chatListLength?: number;
 }) => {
   const [filter, setfilter] = useState("Open");
-
   const [filterAnchorEl, setFilterAnchorEl] = useState(null);
   const [sortAnchorEl, setSortAnchorEl] = useState(null);
+
+  const { setFilteredChatList } = useContext(SocketContext) as TSocketContext;
 
   const filterOpen = Boolean(filterAnchorEl);
   const sortOpen = Boolean(sortAnchorEl);
