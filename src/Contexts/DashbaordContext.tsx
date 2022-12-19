@@ -8,6 +8,7 @@ const DashboardContextProvider = ({ children }: any) => {
   const [darkMode, setDarkMode] = useState(false);
   const [socket, setSocket]: any = useState();
   const [currentChatId, setCurrentChatId] = useState<string>();
+  const [screen, setScreen] = useState(1);
 
   return (
     <DashboardContext.Provider
@@ -19,6 +20,8 @@ const DashboardContextProvider = ({ children }: any) => {
         setSocket,
         currentChatId,
         setCurrentChatId,
+        screen,
+        setScreen,
       }}
     >
       {children}

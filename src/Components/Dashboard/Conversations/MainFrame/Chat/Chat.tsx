@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
 import { TChat, TMessage } from "../../../../../Types/Types";
-import SectionBreak from "../../../General/SectionBreak";
 import ChatHeader from "./Header/ChatHeader";
 import ChatKeyboard from "./Keyboard/ChatKeyboard";
 import ChatMain from "./Main/ChatMain";
+import Divider from "@mui/material/Divider";
 
 const Chat = ({
   currentChatData,
@@ -21,7 +20,7 @@ const Chat = ({
         chatStatus={currentChatData?.status}
         setChatStatus={setChatStatus}
       />
-      <SectionBreak />
+      <Divider />
       <ChatMain messages={currentChatData?.messages} />
       <ChatKeyboard sendMessage={sendMessage} />
     </div>

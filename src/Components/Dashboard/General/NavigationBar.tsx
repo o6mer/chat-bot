@@ -1,25 +1,18 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import MenuOpenOutlinedIcon from "@mui/icons-material/MenuOpenOutlined";
-
+import DisplaySettingsOutlinedIcon from "@mui/icons-material/DisplaySettingsOutlined";
+import { DashboardContext } from "../../../Contexts/DashbaordContext";
+import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -71,14 +64,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function NavigationBar() {
   const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const { screen, setScreen }: any = useContext(DashboardContext);
 
   const toggleDrawer = () => {
     setOpen((prev) => !prev);
@@ -86,74 +72,81 @@ export default function NavigationBar() {
 
   return (
     <div className="flex flex-col">
-      {/* <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={handleDrawerOpen}
-        edge="start"
-        sx={{
-          ...(open && { display: "none" }),
-        }}
-      >
-        <MenuOpenOutlinedIcon />
-      </IconButton> */}
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={toggleDrawer}>
+        <div className={`flex p-4 ${open ? "justify-end" : "justify-center"}`}>
+          <button onClick={toggleDrawer} className="text-lg">
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
+          </button>
+        </div>
         <Divider />
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+        <List sx={{ padding: "0" }}>
+          <NavigationListItem
+            screenIndex={1}
+            text="Conversations"
+            screen={screen}
+            setScreen={setScreen}
+            open={open}
+            icon={<ForumOutlinedIcon />}
+          />
+          <NavigationListItem
+            screenIndex={2}
+            text="Bot and Templates"
+            screen={screen}
+            setScreen={setScreen}
+            open={open}
+            icon={<DisplaySettingsOutlinedIcon />}
+          />
         </List>
         <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <List></List>
       </Drawer>
     </div>
   );
 }
+
+type TNavigationListItem = {
+  screenIndex: number;
+  text: string;
+  screen: number;
+  setScreen: React.Dispatch<React.SetStateAction<number>>;
+  open: boolean;
+  icon: any;
+};
+
+const NavigationListItem = ({
+  screenIndex,
+  text,
+  screen,
+  setScreen,
+  open,
+  icon,
+}: TNavigationListItem) => {
+  return (
+    <ListItem
+      key={text}
+      disablePadding
+      sx={{ display: "block" }}
+      onClick={() => setScreen(screenIndex)}
+    >
+      <ListItemButton
+        sx={{
+          minHeight: 48,
+          justifyContent: open ? "initial" : "center",
+          px: 2.5,
+        }}
+        selected={screen === screenIndex}
+      >
+        <ListItemIcon
+          sx={{
+            minWidth: 0,
+            mr: open ? 1 : "auto",
+            justifyContent: "center",
+          }}
+        >
+          {icon}
+        </ListItemIcon>
+        <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+      </ListItemButton>
+    </ListItem>
+  );
+};

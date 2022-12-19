@@ -1,17 +1,24 @@
 import React from "react";
 import { useSocket } from "../../../Hooks/useSocket";
+import { TChat } from "../../../Types/Types";
 import MainFrame from "./MainFrame/MainFrame";
 import SideBar from "./Sidebar/Sidebar";
 
-const Conversations = () => {
-  const {
-    chatList,
-    deleteAllChats,
-    sendMessage,
-    currentChatData,
-    setChatStatus,
-    setFilteredChatList,
-  } = useSocket();
+const Conversations = ({
+  chatList,
+  deleteAllChats,
+  sendMessage,
+  currentChatData,
+  setChatStatus,
+  setFilteredChatList,
+}: {
+  chatList: TChat[] | undefined;
+  deleteAllChats: () => void;
+  sendMessage: (messageContent: string) => void;
+  currentChatData: TChat | undefined;
+  setChatStatus: (status: string, chatId: string) => void;
+  setFilteredChatList: (filter: string) => void;
+}) => {
   return (
     <>
       <SideBar

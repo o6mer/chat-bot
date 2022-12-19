@@ -1,15 +1,14 @@
-import React from "react";
 import { TChat } from "../../../../../Types/Types";
-import SectionBreak from "../../../General/SectionBreak";
 import InfoSidebarConvoInfo from "./ConvoInfo/InfoSidebarConvoInfo";
 import InfoSidebarHeader from "./Header/InfoSidebarHeader";
+import Divider from "@mui/material/Divider";
 
 const InfoSidebar = ({ currentChatData }: { currentChatData?: TChat }) => {
   return (
     <div className="outline-[3px] outline outline-gray-200 w-[20%] flex flex-col h-full p-2">
       <InfoSidebarHeader />
 
-      <SectionBreak />
+      <Divider />
 
       <InfoSidebarConvoInfo
         id={currentChatData?.id}

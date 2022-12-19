@@ -36,11 +36,6 @@ const router = createBrowserRouter([
     element: <Dashboard />,
     errorElement: <ErrorPage />,
   },
-  {
-    path: "/admins-controlls",
-    element: <AdminsControlls />,
-    errorElement: <ErrorPage />,
-  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
