@@ -9,7 +9,7 @@ const socket = io("http://localhost:3001/", {
 
 export const useSocket = () => {
   const [isConnected, setIsConnected] = useState(socket.connected);
-  const [chatList, setChatList] = useState<Array<TChat>>();
+  const [chatList, setChatList] = useState<Array<TChat>>([]);
   const [chatFilter, setChatFilter] = useState<string>("open");
   const [currentChatData, setCurrentChatData] = useState<TChat>();
   const { user, currentChatId, setCurrentChatId }: any =

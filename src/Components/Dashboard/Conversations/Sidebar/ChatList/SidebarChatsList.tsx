@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TChat } from "../../../../Types/Types";
+import { TChat } from "../../../../../Types/Types";
 import SidebarChatListItem from "./SidebarChatListItem";
 import date from "date-and-time";
 
