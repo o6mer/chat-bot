@@ -26,7 +26,7 @@ export default function BasicTabs() {
   };
 
   return (
-    <div className="w-full ">
+    <div className="w-full h-full flex flex-col">
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
@@ -50,13 +50,16 @@ export default function BasicTabs() {
 const TabPanel = ({ children, value, index, ...other }: TabPanelProps) => {
   return (
     <div
+      className={`${
+        value === index && "w-full flex grow justify-center px-32 py-20   "
+      }`}
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <div>{children}</div>}
+      {value === index && <>{children}</>}
     </div>
   );
 };

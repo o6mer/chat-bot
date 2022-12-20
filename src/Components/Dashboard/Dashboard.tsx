@@ -7,6 +7,7 @@ import NavigationBar from "./General/NavigationBar";
 import { DashboardContext } from "../../Contexts/DashbaordContext";
 import AdminControlls from "./AdminControlls/AdminsControlls";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import SocketContextProvider from "../../Contexts/SocketContext";
 declare module "@mui/material/styles" {
   interface Theme {
     status: {
@@ -42,13 +43,15 @@ const Dashboard = () => {
     },
   });
   return (
-    <ThemeProvider theme={theme}>
-      <main className="w-full h-full flex">
-        <NavigationBar />
-        {screen === 1 && <Conversations />}
-        {screen === 2 && <AdminControlls />}
-      </main>
-    </ThemeProvider>
+    <SocketContextProvider>
+      <ThemeProvider theme={theme}>
+        <main className="w-full h-full flex">
+          <NavigationBar />
+          {screen === 1 && <Conversations />}
+          {screen === 2 && <AdminControlls />}
+        </main>
+      </ThemeProvider>
+    </SocketContextProvider>
   );
 };
 
