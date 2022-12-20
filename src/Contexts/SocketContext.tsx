@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useSocket } from "../Hooks/useSocket";
-import { TChat, TUser } from "../Types/Types";
+import { TChat, TTemplate, TUser } from "../Types/Types";
 
 export type TSocketContext = {
   chatList?: Array<TChat>;
@@ -9,6 +9,10 @@ export type TSocketContext = {
   currentChatData?: TChat;
   setChatStatus: (status: string, chatId: string) => void;
   setFilteredChatList: (filter: string) => void;
+  templateList?: Array<TTemplate>;
+  updateTemplate: (template: TTemplate) => void;
+  deleteTemplate: (templateId?: string) => void;
+  createTemplate: (title: string, content: string) => void;
 };
 
 export const SocketContext = createContext<TSocketContext | null>(null);
@@ -21,6 +25,10 @@ const SocketContextProvider = ({ children }: any) => {
     currentChatData,
     setChatStatus,
     setFilteredChatList,
+    templateList,
+    updateTemplate,
+    deleteTemplate,
+    createTemplate,
   } = useSocket();
 
   return (
@@ -32,6 +40,10 @@ const SocketContextProvider = ({ children }: any) => {
         currentChatData,
         setChatStatus,
         setFilteredChatList,
+        templateList,
+        updateTemplate,
+        deleteTemplate,
+        createTemplate,
       }}
     >
       {children}

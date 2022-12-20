@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { DashboardContext } from "../Contexts/DashbaordContext";
-import { TChat, TMessage } from "../Types/Types";
+import { TChat, TMessage, TTemplate } from "../Types/Types";
 import io from "socket.io-client";
 
 const socket = io("http://localhost:3001/", {
@@ -12,6 +12,7 @@ export const useSocket = () => {
   const [chatList, setChatList] = useState<Array<TChat>>([]);
   const [chatFilter, setChatFilter] = useState<string>("open");
   const [currentChatData, setCurrentChatData] = useState<TChat>();
+  const [templateList, setTemplateLst] = useState<Array<TTemplate>>([]);
   const { user, currentChatId, setCurrentChatId }: any =
     useContext(DashboardContext);
 
@@ -48,6 +49,7 @@ export const useSocket = () => {
   const onNewAdminConnection = (prevChatList: Array<any>) => {
     console.log("admin connected", prevChatList);
     setChatList(prevChatList);
+    getAllTemplates();
   };
 
   const onNewChat = (newChat: TChat) => {
@@ -122,6 +124,28 @@ export const useSocket = () => {
     });
   };
 
+  const getAllTemplates = () => {
+    socket.emit("getAllTemplates", (list: Array<TTemplate>) => {
+      setTemplateLst(list);
+    });
+  };
+
+  const updateTemplate = (updatedTemplate: TTemplate) => {
+    if (!updatedTemplate.id)
+      return createTemplate(updatedTemplate.title, updatedTemplate.content);
+    socket.emit("updateTemplate", updatedTemplate);
+  };
+
+  const deleteTemplate = (tempalteId?: string) => {
+    socket.emit("deleteTemplate", tempalteId);
+  };
+
+  const createTemplate = (title?: string, content?: string) => {
+    socket.emit("createTemplate", { title, content }, (template: TTemplate) =>
+      setTemplateLst((prev: Array<TTemplate>) => [...prev, template])
+    );
+  };
+
   return {
     chatList,
     deleteAllChats,
@@ -129,5 +153,9 @@ export const useSocket = () => {
     currentChatData,
     setChatStatus,
     setFilteredChatList,
+    templateList,
+    updateTemplate,
+    deleteTemplate,
+    createTemplate,
   };
 };

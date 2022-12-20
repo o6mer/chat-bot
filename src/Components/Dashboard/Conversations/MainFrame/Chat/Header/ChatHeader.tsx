@@ -41,7 +41,7 @@ const ChatHeader = ({
         )}
         {chatStatus !== "open" && (
           <div
-            className={`px-2 py-1 bg-green-700 text-white hover:bg-green-600 rounded-lg ${
+            className={`px-2 py-1 bg-green-600 text-white hover:bg-green-500 rounded-lg ${
               chatStatus === "open" ? "hidden" : "flex"
             } justify-between items-center gap-1 cursor-pointer`}
             onClick={() => setChatStatus("open", currentChatId)}
