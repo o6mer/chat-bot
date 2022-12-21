@@ -1,14 +1,14 @@
 import React from "react";
-import { TTemplate } from "../../../../../Types/Types";
+import { TTemplate } from "../../../../../../Types/Types";
 
 const TemplateItem = ({
-  header,
+  title,
   content,
   id,
   setSelectedTemplate,
   submitTemplate,
 }: {
-  header?: string;
+  title?: string;
   content?: string;
   id?: string;
   setSelectedTemplate: React.Dispatch<
@@ -25,14 +25,14 @@ const TemplateItem = ({
   return (
     <li
       key={id}
-      className="w-max cursor-pointer hover:bg-gray-200"
+      className="w-full p-1 cursor-pointer hover:bg-gray-200"
       onClick={(e) => {
         handleClick(e);
-        const template: TTemplate = { header, content, id };
+        const template: TTemplate = { title, content, id };
         setSelectedTemplate(template);
       }}
     >
-      {header}
+      {title}
     </li>
   );
 };

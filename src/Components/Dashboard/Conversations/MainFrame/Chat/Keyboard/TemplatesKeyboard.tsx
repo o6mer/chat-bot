@@ -1,26 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Menu } from "@mui/material";
 import BookOutlinedIcon from "@mui/icons-material/BookOutlined";
-import { TTemplate } from "../../../../../Types/Types";
+import { TTemplate } from "../../../../../../Types/Types";
 import TemplateItem from "./TemplateItem";
-
-const templateList = [
-  {
-    header: "template",
-    content: "content content content content content ",
-    id: "dasfsafadsdfs",
-  },
-  {
-    header: "booooo",
-    content: "content2 content2 content2 content2 content2 ",
-    id: "bxbzxbxbzx2",
-  },
-  {
-    header: "zaaaa",
-    content: " template  template  template  template  template ",
-    id: "qwwtwgsadg",
-  },
-];
+import {
+  SocketContext,
+  TSocketContext,
+} from "../../../../../../Contexts/SocketContext";
 
 const TemplatesKeyboard = ({
   setMessage,
@@ -28,12 +14,14 @@ const TemplatesKeyboard = ({
   setMessage: React.Dispatch<React.SetStateAction<string | undefined>>;
 }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [filteredTemplateList, setFilteredTemplateList] =
-    useState<Array<TTemplate | undefined>>(templateList);
   const [selectedTemplate, setSelectedTemplate] = useState<
     TTemplate | undefined
   >();
   const [search, setSearch] = useState<string>("");
+
+  const { templateList } = useContext(SocketContext) as TSocketContext;
+  const [filteredTemplateList, setFilteredTemplateList] =
+    useState(templateList);
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -51,13 +39,13 @@ const TemplatesKeyboard = ({
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.currentTarget.value;
     setSearch(searchValue);
-    setFilteredTemplateList(
-      templateList
-        .map((template) => {
-          if (template.header.includes(searchValue)) return template;
-        })
-        .filter((template) => template !== undefined)
-    );
+    setFilteredTemplateList(() => {
+      let list: Array<TTemplate> = [];
+      templateList?.forEach((template: TTemplate) => {
+        if (template?.title?.includes(searchValue)) list.push(template);
+      });
+      return list;
+    });
   };
 
   return (
@@ -92,6 +80,7 @@ const TemplatesKeyboard = ({
       >
         <div className="w-96 flex flex-col p-2 gap-2">
           <input
+            className="border"
             type="text"
             placeholder="Search template..."
             onKeyDown={(e: any) => {
@@ -101,8 +90,8 @@ const TemplatesKeyboard = ({
             onChange={handleSearch}
           />
           <div className="flex justify-between gap-2 ">
-            <ul className="w-max flex flex-col">
-              {filteredTemplateList.length ? (
+            <ul className=" flex flex-col w-[30%]">
+              {filteredTemplateList?.length ? (
                 filteredTemplateList?.map((template, index, arr) => (
                   <TemplateItem
                     {...template}
@@ -115,8 +104,8 @@ const TemplatesKeyboard = ({
                 <p>template not found...</p>
               )}
             </ul>
-            <div className="flex flex-wrap">
-              {filteredTemplateList.length ? selectedTemplate?.content : ""}
+            <div className="flex flex-wrap grow">
+              {filteredTemplateList?.length ? selectedTemplate?.content : ""}
             </div>
           </div>
         </div>

@@ -39,7 +39,13 @@ const Editor = ({
 
   const onDeleteClicked = () => {
     deleteTemplate(selectedTemplate?.id);
-    setSelectedTemplate({});
+    setSelectedTemplate(undefined);
+  };
+
+  const onCancelClicked = () => {
+    setSelectedTemplate(undefined);
+    setTitle("");
+    setContent("");
   };
 
   return (
@@ -85,7 +91,10 @@ const Editor = ({
           Delete
         </button>
         <div className="flex gap-2">
-          <button className="gap-1 flex items-center transition-all hover:bg-gray-200 border px-2 py-1 rounded-lg m-w-16">
+          <button
+            className="gap-1 flex items-center transition-all hover:bg-gray-200 border px-2 py-1 rounded-lg m-w-16"
+            onClick={onCancelClicked}
+          >
             <CloseOutlinedIcon fontSize="small" />
             Cancel
           </button>

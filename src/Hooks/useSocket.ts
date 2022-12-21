@@ -138,6 +138,9 @@ export const useSocket = () => {
 
   const deleteTemplate = (tempalteId?: string) => {
     socket.emit("deleteTemplate", tempalteId);
+    setTemplateLst((prev: Array<TTemplate>) =>
+      prev.filter((template: TTemplate) => template.id !== tempalteId)
+    );
   };
 
   const createTemplate = (title?: string, content?: string) => {
