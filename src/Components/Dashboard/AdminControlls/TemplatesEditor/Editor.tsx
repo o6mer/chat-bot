@@ -50,7 +50,7 @@ const Editor = ({
 
   return (
     <main className="flex flex-col justify-between w-full grow p-6 ">
-      <section className="flex flex-col gap-4">
+      <section className="flex flex-col gap-4 grow py-4">
         <div className="flex flex-col w-full  justify-start gap-2">
           <label htmlFor="template-title_input" className="text-lg">
             Title:
@@ -66,7 +66,7 @@ const Editor = ({
             }
           />
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 grow">
           <label htmlFor="template-content_textarea" className="text-lg">
             Content:
           </label>
@@ -74,7 +74,7 @@ const Editor = ({
             name=""
             id="template-content_textarea"
             placeholder="Current Content"
-            className="resize-none border rounded-lg"
+            className="flex self-stretch resize-none border rounded-lg h-full"
             value={content}
             onChange={(e: React.FormEvent<HTMLTextAreaElement>) =>
               setContent(e.currentTarget.value)

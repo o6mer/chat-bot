@@ -9,7 +9,7 @@ const TemplateItem = ({
   setSelectedTemplate,
   submitTemplate,
 }: {
-  title?: string;
+  title: string;
   content?: string;
   id?: string;
   selectedTemplate?: TTemplate;

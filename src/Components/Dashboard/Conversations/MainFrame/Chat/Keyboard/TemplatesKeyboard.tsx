@@ -92,15 +92,25 @@ const TemplatesKeyboard = ({
           <div className="flex justify-between gap-2 overflow-y-scroll dashboard-scrollbar">
             <ul className=" flex flex-col w-[30%]">
               {filteredTemplateList?.length ? (
-                filteredTemplateList?.map((template, index, arr) => (
-                  <TemplateItem
-                    {...template}
-                    selectedTemplate={selectedTemplate}
-                    setSelectedTemplate={setSelectedTemplate}
-                    submitTemplate={submitTemplate}
-                    key={index}
-                  />
-                ))
+                filteredTemplateList
+                  ?.sort((a: TTemplate, b: TTemplate) => {
+                    if (a?.title < b?.title) {
+                      return -1;
+                    }
+                    if (a?.title > b?.title) {
+                      return 1;
+                    }
+                    return 0;
+                  })
+                  .map((template, index, arr) => (
+                    <TemplateItem
+                      {...template}
+                      selectedTemplate={selectedTemplate}
+                      setSelectedTemplate={setSelectedTemplate}
+                      submitTemplate={submitTemplate}
+                      key={index}
+                    />
+                  ))
               ) : (
                 <p>template not found...</p>
               )}
