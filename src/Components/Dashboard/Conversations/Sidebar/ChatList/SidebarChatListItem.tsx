@@ -28,7 +28,7 @@ const SidebarChatListItem = ({
     <li
       className={`flex gap-2 w-full p-2 rounded-md cursor-pointer items-center transition-all  ${
         currentChatId === id ? "bg-slate-200 hover:bg-slate-300 " : "bg-white"
-      } hover:bg-slate-100 ${seen ? "font-normal" : "font-bold"}`}
+      } hover:bg-slate-200 ${seen ? "font-normal" : "font-bold"}`}
       onClick={chatSelectHandler}
     >
       <div className="flex items-center">

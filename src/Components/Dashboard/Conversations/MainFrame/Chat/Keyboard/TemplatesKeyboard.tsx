@@ -78,7 +78,7 @@ const TemplatesKeyboard = ({
           horizontal: "left",
         }}
       >
-        <div className="w-96 flex flex-col p-2 gap-2">
+        <div className="w-96 flex flex-col p-2 gap-2 h-80">
           <input
             className="border"
             type="text"
@@ -89,12 +89,13 @@ const TemplatesKeyboard = ({
             value={search}
             onChange={handleSearch}
           />
-          <div className="flex justify-between gap-2 ">
+          <div className="flex justify-between gap-2 overflow-y-scroll dashboard-scrollbar">
             <ul className=" flex flex-col w-[30%]">
               {filteredTemplateList?.length ? (
                 filteredTemplateList?.map((template, index, arr) => (
                   <TemplateItem
                     {...template}
+                    selectedTemplate={selectedTemplate}
                     setSelectedTemplate={setSelectedTemplate}
                     submitTemplate={submitTemplate}
                     key={index}
