@@ -4,7 +4,10 @@ import SideBar from "./Conversations/Sidebar/Sidebar";
 import { useSocket } from "../../Hooks/useSocket";
 import Conversations from "./Conversations/Conversations";
 import NavigationBar from "./General/NavigationBar";
-import { DashboardContext } from "../../Contexts/DashbaordContext";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../Contexts/DashbaordContext";
 import AdminControlls from "./AdminControlls/AdminsControlls";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import SocketContextProvider from "../../Contexts/SocketContext";
@@ -23,8 +26,7 @@ declare module "@mui/material/styles" {
 }
 
 const Dashboard = () => {
-  const { screen }: any = useContext(DashboardContext);
-  // const socket = useSocket();
+  const { screen } = useContext(DashboardContext) as TDashbaordContext;
 
   const theme = createTheme({
     palette: {

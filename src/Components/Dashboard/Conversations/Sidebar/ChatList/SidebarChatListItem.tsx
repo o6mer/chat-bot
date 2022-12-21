@@ -1,7 +1,10 @@
 import React, { useContext, useState } from "react";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { TChat } from "../../../../../Types/Types";
-import { DashboardContext } from "../../../../../Contexts/DashbaordContext";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../../../Contexts/DashbaordContext";
 
 const SidebarChatListItem = ({
   customerName,
@@ -10,7 +13,9 @@ const SidebarChatListItem = ({
   messages,
   id,
 }: TChat) => {
-  const { currentChatId, setCurrentChatId }: any = useContext(DashboardContext);
+  const { currentChatId, setCurrentChatId } = useContext(
+    DashboardContext
+  ) as TDashbaordContext;
   const [seen, setSeen] = useState(isSeen);
   const lastMessage = messages.at(-1);
 

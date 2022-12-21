@@ -1,14 +1,17 @@
 import React, { FormEvent, useContext, useState } from "react";
 import LabeldInput from "../../General/LabeldInput";
 import axios from "axios";
-import { DashboardContext } from "../../../Contexts/DashbaordContext";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../Contexts/DashbaordContext";
 import { useNavigate, redirect } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setUser }: any = useContext(DashboardContext);
+  const { setUser } = useContext(DashboardContext) as TDashbaordContext;
 
   const navigate = useNavigate();
 

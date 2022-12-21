@@ -1,7 +1,10 @@
 import React, { FormEvent, useContext, useState } from "react";
 import LabeldInput from "../../General/LabeldInput";
 import axios from "axios";
-import { DashboardContext } from "../../../Contexts/DashbaordContext";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../Contexts/DashbaordContext";
 import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
@@ -9,7 +12,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
-  const { setUser }: any = useContext(DashboardContext);
+  const { setUser } = useContext(DashboardContext) as TDashbaordContext;
 
   const navigate = useNavigate();
 

@@ -83,7 +83,7 @@ const TemplatesKeyboard = ({
             className="border"
             type="text"
             placeholder="Search template..."
-            onKeyDown={(e: any) => {
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
               e.stopPropagation();
             }}
             value={search}

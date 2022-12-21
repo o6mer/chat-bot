@@ -8,8 +8,8 @@ const LabeldInput = ({
 }: {
   type: string;
   label: string;
-  state: any;
-  setState: any;
+  state: string;
+  setState: (value: string) => void;
 }) => {
   return (
     <div className="w-full flex flex-col justify-between">

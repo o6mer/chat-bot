@@ -20,12 +20,12 @@ const ChatKeyboard = ({}: {}) => {
     setMessage("");
   };
 
-  const typingHandler = (e: any) => {
-    setMessage(e.target.value);
+  const typingHandler = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    setMessage(e.currentTarget.value);
   };
 
-  const checkSubmit = (e: any) => {
-    if (e.keyCode == 13 && e.shiftKey == true) {
+  const checkSubmit = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key == "Enter" && e.shiftKey == true) {
       e.preventDefault();
       formRef?.current?.requestSubmit();
     }

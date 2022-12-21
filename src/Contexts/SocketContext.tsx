@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, ReactNode } from "react";
 import { useSocket } from "../Hooks/useSocket";
 import { TChat, TTemplate, TUser } from "../Types/Types";
 
@@ -7,7 +7,7 @@ export type TSocketContext = {
   deleteAllChats?: () => void;
   sendMessage: (message: string) => void;
   currentChatData?: TChat;
-  setChatStatus: (status: string, chatId: string) => void;
+  setChatStatus: (status?: string, chatId?: string) => void;
   setFilteredChatList: (filter: string) => void;
   templateList?: Array<TTemplate>;
   updateTemplate: (template: TTemplate) => void;
@@ -17,7 +17,7 @@ export type TSocketContext = {
 
 export const SocketContext = createContext<TSocketContext | null>(null);
 
-const SocketContextProvider = ({ children }: any) => {
+const SocketContextProvider = ({ children }: { children: ReactNode }) => {
   const {
     chatList,
     deleteAllChats,

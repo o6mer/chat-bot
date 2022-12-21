@@ -1,5 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { DashboardContext } from "../Contexts/DashbaordContext";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../Contexts/DashbaordContext";
 import { TChat, TMessage, TTemplate } from "../Types/Types";
 import io from "socket.io-client";
 
@@ -13,8 +16,9 @@ export const useSocket = () => {
   const [chatFilter, setChatFilter] = useState<string>("open");
   const [currentChatData, setCurrentChatData] = useState<TChat>();
   const [templateList, setTemplateLst] = useState<Array<TTemplate>>([]);
-  const { user, currentChatId, setCurrentChatId }: any =
-    useContext(DashboardContext);
+  const { user, currentChatId, setCurrentChatId } = useContext(
+    DashboardContext
+  ) as TDashbaordContext;
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -46,17 +50,18 @@ export const useSocket = () => {
     });
   }, [currentChatId]);
 
-  const onNewAdminConnection = (prevChatList: Array<any>) => {
+  const onNewAdminConnection = (prevChatList: Array<TChat>) => {
     console.log("admin connected", prevChatList);
     setChatList(prevChatList);
     getAllTemplates();
   };
 
   const onNewChat = (newChat: TChat) => {
-    setChatList((prev: any) => {
+    setChatList((prev: Array<TChat>): Array<TChat> => {
       if (newChat.status === chatFilter) return [...prev, newChat];
       if (newChat.status !== chatFilter)
         return prev.filter((chat: TChat) => chat.id === newChat.id);
+      return prev;
     });
     if (!isConnected) return;
     socket.emit("joinChat", newChat.id);
@@ -73,15 +78,17 @@ export const useSocket = () => {
   };
 
   const onChatStatusChanged = (newChat: TChat) => {
-    setChatList((prev: any) => {
+    setChatList((prev: Array<TChat>): Array<TChat> => {
       if (newChat.status === chatFilter) return [...prev, newChat];
       if (newChat.status !== chatFilter)
         return prev.filter((chat: TChat) => chat.id !== newChat.id);
+      return prev;
     });
   };
 
   const addMessage = (message: TMessage) => {
-    setCurrentChatData((prev: any) => {
+    setCurrentChatData((prev: TChat | undefined) => {
+      if (!prev) return;
       return { ...prev, messages: [...prev.messages, message] };
     });
   };
@@ -99,11 +106,11 @@ export const useSocket = () => {
     );
   };
 
-  const setChatStatus = (status: string, chatId: string) => {
+  const setChatStatus = (status?: string, chatId?: string) => {
     if (!isConnected) return;
     socket.emit("setChatStatus", status, chatId);
     setCurrentChatId("");
-    setChatList((prev: any) =>
+    setChatList((prev: Array<TChat>) =>
       prev.filter((chat: TChat) => {
         // if (chat.status !== status) return;
         return chat.id !== chatId;
