@@ -15,8 +15,8 @@ const Editor = ({
     React.SetStateAction<TTemplate | undefined>
   >;
 }) => {
-  const [title, setTitle] = useState(selectedTemplate.title);
-  const [content, setContent] = useState(selectedTemplate.content);
+  const [title, setTitle] = useState(selectedTemplate?.title || "");
+  const [content, setContent] = useState(selectedTemplate?.content || "");
 
   useEffect(() => {
     setTitle(selectedTemplate?.title || "");

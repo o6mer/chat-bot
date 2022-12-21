@@ -1,6 +1,7 @@
 import { TTemplate } from "../../../../Types/Types";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import Divider from "@mui/material/Divider";
+import { useEffect, useState } from "react";
 
 const Sidebar = ({
   templateList,
@@ -9,14 +10,35 @@ const Sidebar = ({
   templateList?: Array<TTemplate>;
   setSelectedTemplate: (template: TTemplate) => void;
 }) => {
+  const [search, setSearch] = useState("");
+  const [filteredList, setFilteredList] = useState(templateList);
+
+  useEffect(() => {
+    setFilteredList(templateList);
+  }, [templateList]);
+
   const onNewTemplate = () => {
     setSelectedTemplate({});
+  };
+
+  const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchValue = e.currentTarget.value;
+    setSearch(searchValue);
+    setFilteredList(() => {
+      const list: Array<TTemplate> = [];
+      templateList?.forEach((template: TTemplate) => {
+        if (template.title?.includes(searchValue)) list.push(template);
+      });
+      return list;
+    });
   };
 
   return (
     <aside className="flex w-[30%] flex-col  gap-2 h-full ">
       <div className="flex gap-2 px-2 w-full">
         <input
+          onChange={onSearch}
+          value={search}
           type="text"
           className="min-w-0 p-1 border rounded-lg"
           placeholder="Search template..."
@@ -31,7 +53,7 @@ const Sidebar = ({
       </div>
       <Divider />
       <ul className="list-none text-md flex flex-col grow h-0 overflow-y-scroll dashboard-scrollbar px-2">
-        {templateList?.map((template: TTemplate) => (
+        {filteredList?.map((template: TTemplate) => (
           <TemplateListItem
             template={template}
             setSelectedTemplate={setSelectedTemplate}
