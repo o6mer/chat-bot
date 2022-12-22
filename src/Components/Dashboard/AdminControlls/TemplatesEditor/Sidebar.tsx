@@ -8,7 +8,7 @@ const Sidebar = ({
   setSelectedTemplate,
 }: {
   templateList?: Array<TTemplate>;
-  setSelectedTemplate: (template: TTemplate) => void;
+  setSelectedTemplate: (template?: TTemplate) => void;
 }) => {
   const [search, setSearch] = useState("");
   const [filteredList, setFilteredList] = useState(templateList);
@@ -18,7 +18,7 @@ const Sidebar = ({
   }, [templateList]);
 
   const onNewTemplate = () => {
-    setSelectedTemplate({});
+    setSelectedTemplate({ title: "" });
   };
 
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,13 +34,13 @@ const Sidebar = ({
   };
 
   return (
-    <aside className="flex w-[30%] flex-col  gap-2 h-full ">
+    <aside className="flex w-[22%] flex-col  gap-2 h-full ">
       <div className="flex gap-2 px-2 w-full">
         <input
           onChange={onSearch}
           value={search}
           type="text"
-          className="min-w-0 p-1 border rounded-lg"
+          className="min-w-0 p-1 border rounded-lg "
           placeholder="Search template..."
         />
         <button
@@ -53,13 +53,23 @@ const Sidebar = ({
       </div>
       <Divider />
       <ul className="list-none text-md flex flex-col grow h-0 overflow-y-scroll dashboard-scrollbar px-2">
-        {filteredList?.map((template: TTemplate) => (
-          <TemplateListItem
-            template={template}
-            setSelectedTemplate={setSelectedTemplate}
-            key={template.id}
-          />
-        ))}
+        {filteredList
+          ?.sort((a: TTemplate, b: TTemplate) => {
+            if (a?.title < b?.title) {
+              return -1;
+            }
+            if (a?.title > b?.title) {
+              return 1;
+            }
+            return 0;
+          })
+          ?.map((template: TTemplate) => (
+            <TemplateListItem
+              template={template}
+              setSelectedTemplate={setSelectedTemplate}
+              key={template.id}
+            />
+          ))}
       </ul>
     </aside>
   );

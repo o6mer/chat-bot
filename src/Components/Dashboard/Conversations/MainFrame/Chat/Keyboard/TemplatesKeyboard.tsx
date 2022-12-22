@@ -79,18 +79,20 @@ const TemplatesKeyboard = ({
         }}
       >
         <div className="w-96 flex flex-col p-2 gap-2 h-80">
-          <input
-            className="border"
-            type="text"
-            placeholder="Search template..."
-            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-              e.stopPropagation();
-            }}
-            value={search}
-            onChange={handleSearch}
-          />
-          <div className="flex justify-between gap-2 overflow-y-scroll dashboard-scrollbar">
-            <ul className=" flex flex-col w-[30%]">
+          <div>
+            <input
+              className="border w-full"
+              type="text"
+              placeholder="Search template..."
+              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                e.stopPropagation();
+              }}
+              value={search}
+              onChange={handleSearch}
+            />
+          </div>
+          <div className="flex overflow-y-hidden">
+            <ul className=" flex flex-col w-[30%] overflow-y-scroll dashboard-scrollbar px-1">
               {filteredTemplateList?.length ? (
                 filteredTemplateList
                   ?.sort((a: TTemplate, b: TTemplate) => {
@@ -115,7 +117,7 @@ const TemplatesKeyboard = ({
                 <p>template not found...</p>
               )}
             </ul>
-            <div className="flex flex-wrap grow">
+            <div className="flex flex-wrap grow p-2">
               {filteredTemplateList?.length ? selectedTemplate?.content : ""}
             </div>
           </div>
