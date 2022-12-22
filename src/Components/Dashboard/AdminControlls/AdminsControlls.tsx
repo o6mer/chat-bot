@@ -2,8 +2,8 @@ import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import BotEditor from "./BotEditor/BotEditor";
 import TemplateEditor from "./TemplatesEditor/TemplateEditor";
+import ConversationEditor from "./ConversationsEditor/ConversationEditor";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -38,7 +38,7 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <BotEditor />
+        <ConversationEditor />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <TemplateEditor />

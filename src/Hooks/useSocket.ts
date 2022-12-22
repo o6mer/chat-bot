@@ -4,7 +4,7 @@ import {
   DashboardContext,
   TDashbaordContext,
 } from "../Contexts/DashbaordContext";
-import { TChat, TMessage, TTemplate } from "../Types/Types";
+import { TChat, TConversation, TMessage, TTemplate } from "../Types/Types";
 
 export const useSocket = (socket: any) => {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -64,7 +64,6 @@ export const useSocket = (socket: any) => {
 
       return prev.filter((chat: TChat) => chat.id !== newChat.id);
     });
-    console.log(newChat);
     socket.emit("joinChat", newChat.id);
   };
 
@@ -75,7 +74,6 @@ export const useSocket = (socket: any) => {
     message: TMessage;
     id: string;
   }) => {
-    console.log("ReceiveMessage", message, id);
     addMessage(message, id);
   };
 
@@ -171,6 +169,11 @@ export const useSocket = (socket: any) => {
     );
   };
 
+  const createConversation = (conversation: TConversation) => {
+    console.log(conversation);
+    socket.emit("createConversation", conversation);
+  };
+
   return {
     chatList,
     deleteAllChats,
@@ -182,5 +185,6 @@ export const useSocket = (socket: any) => {
     updateTemplate,
     deleteTemplate,
     createTemplate,
+    createConversation,
   };
 };
