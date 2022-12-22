@@ -64,7 +64,7 @@ export const useSocket = (socket: any) => {
 
       return prev.filter((chat: TChat) => chat.id !== newChat.id);
     });
-    if (!isConnected) return;
+    console.log(newChat);
     socket.emit("joinChat", newChat.id);
   };
 
@@ -75,6 +75,7 @@ export const useSocket = (socket: any) => {
     message: TMessage;
     id: string;
   }) => {
+    console.log("ReceiveMessage", message, id);
     addMessage(message, id);
   };
 
