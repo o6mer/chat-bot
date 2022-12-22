@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState, ReactNode } from "react";
 import { useSocket } from "../Hooks/useSocket";
 import { TChat, TTemplate, TUser } from "../Types/Types";
+import io from "socket.io-client";
 
 export type TSocketContext = {
   chatList?: Array<TChat>;
@@ -17,6 +18,10 @@ export type TSocketContext = {
 
 export const SocketContext = createContext<TSocketContext | null>(null);
 
+const socket = io("http://localhost:3001/", {
+  closeOnBeforeunload: false,
+});
+
 const SocketContextProvider = ({ children }: { children: ReactNode }) => {
   const {
     chatList,
@@ -29,7 +34,7 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
     updateTemplate,
     deleteTemplate,
     createTemplate,
-  } = useSocket();
+  } = useSocket(socket);
 
   return (
     <SocketContext.Provider
