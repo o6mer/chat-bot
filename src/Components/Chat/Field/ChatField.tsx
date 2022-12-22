@@ -3,7 +3,10 @@ import ChatKeyboard from "./ChatKeyboard";
 import TextMessage from "../../Messages/TextMessage";
 import { TMessage } from "../../../Types/Types";
 import InputMessage from "../../Messages/InputMessage";
-import { CustomerContext } from "../../../Contexts/CustomerContext";
+import {
+  CustomerContext,
+  TCustomerContext,
+} from "../../../Contexts/CustomerContext";
 import { io } from "socket.io-client";
 
 const socket = io("http://localhost:3001/", {
@@ -14,7 +17,7 @@ const ChatField = () => {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [messagesList, setMessagesList] = useState<TMessage[]>([]);
 
-  const { chatId, setChatId }: any = useContext(CustomerContext);
+  const { chatId, setChatId } = useContext(CustomerContext) as TCustomerContext;
 
   useEffect(() => {
     socket.on("connect", () => {

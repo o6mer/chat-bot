@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
 import BeenhereOutlinedIcon from "@mui/icons-material/BeenhereOutlined";
 import BedtimeIcon from "@mui/icons-material/Bedtime";
-import { DashboardContext } from "../../../../../../Contexts/DashbaordContext";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../../../../Contexts/DashbaordContext";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import {
   SocketContext,
@@ -14,7 +17,7 @@ const ChatHeader = ({
   customerName?: string;
   chatStatus?: string;
 }) => {
-  const { currentChatId }: any = useContext(DashboardContext);
+  const { currentChatId } = useContext(DashboardContext) as TDashbaordContext;
   const { setChatStatus } = useContext(SocketContext) as TSocketContext;
 
   return (
@@ -41,7 +44,7 @@ const ChatHeader = ({
         )}
         {chatStatus !== "open" && (
           <div
-            className={`px-2 py-1 bg-green-700 text-white hover:bg-green-600 rounded-lg ${
+            className={`px-2 py-1 bg-green-600 text-white hover:bg-green-500 rounded-lg ${
               chatStatus === "open" ? "hidden" : "flex"
             } justify-between items-center gap-1 cursor-pointer`}
             onClick={() => setChatStatus("open", currentChatId)}

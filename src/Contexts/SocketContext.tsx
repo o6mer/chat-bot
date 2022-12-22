@@ -1,19 +1,28 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, ReactNode } from "react";
 import { useSocket } from "../Hooks/useSocket";
-import { TChat, TUser } from "../Types/Types";
+import { TChat, TTemplate, TUser } from "../Types/Types";
+import io from "socket.io-client";
 
 export type TSocketContext = {
   chatList?: Array<TChat>;
   deleteAllChats?: () => void;
   sendMessage: (message: string) => void;
   currentChatData?: TChat;
-  setChatStatus: (status: string, chatId: string) => void;
+  setChatStatus: (status?: string, chatId?: string) => void;
   setFilteredChatList: (filter: string) => void;
+  templateList?: Array<TTemplate>;
+  updateTemplate: (template: TTemplate) => void;
+  deleteTemplate: (templateId?: string) => void;
+  createTemplate: (title: string, content: string) => void;
 };
 
 export const SocketContext = createContext<TSocketContext | null>(null);
 
-const SocketContextProvider = ({ children }: any) => {
+const socket = io("http://localhost:3001/", {
+  closeOnBeforeunload: false,
+});
+
+const SocketContextProvider = ({ children }: { children: ReactNode }) => {
   const {
     chatList,
     deleteAllChats,
@@ -21,7 +30,11 @@ const SocketContextProvider = ({ children }: any) => {
     currentChatData,
     setChatStatus,
     setFilteredChatList,
-  } = useSocket();
+    templateList,
+    updateTemplate,
+    deleteTemplate,
+    createTemplate,
+  } = useSocket(socket);
 
   return (
     <SocketContext.Provider
@@ -32,6 +45,10 @@ const SocketContextProvider = ({ children }: any) => {
         currentChatData,
         setChatStatus,
         setFilteredChatList,
+        templateList,
+        updateTemplate,
+        deleteTemplate,
+        createTemplate,
       }}
     >
       {children}

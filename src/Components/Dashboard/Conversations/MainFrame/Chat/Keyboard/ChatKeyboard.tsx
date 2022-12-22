@@ -20,12 +20,12 @@ const ChatKeyboard = ({}: {}) => {
     setMessage("");
   };
 
-  const typingHandler = (e: any) => {
-    setMessage(e.target.value);
+  const typingHandler = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    setMessage(e.currentTarget.value);
   };
 
-  const checkSubmit = (e: any) => {
-    if (e.keyCode == 13 && e.shiftKey == true) {
+  const checkSubmit = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key == "Enter" && e.shiftKey == true) {
       e.preventDefault();
       formRef?.current?.requestSubmit();
     }
@@ -38,12 +38,15 @@ const ChatKeyboard = ({}: {}) => {
       ref={formRef}
     >
       <textarea
-        className="w-full h-full p-1 focus:outline-gray-200 outline-[1px] rounded-lg  resize-none dashboard-scrollbar "
+        className="w-full h-full p-1 border focus:outline-gray-200 outline-[1px] rounded-lg  resize-none dashboard-scrollbar "
         placeholder="Write here..."
         value={message}
         onChange={typingHandler}
         onKeyDown={checkSubmit}
       />
+      <p className="text-xs text-gray-500 py-1">
+        * <b>Enter</b>: New line. <b>Sihft+Enter</b>: Send
+      </p>
       <ChatKeyboardActions setMessage={setMessage} />
     </form>
   );

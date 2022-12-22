@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { ReactNode, useContext } from "react";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -11,7 +11,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DisplaySettingsOutlinedIcon from "@mui/icons-material/DisplaySettingsOutlined";
-import { DashboardContext } from "../../../Contexts/DashbaordContext";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../Contexts/DashbaordContext";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 const drawerWidth = 240;
 
@@ -64,7 +67,9 @@ const Drawer = styled(MuiDrawer, {
 
 export default function NavigationBar() {
   const [open, setOpen] = React.useState(false);
-  const { screen, setScreen }: any = useContext(DashboardContext);
+  const { screen, setScreen } = useContext(
+    DashboardContext
+  ) as TDashbaordContext;
 
   const toggleDrawer = () => {
     setOpen((prev) => !prev);
@@ -106,11 +111,11 @@ export default function NavigationBar() {
 
 type TNavigationListItem = {
   screenIndex: number;
-  text: string;
-  screen: number;
-  setScreen: React.Dispatch<React.SetStateAction<number>>;
-  open: boolean;
-  icon: any;
+  text?: string;
+  screen?: number;
+  setScreen: (screen: number) => void;
+  open?: boolean;
+  icon?: ReactNode;
 };
 
 const NavigationListItem = ({

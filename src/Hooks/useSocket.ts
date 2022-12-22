@@ -1,19 +1,20 @@
+import { Socket } from "dgram";
 import { useContext, useEffect, useState } from "react";
-import { DashboardContext } from "../Contexts/DashbaordContext";
-import { TChat, TMessage } from "../Types/Types";
-import io from "socket.io-client";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../Contexts/DashbaordContext";
+import { TChat, TMessage, TTemplate } from "../Types/Types";
 
-const socket = io("http://localhost:3001/", {
-  closeOnBeforeunload: false,
-});
-
-export const useSocket = () => {
+export const useSocket = (socket: any) => {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [chatList, setChatList] = useState<Array<TChat>>([]);
   const [chatFilter, setChatFilter] = useState<string>("open");
   const [currentChatData, setCurrentChatData] = useState<TChat>();
-  const { user, currentChatId, setCurrentChatId }: any =
-    useContext(DashboardContext);
+  const [templateList, setTemplateLst] = useState<Array<TTemplate>>([]);
+  const { user, currentChatId, setCurrentChatId } = useContext(
+    DashboardContext
+  ) as TDashbaordContext;
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -21,9 +22,7 @@ export const useSocket = () => {
       socket.emit("newAdminConnection", onNewAdminConnection);
     });
 
-    socket.on("newChatStarted", onNewChat);
     socket.on("receiveMessage", onReceiveMessage);
-    socket.on("chatStatusChanged", onChatStatusChanged);
     socket.on("disconnect", () => {
       setIsConnected(false);
     });
@@ -31,10 +30,18 @@ export const useSocket = () => {
     return () => {
       socket.off("connect");
       socket.off("newAdminConnection");
-      socket.off("newChatStarted");
       socket.off("receiveMessage");
-      socket.off("chatStatusChanged");
       socket.off("disconnect");
+    };
+  }, []);
+
+  useEffect(() => {
+    socket.on("newChatStarted", onNewChat);
+    socket.on("chatStatusChanged", onChatStatusChanged);
+
+    return () => {
+      socket.off("newChatStarted");
+      socket.off("chatStatusChanged");
     };
   }, [chatFilter]);
 
@@ -45,16 +52,17 @@ export const useSocket = () => {
     });
   }, [currentChatId]);
 
-  const onNewAdminConnection = (prevChatList: Array<any>) => {
+  const onNewAdminConnection = (prevChatList: Array<TChat>) => {
     console.log("admin connected", prevChatList);
     setChatList(prevChatList);
+    getAllTemplates();
   };
 
   const onNewChat = (newChat: TChat) => {
-    setChatList((prev: any) => {
+    setChatList((prev: Array<TChat>): Array<TChat> => {
       if (newChat.status === chatFilter) return [...prev, newChat];
-      if (newChat.status !== chatFilter)
-        return prev.filter((chat: TChat) => chat.id === newChat.id);
+
+      return prev.filter((chat: TChat) => chat.id !== newChat.id);
     });
     if (!isConnected) return;
     socket.emit("joinChat", newChat.id);
@@ -67,20 +75,28 @@ export const useSocket = () => {
     message: TMessage;
     id: string;
   }) => {
-    addMessage(message);
+    addMessage(message, id);
   };
 
-  const onChatStatusChanged = (newChat: TChat) => {
-    setChatList((prev: any) => {
-      if (newChat.status === chatFilter) return [...prev, newChat];
-      if (newChat.status !== chatFilter)
-        return prev.filter((chat: TChat) => chat.id !== newChat.id);
+  const addMessage = (message: TMessage, id: string) => {
+    setChatList((prev: Array<TChat>): Array<TChat> => {
+      const index = prev.findIndex((chat: TChat) => chat.id === id);
+      prev[index].messages.push(message);
+      return [...prev];
+    });
+
+    setCurrentChatData((prev: TChat | undefined) => {
+      if (!prev) return;
+      return { ...prev, messages: [...prev.messages, message] };
     });
   };
 
-  const addMessage = (message: TMessage) => {
-    setCurrentChatData((prev: any) => {
-      return { ...prev, messages: [...prev.messages, message] };
+  const onChatStatusChanged = (newChat: TChat) => {
+    setChatList((prev: Array<TChat>): Array<TChat> => {
+      if (newChat.status === chatFilter) return [...prev, newChat];
+      if (newChat.status !== chatFilter)
+        return prev.filter((chat: TChat) => chat.id !== newChat.id);
+      return prev;
     });
   };
 
@@ -97,11 +113,11 @@ export const useSocket = () => {
     );
   };
 
-  const setChatStatus = (status: string, chatId: string) => {
+  const setChatStatus = (status?: string, chatId?: string) => {
     if (!isConnected) return;
     socket.emit("setChatStatus", status, chatId);
     setCurrentChatId("");
-    setChatList((prev: any) =>
+    setChatList((prev: Array<TChat>) =>
       prev.filter((chat: TChat) => {
         // if (chat.status !== status) return;
         return chat.id !== chatId;
@@ -122,6 +138,38 @@ export const useSocket = () => {
     });
   };
 
+  const getAllTemplates = () => {
+    socket.emit("getAllTemplates", (list: Array<TTemplate>) => {
+      setTemplateLst(list);
+    });
+  };
+
+  const updateTemplate = (updatedTemplate: TTemplate) => {
+    if (!updatedTemplate.id)
+      return createTemplate(updatedTemplate.title, updatedTemplate.content);
+    socket.emit("updateTemplate", updatedTemplate);
+    setTemplateLst((prev: Array<TTemplate>) => {
+      const index = prev.findIndex(
+        (template: TTemplate) => template.id === updatedTemplate.id
+      );
+      prev[index] = updatedTemplate;
+      return [...prev];
+    });
+  };
+
+  const deleteTemplate = (tempalteId?: string) => {
+    socket.emit("deleteTemplate", tempalteId);
+    setTemplateLst((prev: Array<TTemplate>) =>
+      prev.filter((template: TTemplate) => template.id !== tempalteId)
+    );
+  };
+
+  const createTemplate = (title?: string, content?: string) => {
+    socket.emit("createTemplate", { title, content }, (template: TTemplate) =>
+      setTemplateLst((prev: Array<TTemplate>) => [...prev, template])
+    );
+  };
+
   return {
     chatList,
     deleteAllChats,
@@ -129,5 +177,9 @@ export const useSocket = () => {
     currentChatData,
     setChatStatus,
     setFilteredChatList,
+    templateList,
+    updateTemplate,
+    deleteTemplate,
+    createTemplate,
   };
 };

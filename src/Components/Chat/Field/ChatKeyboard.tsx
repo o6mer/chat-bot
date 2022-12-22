@@ -1,7 +1,11 @@
 import React, { useRef, useState } from "react";
 import { TMessage } from "../../../Types/Types";
 
-const ChatKeyboard = ({ sendMessage }: any) => {
+const ChatKeyboard = ({
+  sendMessage,
+}: {
+  sendMessage: (message: string) => void;
+}) => {
   const [messageContent, setMessageContent] = useState<string>("");
 
   const submitHandler = (e: React.FormEvent) => {

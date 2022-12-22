@@ -1,7 +1,35 @@
-import React from "react";
+import { useState, useContext } from "react";
+import {
+  SocketContext,
+  TSocketContext,
+} from "../../../../Contexts/SocketContext";
+import { TTemplate } from "../../../../Types/Types";
+import Editor from "./Editor";
+import Sidebar from "./Sidebar";
 
 const TemplateEditor = () => {
-  return <div className="flex">template editor</div>;
+  const [selectedTemplate, setSelectedTemplate] = useState<TTemplate>();
+
+  const { templateList } = useContext(SocketContext) as TSocketContext;
+
+  return (
+    <div className="flex w-full p-4 shadow-[0px_0px_25px_3px_rgba(0,0,0,0.07)]">
+      <Sidebar
+        templateList={templateList}
+        setSelectedTemplate={setSelectedTemplate}
+      />
+      {selectedTemplate ? (
+        <Editor
+          selectedTemplate={selectedTemplate}
+          setSelectedTemplate={setSelectedTemplate}
+        />
+      ) : (
+        <div className="flex grow h-full justify-center items-center">
+          Please Select a Template
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default TemplateEditor;

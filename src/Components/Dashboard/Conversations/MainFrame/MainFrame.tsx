@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { DashboardContext } from "../../../../Contexts/DashbaordContext";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../../Contexts/DashbaordContext";
 import {
   SocketContext,
   TSocketContext,
@@ -9,7 +12,7 @@ import Chat from "./Chat/Chat";
 import InfoSidebar from "./InfoSidebar/InfoSidebar";
 
 const MainFrame = () => {
-  const { currentChatId }: any = useContext(DashboardContext);
+  const { currentChatId } = useContext(DashboardContext) as TDashbaordContext;
   const { currentChatData } = useContext(SocketContext) as TSocketContext;
 
   return (

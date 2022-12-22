@@ -17,22 +17,24 @@ const SidebarFilters = ({
   chatListLength?: number;
 }) => {
   const [filter, setfilter] = useState("Open");
-  const [filterAnchorEl, setFilterAnchorEl] = useState(null);
-  const [sortAnchorEl, setSortAnchorEl] = useState(null);
+  const [filterAnchorEl, setFilterAnchorEl] = useState<
+    HTMLElement | undefined
+  >();
+  const [sortAnchorEl, setSortAnchorEl] = useState<HTMLElement | undefined>();
 
   const { setFilteredChatList } = useContext(SocketContext) as TSocketContext;
 
   const filterOpen = Boolean(filterAnchorEl);
   const sortOpen = Boolean(sortAnchorEl);
 
-  const handleClick = (e: any) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (e.currentTarget.id === "filter")
       return setFilterAnchorEl(e.currentTarget);
     setSortAnchorEl(e.currentTarget);
   };
-  const handleClose = (e: any) => {
-    setFilterAnchorEl(null);
-    setSortAnchorEl(null);
+  const handleClose = (e: React.MouseEvent<HTMLElement>) => {
+    setFilterAnchorEl(undefined);
+    setSortAnchorEl(undefined);
 
     const { value, type } = e.currentTarget.dataset;
     if (!value) return;

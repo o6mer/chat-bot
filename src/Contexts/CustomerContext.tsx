@@ -1,11 +1,17 @@
-import { createContext, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
+
+export type TCustomerContext = {
+  chatId: string;
+  setChatId: (chatId: string) => void;
+  darkmode: boolean;
+  setDarkMode: (darkMode: boolean) => void;
+};
 
 export const CustomerContext = createContext({});
 
-const CustomerContextProvider = ({ children }: any) => {
+const CustomerContextProvider = ({ children }: { children: ReactNode }) => {
   const [chatId, setChatId] = useState<String>("");
   const [darkMode, setDarkMode] = useState(false);
-  const [socket, setSocket]: any = useState();
 
   return (
     <CustomerContext.Provider
@@ -14,8 +20,6 @@ const CustomerContextProvider = ({ children }: any) => {
         setChatId,
         darkMode,
         setDarkMode,
-        socket,
-        setSocket,
       }}
     >
       {children}
