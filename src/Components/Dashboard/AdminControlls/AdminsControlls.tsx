@@ -25,6 +25,17 @@ export default function BasicTabs() {
     setValue(newValue);
   };
 
+  const tabStyling = {
+    textTransform: "none",
+    fontWeight: "bold",
+    fontSize: "1.125rem",
+    lineHeight: "1.75rem  ",
+    fontFamily: "inherit",
+    padding: "1.25rem",
+    margin: "0",
+    letterSpacing: "inherit",
+  };
+
   return (
     <div className="w-full h-full flex flex-col">
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -33,8 +44,8 @@ export default function BasicTabs() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Bot Editor" {...a11yProps(0)} />
-          <Tab label="Templates Editor" {...a11yProps(1)} />
+          <Tab label="Bot Editor" {...a11yProps(0)} sx={tabStyling} />
+          <Tab label="Templates Editor" {...a11yProps(1)} sx={tabStyling} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

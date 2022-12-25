@@ -19,7 +19,7 @@ export type TSocketContext = {
 
 export const SocketContext = createContext<TSocketContext | null>(null);
 
-const socket = io("http://localhost:3001/", {
+const socket = io("http://localhost:3002/", {
   closeOnBeforeunload: false,
 });
 

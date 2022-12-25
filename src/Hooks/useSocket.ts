@@ -170,7 +170,6 @@ export const useSocket = (socket: any) => {
   };
 
   const createConversation = (conversation: TConversation) => {
-    console.log(conversation);
     socket.emit("createConversation", conversation);
   };
 
