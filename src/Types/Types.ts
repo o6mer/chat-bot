@@ -44,8 +44,11 @@ export type TTemplate = {
 };
 
 export type TConversation = {
-  id?: String;
+  id: string;
   question: string;
   response: string;
-  followUp: Array<{ question: string; response: string }>;
+  followUp: Array<{
+    input: string;
+    response: string;
+  }>;
 };
