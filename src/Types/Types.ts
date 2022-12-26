@@ -49,6 +49,6 @@ export type TConversation = {
   response: string;
   followUp: Array<{
     input: string;
-    response: string;
+    conversation: string;
   }>;
 };
