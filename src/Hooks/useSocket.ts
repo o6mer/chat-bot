@@ -12,6 +12,7 @@ export const useSocket = (socket: any) => {
   const [chatFilter, setChatFilter] = useState<string>("open");
   const [currentChatData, setCurrentChatData] = useState<TChat>();
   const [templateList, setTemplateLst] = useState<Array<TTemplate>>([]);
+  const [conversations, setConversations] = useState<Array<TConversation>>([]);
   const { user, currentChatId, setCurrentChatId } = useContext(
     DashboardContext
   ) as TDashbaordContext;
@@ -56,6 +57,7 @@ export const useSocket = (socket: any) => {
     console.log("admin connected", prevChatList);
     setChatList(prevChatList);
     getAllTemplates();
+    getAllConversations();
   };
 
   const onNewChat = (newChat: TChat) => {
@@ -169,8 +171,22 @@ export const useSocket = (socket: any) => {
     );
   };
 
+  const getAllConversations = () => {
+    socket.emit(
+      "getAllConversations",
+      (conversations: Array<TConversation>) => {
+        setConversations([...conversations]);
+      }
+    );
+  };
+
   const createConversation = (conversation: TConversation) => {
-    socket.emit("createConversation", conversation);
+    socket.emit(
+      "createConversation",
+      conversation,
+      (conversation: TConversation) =>
+        setConversations((prev) => [...prev, conversation])
+    );
   };
 
   return {
@@ -184,6 +200,7 @@ export const useSocket = (socket: any) => {
     updateTemplate,
     deleteTemplate,
     createTemplate,
+    conversations,
     createConversation,
   };
 };

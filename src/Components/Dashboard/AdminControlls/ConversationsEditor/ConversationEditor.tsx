@@ -1,47 +1,38 @@
-import React, { useState } from "react";
-import { TConversation } from "../../../../Types/Types";
+import React, { useContext, useState } from "react";
+import {
+  SocketContext,
+  TSocketContext,
+} from "../../../../Contexts/SocketContext";
+import { TConversation, TFollowUp } from "../../../../Types/Types";
+import Controlls from "./Controlls";
+import List from "./List";
 
-const ConversationEditor = ({
-  conversations,
-}: {
-  conversations: TConversation[];
-}) => {
-  const [question, setQuestion] = useState("");
-  const [response, setResponse] = useState("");
-  const [followUp, setFollowUp] = useState({ input: "", conversation: "" });
+const ConversationEditor = () => {
+  const { conversations, createConversation } = useContext(
+    SocketContext
+  ) as TSocketContext;
 
-  const submitHandler = () => {};
+  const submitHandler = ({
+    question,
+    response,
+    followUps,
+  }: {
+    question: string;
+    response: string;
+    followUps: Array<TFollowUp>;
+  }) => {
+    const newCovnersation: TConversation = {
+      question,
+      response,
+      followUp: followUps,
+    };
+    console.log(newCovnersation);
+    createConversation(newCovnersation);
+  };
   return (
-    <div>
-      <form onSubmit={submitHandler} action="">
-        <label htmlFor="question">Question:</label>
-        <input
-          id="question"
-          type="text"
-          onChange={(e) => setQuestion(e.currentTarget.value)}
-        />
-        <label htmlFor="response">Response:</label>
-        <input
-          id="response"
-          type="text"
-          onChange={(e) => setResponse(e.currentTarget.value)}
-        />
-        <label htmlFor="response">Response:</label>
-
-        <input
-          type="text"
-          onChange={(e) =>
-            setFollowUp((prev) => {
-              return { ...prev, input: e.currentTarget.value };
-            })
-          }
-        />
-        <select name="" id="">
-          {conversations?.map((con) => (
-            <option value={con.id}>{con.question}</option>
-          ))}
-        </select>
-      </form>
+    <div className="w-full grow m-12 p-4 flex flex-col justify-between bg-white shadow-[0px_0px_25px_3px_rgba(0,0,0,0.07)] rounded-lg">
+      <List conversations={conversations} />
+      <Controlls conversations={conversations} submitHandler={submitHandler} />
     </div>
   );
 };

@@ -44,11 +44,13 @@ export type TTemplate = {
 };
 
 export type TConversation = {
-  id: string;
+  id?: string;
   question: string;
   response: string;
-  followUp: Array<{
-    input: string;
-    conversation: string;
-  }>;
+  followUp: Array<TFollowUp>;
+};
+
+export type TFollowUp = {
+  input: string;
+  conversation: string;
 };

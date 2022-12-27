@@ -13,7 +13,7 @@ const TemplateEditor = () => {
   const { templateList } = useContext(SocketContext) as TSocketContext;
 
   return (
-    <div className="flex w-full p-4 shadow-[0px_0px_25px_3px_rgba(0,0,0,0.07)] bg-white m-12">
+    <div className="flex w-full p-4 shadow-[0px_0px_25px_3px_rgba(0,0,0,0.07)] bg-white m-12 rounded-lg">
       <Sidebar
         templateList={templateList}
         setSelectedTemplate={setSelectedTemplate}

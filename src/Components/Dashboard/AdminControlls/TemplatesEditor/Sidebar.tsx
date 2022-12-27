@@ -44,7 +44,7 @@ const Sidebar = ({
           placeholder="Search template..."
         />
         <button
-          className="border px-2 py-1 rounded-lg flex items-center hover:bg-gray-200 transition-all"
+          className="border px-2 py-1 rounded-lg flex items-center hover:bg-gray-200 transition-all font-bold"
           onClick={onNewTemplate}
         >
           <AddOutlinedIcon fontSize="small" />
