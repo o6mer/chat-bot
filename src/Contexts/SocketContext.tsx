@@ -16,6 +16,7 @@ export type TSocketContext = {
   createTemplate: (title: string, content: string) => void;
   conversations: Array<TConversation>;
   createConversation: (coversation: TConversation) => void;
+  deleteConversation: (conversationId?: string) => void;
 };
 
 export const SocketContext = createContext<TSocketContext | null>(null);
@@ -38,6 +39,7 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
     createTemplate,
     conversations,
     createConversation,
+    deleteConversation,
   } = useSocket(socket);
 
   return (
@@ -55,6 +57,7 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
         createTemplate,
         conversations,
         createConversation,
+        deleteConversation,
       }}
     >
       {children}

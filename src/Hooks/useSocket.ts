@@ -189,6 +189,14 @@ export const useSocket = (socket: any) => {
     );
   };
 
+  const deleteConversation = (conversationId?: string) => {
+    socket.emit("deleteConversation", conversationId);
+    setConversations((prev) => {
+      prev = prev.filter((conversation) => conversation.id !== conversationId);
+      return [...prev];
+    });
+  };
+
   return {
     chatList,
     deleteAllChats,
@@ -202,5 +210,6 @@ export const useSocket = (socket: any) => {
     createTemplate,
     conversations,
     createConversation,
+    deleteConversation,
   };
 };

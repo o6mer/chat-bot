@@ -1,22 +1,14 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { TConversation, TFollowUp } from "../../../../Types/Types";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import ClearIcon from "@mui/icons-material/Clear";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 const Controlls = ({
-  submitHandler,
+  createConversation,
   conversations,
 }: {
-  submitHandler: ({
-    question,
-    response,
-    followUps,
-  }: {
-    question: string;
-    response: string;
-    followUps: Array<TFollowUp>;
-  }) => void;
+  createConversation: (coversation: TConversation) => void;
   conversations: Array<TConversation>;
 }) => {
   const [question, setQuestion] = useState("");
@@ -56,17 +48,21 @@ const Controlls = ({
     setFollowUpConversation("defualt");
   };
 
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
+    clearForm();
+    const newCovnersation: TConversation = {
+      question,
+      response,
+      followUp: followUps,
+    };
+    console.log(newCovnersation);
+    createConversation(newCovnersation);
+  };
+
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        clearForm();
-        submitHandler({
-          question,
-          response,
-          followUps,
-        });
-      }}
+      onSubmit={submitHandler}
       action=""
       className="flex flex-col justify-center px-2 py-2 gap-2 border rounded-lg"
     >

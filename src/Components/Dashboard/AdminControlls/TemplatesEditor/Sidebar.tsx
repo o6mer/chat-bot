@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 
 const Sidebar = ({
   templateList,
+  selectedTemplate,
   setSelectedTemplate,
 }: {
   templateList?: Array<TTemplate>;
+  selectedTemplate?: TTemplate;
   setSelectedTemplate: (template?: TTemplate) => void;
 }) => {
   const [search, setSearch] = useState("");
@@ -66,6 +68,7 @@ const Sidebar = ({
           ?.map((template: TTemplate) => (
             <TemplateListItem
               template={template}
+              selectedTemplate={selectedTemplate}
               setSelectedTemplate={setSelectedTemplate}
               key={template.id}
             />
@@ -77,14 +80,18 @@ const Sidebar = ({
 
 const TemplateListItem = ({
   template,
+  selectedTemplate,
   setSelectedTemplate,
 }: {
   template: TTemplate;
+  selectedTemplate?: TTemplate;
   setSelectedTemplate: (template: TTemplate) => void;
 }) => {
   return (
     <li
-      className=" p-2 cursor-pointer hover:bg-slate-200 transition-all"
+      className={`p-2 cursor-pointer hover:bg-slate-200 ${
+        template.id === selectedTemplate?.id && "bg-gray-200 hover:bg-gray-300"
+      } transition-all`}
       onClick={() => {
         setSelectedTemplate(template);
       }}
