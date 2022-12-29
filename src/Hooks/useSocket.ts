@@ -197,6 +197,18 @@ export const useSocket = (socket: any) => {
     });
   };
 
+  const updateConversation = (updatedConversation: TConversation) => {
+    socket.emit("updateConversation", updatedConversation);
+    setConversations((prev: Array<TConversation>) => {
+      const index = prev.findIndex(
+        (conversation: TConversation) =>
+          conversation.id === updatedConversation.id
+      );
+      prev[index] = updatedConversation;
+      return [...prev];
+    });
+  };
+
   return {
     chatList,
     deleteAllChats,
@@ -204,12 +216,12 @@ export const useSocket = (socket: any) => {
     currentChatData,
     setChatStatus,
     setFilteredChatList,
-    templateList,
     updateTemplate,
     deleteTemplate,
     createTemplate,
     conversations,
     createConversation,
     deleteConversation,
+    updateConversation,
   };
 };

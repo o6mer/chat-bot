@@ -1,21 +1,23 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useContext, useState } from "react";
 import { TConversation, TFollowUp } from "../../../../Types/Types";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import ClearIcon from "@mui/icons-material/Clear";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import {
+  SocketContext,
+  TSocketContext,
+} from "../../../../Contexts/SocketContext";
 
-const Controlls = ({
-  createConversation,
-  conversations,
-}: {
-  createConversation: (coversation: TConversation) => void;
-  conversations: Array<TConversation>;
-}) => {
+const Controlls = () => {
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState("");
   const [followUps, setFollowUps] = useState<Array<TFollowUp>>([]);
   const [followUpInput, setFollowUpInput] = useState("");
   const [followUpConversation, setFollowUpConversation] = useState("defualt");
+
+  const { conversations, createConversation } = useContext(
+    SocketContext
+  ) as TSocketContext;
 
   const onFollowUpAdded = () => {
     if (!followUpInput || !followUpConversation) return;
