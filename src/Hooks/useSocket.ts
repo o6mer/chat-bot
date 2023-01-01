@@ -216,6 +216,7 @@ export const useSocket = (socket: any) => {
     currentChatData,
     setChatStatus,
     setFilteredChatList,
+    templateList,
     updateTemplate,
     deleteTemplate,
     createTemplate,

@@ -45,7 +45,7 @@ const ChatKeyboard = ({}: {}) => {
         onKeyDown={checkSubmit}
       />
       <p className="text-xs text-gray-500 py-1">
-        * <b>Enter</b>: New line. <b>Sihft+Enter</b>: Send
+        * <b>Enter</b>: New line. <b>Shift+Enter</b>: Send
       </p>
       <ChatKeyboardActions setMessage={setMessage} />
     </form>

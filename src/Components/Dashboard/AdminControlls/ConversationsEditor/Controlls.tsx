@@ -58,7 +58,6 @@ const Controlls = () => {
       response,
       followUp: followUps,
     };
-    console.log(newCovnersation);
     createConversation(newCovnersation);
   };
 

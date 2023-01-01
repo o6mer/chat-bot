@@ -28,6 +28,11 @@ const Editor = ({
   ) as TSocketContext;
 
   const onSaveClicked = () => {
+    if (!title || !content) {
+      alert("please fill all fields");
+      return;
+    }
+
     const template = {
       title,
       content,

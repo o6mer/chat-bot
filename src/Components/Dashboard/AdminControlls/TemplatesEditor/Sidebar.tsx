@@ -15,6 +15,8 @@ const Sidebar = ({
   const [search, setSearch] = useState("");
   const [filteredList, setFilteredList] = useState(templateList);
 
+  console.log(filteredList);
+
   useEffect(() => {
     setFilteredList(templateList);
   }, [templateList]);
