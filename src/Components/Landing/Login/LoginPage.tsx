@@ -18,7 +18,7 @@ const LoginPage = () => {
   const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3001/api/user/login", {
+      const res = await axios.post("http://localhost:3002/api/user/login", {
         email,
         password,
       });

@@ -4,7 +4,7 @@ import {
   DashboardContext,
   TDashbaordContext,
 } from "../Contexts/DashbaordContext";
-import { TChat, TMessage, TTemplate } from "../Types/Types";
+import { TChat, TConversation, TMessage, TTemplate } from "../Types/Types";
 
 export const useSocket = (socket: any) => {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -12,6 +12,7 @@ export const useSocket = (socket: any) => {
   const [chatFilter, setChatFilter] = useState<string>("open");
   const [currentChatData, setCurrentChatData] = useState<TChat>();
   const [templateList, setTemplateLst] = useState<Array<TTemplate>>([]);
+  const [conversations, setConversations] = useState<Array<TConversation>>([]);
   const { user, currentChatId, setCurrentChatId } = useContext(
     DashboardContext
   ) as TDashbaordContext;
@@ -56,6 +57,7 @@ export const useSocket = (socket: any) => {
     console.log("admin connected", prevChatList);
     setChatList(prevChatList);
     getAllTemplates();
+    getAllConversations();
   };
 
   const onNewChat = (newChat: TChat) => {
@@ -64,7 +66,6 @@ export const useSocket = (socket: any) => {
 
       return prev.filter((chat: TChat) => chat.id !== newChat.id);
     });
-    if (!isConnected) return;
     socket.emit("joinChat", newChat.id);
   };
 
@@ -170,6 +171,44 @@ export const useSocket = (socket: any) => {
     );
   };
 
+  const getAllConversations = () => {
+    socket.emit(
+      "getAllConversations",
+      (conversations: Array<TConversation>) => {
+        setConversations([...conversations]);
+      }
+    );
+  };
+
+  const createConversation = (conversation: TConversation) => {
+    socket.emit(
+      "createConversation",
+      conversation,
+      (conversation: TConversation) =>
+        setConversations((prev) => [...prev, conversation])
+    );
+  };
+
+  const deleteConversation = (conversationId?: string) => {
+    socket.emit("deleteConversation", conversationId);
+    setConversations((prev) => {
+      prev = prev.filter((conversation) => conversation.id !== conversationId);
+      return [...prev];
+    });
+  };
+
+  const updateConversation = (updatedConversation: TConversation) => {
+    socket.emit("updateConversation", updatedConversation);
+    setConversations((prev: Array<TConversation>) => {
+      const index = prev.findIndex(
+        (conversation: TConversation) =>
+          conversation.id === updatedConversation.id
+      );
+      prev[index] = updatedConversation;
+      return [...prev];
+    });
+  };
+
   return {
     chatList,
     deleteAllChats,
@@ -181,5 +220,9 @@ export const useSocket = (socket: any) => {
     updateTemplate,
     deleteTemplate,
     createTemplate,
+    conversations,
+    createConversation,
+    deleteConversation,
+    updateConversation,
   };
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 import EmojiPicker, { IEmojiData } from "emoji-picker-react";
-import { Menu } from "@mui/material";
+import { Menu, Tooltip } from "@mui/material";
 const EmojiKeyboard = ({
   setMessage,
 }: {
@@ -18,16 +18,19 @@ const EmojiKeyboard = ({
 
   return (
     <>
-      <button
-        type="button"
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
-        <EmojiEmotionsOutlinedIcon fontSize="small" />
-      </button>
+      <Tooltip title="Emojis" arrow>
+        <button
+          type="button"
+          id="basic-button"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+          className="hover:text-gray-500 transition-all"
+        >
+          <EmojiEmotionsOutlinedIcon fontSize="small" />
+        </button>
+      </Tooltip>
       <Menu
         sx={{ translate: "0 -2rem" }}
         id="basic-menu"

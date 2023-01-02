@@ -2,8 +2,8 @@ import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import BotEditor from "./BotEditor/BotEditor";
 import TemplateEditor from "./TemplatesEditor/TemplateEditor";
+import ConversationEditor from "./ConversationsEditor/ConversationEditor";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -25,6 +25,17 @@ export default function BasicTabs() {
     setValue(newValue);
   };
 
+  const tabStyling = {
+    textTransform: "none",
+    fontWeight: "bold",
+    fontSize: "1.125rem",
+    lineHeight: "1.75rem  ",
+    fontFamily: "inherit",
+    padding: "1.05rem",
+    margin: "0",
+    letterSpacing: "inherit",
+  };
+
   return (
     <div className="w-full h-full flex flex-col">
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -33,12 +44,12 @@ export default function BasicTabs() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Bot Editor" {...a11yProps(0)} />
-          <Tab label="Templates Editor" {...a11yProps(1)} />
+          <Tab label="Conversations Editor" {...a11yProps(0)} sx={tabStyling} />
+          <Tab label="Templates Editor" {...a11yProps(1)} sx={tabStyling} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <BotEditor />
+        <ConversationEditor />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <TemplateEditor />
@@ -51,7 +62,7 @@ const TabPanel = ({ children, value, index, ...other }: TabPanelProps) => {
   return (
     <div
       className={`${
-        value === index && "w-full flex grow justify-center px-32 py-20   "
+        value === index && "w-full flex grow justify-center bg-gray-100"
       }`}
       role="tabpanel"
       hidden={value !== index}

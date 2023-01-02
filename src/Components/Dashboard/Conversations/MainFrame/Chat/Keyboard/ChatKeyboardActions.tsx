@@ -3,6 +3,7 @@ import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import EmojiKeyboard from "./EmojiKeyboard";
 import TemplatesKeyboard from "./TemplatesKeyboard";
 import AddFileKeyboard from "./AddFileKeyboard";
+import { Tooltip } from "@mui/material";
 
 const ChatKeyboardActions = ({
   setMessage,
@@ -10,17 +11,17 @@ const ChatKeyboardActions = ({
   setMessage: React.Dispatch<React.SetStateAction<string | undefined>>;
 }) => {
   return (
-    <div className="w-full flex justify-between  items-centerp-2 text-gray-600">
+    <div className="w-full flex justify-between  items-center text-gray-600">
       <div className="flex gap-1">
         <AddFileKeyboard />
         <EmojiKeyboard setMessage={setMessage} />
         <TemplatesKeyboard setMessage={setMessage} />
       </div>
-      <div>
-        <button type="submit">
+      <Tooltip title="Send" arrow>
+        <button type="submit" className="hover:text-gray-500 transition-all">
           <SendOutlinedIcon fontSize="small" />
         </button>
-      </div>
+      </Tooltip>
     </div>
   );
 };

@@ -5,13 +5,17 @@ import { useEffect, useState } from "react";
 
 const Sidebar = ({
   templateList,
+  selectedTemplate,
   setSelectedTemplate,
 }: {
   templateList?: Array<TTemplate>;
+  selectedTemplate?: TTemplate;
   setSelectedTemplate: (template?: TTemplate) => void;
 }) => {
   const [search, setSearch] = useState("");
   const [filteredList, setFilteredList] = useState(templateList);
+
+  console.log(filteredList);
 
   useEffect(() => {
     setFilteredList(templateList);
@@ -44,7 +48,7 @@ const Sidebar = ({
           placeholder="Search template..."
         />
         <button
-          className="border px-2 py-1 rounded-lg flex items-center hover:bg-gray-200 transition-all"
+          className="border px-2 py-1 rounded-lg flex items-center hover:bg-gray-200 transition-all font-bold"
           onClick={onNewTemplate}
         >
           <AddOutlinedIcon fontSize="small" />
@@ -66,6 +70,7 @@ const Sidebar = ({
           ?.map((template: TTemplate) => (
             <TemplateListItem
               template={template}
+              selectedTemplate={selectedTemplate}
               setSelectedTemplate={setSelectedTemplate}
               key={template.id}
             />
@@ -77,14 +82,18 @@ const Sidebar = ({
 
 const TemplateListItem = ({
   template,
+  selectedTemplate,
   setSelectedTemplate,
 }: {
   template: TTemplate;
+  selectedTemplate?: TTemplate;
   setSelectedTemplate: (template: TTemplate) => void;
 }) => {
   return (
     <li
-      className=" p-2 cursor-pointer hover:bg-slate-200 transition-all"
+      className={`p-2 cursor-pointer hover:bg-slate-200 ${
+        template.id === selectedTemplate?.id && "bg-gray-200 hover:bg-gray-300"
+      } transition-all`}
       onClick={() => {
         setSelectedTemplate(template);
       }}

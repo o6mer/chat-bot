@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState, ReactNode } from "react";
 import { useSocket } from "../Hooks/useSocket";
-import { TChat, TTemplate, TUser } from "../Types/Types";
+import { TChat, TConversation, TTemplate, TUser } from "../Types/Types";
 import io from "socket.io-client";
 
 export type TSocketContext = {
@@ -14,11 +14,15 @@ export type TSocketContext = {
   updateTemplate: (template: TTemplate) => void;
   deleteTemplate: (templateId?: string) => void;
   createTemplate: (title: string, content: string) => void;
+  conversations: Array<TConversation>;
+  createConversation: (coversation: TConversation) => void;
+  deleteConversation: (conversationId?: string) => void;
+  updateConversation: (conversation: TConversation) => void;
 };
 
 export const SocketContext = createContext<TSocketContext | null>(null);
 
-const socket = io("http://localhost:3001/", {
+const socket = io("http://localhost:3002/", {
   closeOnBeforeunload: false,
 });
 
@@ -34,6 +38,10 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
     updateTemplate,
     deleteTemplate,
     createTemplate,
+    conversations,
+    createConversation,
+    deleteConversation,
+    updateConversation,
   } = useSocket(socket);
 
   return (
@@ -49,6 +57,10 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
         updateTemplate,
         deleteTemplate,
         createTemplate,
+        conversations,
+        createConversation,
+        deleteConversation,
+        updateConversation,
       }}
     >
       {children}
