@@ -6,6 +6,7 @@ const MultipleChoiceMessage = ({
   writer,
   time,
   content,
+  chooseFollowUp,
 }: TMultipleChoiseMessage) => {
   return (
     <Message writer={writer} time={time} type="text">
@@ -13,7 +14,11 @@ const MultipleChoiceMessage = ({
       <p className="flex w-full">{content?.response}</p>
       <ul>
         {content?.followUp.map((followUp) => (
-          <li key={followUp.conversation} className="cursor-pointer border">
+          <li
+            key={followUp.conversation}
+            className="cursor-pointer border"
+            onClick={() => chooseFollowUp(followUp)}
+          >
             {followUp.input}
           </li>
         ))}

@@ -26,6 +26,7 @@ export type TMultipleChoiseMessage = {
   writer: string;
   time: Date | string;
   content?: TConversation;
+  [key: string]: any;
 };
 
 export type TInputMessage = {

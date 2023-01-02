@@ -82,7 +82,7 @@ export const useSocket = (socket: any) => {
   const addMessage = (message: TMessage, id: string) => {
     setChatList((prev: Array<TChat>): Array<TChat> => {
       const index = prev.findIndex((chat: TChat) => chat.id === id);
-      prev[index].messages.push(message);
+      prev[index]?.messages.push(message);
       return [...prev];
     });
 
