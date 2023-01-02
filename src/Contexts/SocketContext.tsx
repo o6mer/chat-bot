@@ -43,7 +43,6 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
     deleteConversation,
     updateConversation,
   } = useSocket(socket);
-
   return (
     <SocketContext.Provider
       value={{

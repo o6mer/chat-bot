@@ -112,9 +112,14 @@ const ListItemEditMode = ({
                 </option>
               ))}
             </select>
-            <button onClick={() => onFollowUpDeleteClicked(index)}>
-              <DeleteOutlineOutlinedIcon fontSize="small" />
-            </button>
+            <Tooltip title="Delete" arrow>
+              <button
+                onClick={() => onFollowUpDeleteClicked(index)}
+                className="hover:text-gray-700 transition-all"
+              >
+                <DeleteOutlineOutlinedIcon fontSize="small" />
+              </button>
+            </Tooltip>
           </div>
         ))}
         <div className="flex w-full justify-center items-center ">

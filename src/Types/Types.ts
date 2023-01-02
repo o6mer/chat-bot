@@ -22,6 +22,12 @@ export type TTextMessage = {
   content?: string;
 };
 
+export type TMultipleChoiseMessage = {
+  writer: string;
+  time: Date | string;
+  content?: TConversation;
+};
+
 export type TInputMessage = {
   writer: string;
   time: Date | string;
