@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Menu } from "@mui/material";
+import { Menu, Tooltip } from "@mui/material";
 import BookOutlinedIcon from "@mui/icons-material/BookOutlined";
 import { TTemplate } from "../../../../../../Types/Types";
 import TemplateItem from "./TemplateItem";
@@ -50,16 +50,19 @@ const TemplatesKeyboard = ({
 
   return (
     <>
-      <button
-        type="button"
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
-        <BookOutlinedIcon fontSize="small" />
-      </button>
+      <Tooltip title="Templates" arrow>
+        <button
+          type="button"
+          id="basic-button"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+          className="hover:text-gray-500 transition-all"
+        >
+          <BookOutlinedIcon fontSize="small" />
+        </button>
+      </Tooltip>
       <Menu
         sx={{ translate: "0 -2rem" }}
         id="basic-menu"

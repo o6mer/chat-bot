@@ -12,9 +12,9 @@ const ChatKeyboard = ({}: {}) => {
   const { sendMessage } = useContext(SocketContext) as TSocketContext;
 
   const sendMessageHandler = (e: FormEvent) => {
-    if (!message) return;
-
     e.preventDefault();
+
+    if (!message?.trim()) return;
 
     sendMessage(message);
     setMessage("");
@@ -26,8 +26,8 @@ const ChatKeyboard = ({}: {}) => {
 
   const checkSubmit = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key == "Enter" && e.shiftKey == true) {
-      e.preventDefault();
       formRef?.current?.requestSubmit();
+      e.preventDefault();
     }
   };
 

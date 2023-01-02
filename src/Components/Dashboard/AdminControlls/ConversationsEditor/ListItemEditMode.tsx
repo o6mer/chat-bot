@@ -1,10 +1,11 @@
 import { Tooltip } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TConversation, TFollowUp } from "../../../../Types/Types";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import SaveAltOutlinedIcon from "@mui/icons-material/SaveAltOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { generateKey } from "../../../../Utils/General";
 
 const ListItemEditMode = ({
   conversation,
@@ -20,9 +21,7 @@ const ListItemEditMode = ({
   const [updatedQuestion, setUpdatedQuestion] = useState(conversation.question);
   const [updatedResponse, setUpdatedResponse] = useState(conversation.response);
   const [updatedFollowUps, setUpdatedFollowUps] = useState<Array<TFollowUp>>(
-    conversation.followUp.length
-      ? conversation.followUp
-      : [{ input: "", conversation: "defualt" }]
+    conversation.followUp
   );
 
   const onSaveClicked = () => {
@@ -44,10 +43,9 @@ const ListItemEditMode = ({
   };
 
   const onAddFollowUpClicked = () => {
-    setUpdatedFollowUps((prev) => [
-      ...prev,
-      { input: "none", conversation: "defualt" },
-    ]);
+    setUpdatedFollowUps((prev) => {
+      return [...prev, { input: "", conversation: "defualt" }];
+    });
   };
 
   const onFollowUpDeleteClicked = (index: number) => {
@@ -75,9 +73,9 @@ const ListItemEditMode = ({
           onChange={(e) => setUpdatedResponse(e.currentTarget.value)}
         />
         {updatedFollowUps.map((followUp, index) => (
-          <label
+          <div
             className="w-full flex"
-            key={`edit-followUp-${followUp.conversation}`}
+            key={"edit_follow-up" + conversation.id + index}
           >
             <input
               placeholder="Follow-up title..."
@@ -117,7 +115,7 @@ const ListItemEditMode = ({
             <button onClick={() => onFollowUpDeleteClicked(index)}>
               <DeleteOutlineOutlinedIcon fontSize="small" />
             </button>
-          </label>
+          </div>
         ))}
         <div className="flex w-full justify-center items-center ">
           <Tooltip title="Add Follow-up" arrow>

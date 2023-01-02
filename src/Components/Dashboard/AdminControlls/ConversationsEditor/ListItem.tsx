@@ -34,9 +34,9 @@ const ListItem = ({
 
   return (
     <li
-      className="flex flex-col p-8 shadow-lg relative"
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
+      className="flex flex-col p-8 shadow-lg relative transition-all"
+      onMouseEnter={() => !editMode && setIsHover(true)}
+      onMouseLeave={() => !editMode && setIsHover(false)}
     >
       {editMode ? (
         <ListItemEditMode
@@ -52,10 +52,10 @@ const ListItem = ({
             <p>Response: {conversation.response}</p>
             <ul className="flex flex-col list-disc ">
               {conversation.followUp.length ? (
-                conversation.followUp.map((followUp) => {
+                conversation.followUp.map((followUp, index) => {
                   return (
                     <li
-                      key={`button-${followUp.conversation}`}
+                      key={"edit_follow-up" + conversation.id + index}
                       // onClick={() =>
                       //   showFollowUpConversation(followUp.conversation)
                       // }
