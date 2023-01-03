@@ -82,7 +82,7 @@ export const useSocket = (socket: any) => {
   const addMessage = (message: TMessage, id: string) => {
     setChatList((prev: Array<TChat>): Array<TChat> => {
       const index = prev.findIndex((chat: TChat) => chat.id === id);
-      prev[index].messages.push(message);
+      prev[index]?.messages.push(message);
       return [...prev];
     });
 
@@ -184,8 +184,10 @@ export const useSocket = (socket: any) => {
     socket.emit(
       "createConversation",
       conversation,
-      (conversation: TConversation) =>
-        setConversations((prev) => [...prev, conversation])
+      (conversation: TConversation) => {
+        console.log(conversation);
+        setConversations((prev) => [...prev, conversation]);
+      }
     );
   };
 
@@ -209,6 +211,10 @@ export const useSocket = (socket: any) => {
     });
   };
 
+  const saveAllConversations = () => {
+    socket.emit("saveAllConversations", conversations);
+  };
+
   return {
     chatList,
     deleteAllChats,
@@ -224,5 +230,6 @@ export const useSocket = (socket: any) => {
     createConversation,
     deleteConversation,
     updateConversation,
+    saveAllConversations,
   };
 };

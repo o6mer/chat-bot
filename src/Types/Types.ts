@@ -1,4 +1,5 @@
 import React from "react";
+import { ControlPosition } from "react-draggable";
 
 export type TUser = {
   username: string;
@@ -20,6 +21,13 @@ export type TTextMessage = {
   writer: string;
   time: Date | string;
   content?: string;
+};
+
+export type TMultipleChoiseMessage = {
+  writer: string;
+  time: Date | string;
+  content?: TConversation;
+  [key: string]: any;
 };
 
 export type TInputMessage = {
@@ -45,9 +53,11 @@ export type TTemplate = {
 
 export type TConversation = {
   id?: string;
+  isFirst?: boolean;
   question: string;
   response: string;
   followUp: Array<TFollowUp>;
+  position?: ControlPosition;
 };
 
 export type TFollowUp = {

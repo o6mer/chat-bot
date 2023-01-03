@@ -103,18 +103,26 @@ const ListItemEditMode = ({
               <option value={"defualt"} disabled>
                 Select Conversation
               </option>
-              {conversations.map((conversation) => (
-                <option
-                  value={conversation.id}
-                  key={`option-${conversation.id}`}
-                >
-                  {conversation.question}
-                </option>
-              ))}
+              {conversations.map((conversation) => {
+                if (!conversation.question) return null;
+                return (
+                  <option
+                    value={conversation.id}
+                    key={`option-${conversation.id}`}
+                  >
+                    {conversation.question}
+                  </option>
+                );
+              })}
             </select>
-            <button onClick={() => onFollowUpDeleteClicked(index)}>
-              <DeleteOutlineOutlinedIcon fontSize="small" />
-            </button>
+            <Tooltip title="Delete" arrow>
+              <button
+                onClick={() => onFollowUpDeleteClicked(index)}
+                className="hover:text-gray-700 transition-all"
+              >
+                <DeleteOutlineOutlinedIcon fontSize="small" />
+              </button>
+            </Tooltip>
           </div>
         ))}
         <div className="flex w-full justify-center items-center ">

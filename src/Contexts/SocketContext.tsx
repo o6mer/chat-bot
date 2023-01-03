@@ -18,6 +18,7 @@ export type TSocketContext = {
   createConversation: (coversation: TConversation) => void;
   deleteConversation: (conversationId?: string) => void;
   updateConversation: (conversation: TConversation) => void;
+  saveAllConversations: () => void;
 };
 
 export const SocketContext = createContext<TSocketContext | null>(null);
@@ -42,8 +43,8 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
     createConversation,
     deleteConversation,
     updateConversation,
+    saveAllConversations,
   } = useSocket(socket);
-
   return (
     <SocketContext.Provider
       value={{
@@ -61,6 +62,7 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
         createConversation,
         deleteConversation,
         updateConversation,
+        saveAllConversations,
       }}
     >
       {children}

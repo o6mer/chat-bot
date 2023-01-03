@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import ChatKeyboard from "./ChatKeyboard";
 import TextMessage from "../../Messages/TextMessage";
-import { TMessage } from "../../../Types/Types";
+import { TConversation, TFollowUp, TMessage } from "../../../Types/Types";
 import InputMessage from "../../Messages/InputMessage";
 import {
   CustomerContext,
   TCustomerContext,
 } from "../../../Contexts/CustomerContext";
 import { io } from "socket.io-client";
+import MultipleChoiceMessage from "../../Messages/MultipleChoiceMessage";
 
 const socket = io("http://localhost:3002/", {
   closeOnBeforeunload: false,
@@ -48,6 +49,15 @@ const ChatField = () => {
     setChatId(chatId);
   };
 
+  const chooseFollowUp = (followUp: TFollowUp) => {
+    sendMessage(followUp.input);
+    getResponse(followUp.conversation);
+  };
+
+  const getResponse = (conversationId: string) => {
+    socket.emit("getResponse", { conversationId, chatId });
+  };
+
   const sendMessage = (messageContent: string) => {
     if (!isConnected) return;
     socket.emit(
@@ -69,18 +79,26 @@ const ChatField = () => {
       {socket ? (
         <>
           <div className="flex flex-col gap-1 w-full h-80 px-1 py-2 overflow-y-scroll">
-            {messagesList.map((message: TMessage, index: number) => {
-              if (message.type === "text")
+            {messagesList?.map((message: TMessage, index: number) => {
+              if (message?.type === "text")
                 return (
                   <TextMessage
                     {...message}
                     key={index * new Date().getTime()}
                   />
                 );
-              if (message.type === "input")
+              if (message?.type === "input")
                 return (
                   <InputMessage
                     {...message}
+                    key={index * new Date().getTime()}
+                  />
+                );
+              if (message?.type === "multiple")
+                return (
+                  <MultipleChoiceMessage
+                    {...message}
+                    chooseFollowUp={chooseFollowUp}
                     key={index * new Date().getTime()}
                   />
                 );

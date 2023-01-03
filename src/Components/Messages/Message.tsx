@@ -13,7 +13,7 @@ const ChatMessage = ({ writer, time, children }: TMessage) => {
         <p>{writer}</p>
         <p>{time.toString()}</p>
       </div>
-      <div className="w-full flex">{children}</div>
+      <>{children}</>
     </div>
   );
 };

@@ -26,7 +26,7 @@ const ChatHeader = ({
       <div className="flex items-center gap-2">
         {chatStatus !== "snooze" && (
           <div
-            className={`px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded-lg flex justify-between items-center gap-1 cursor-pointer`}
+            className={`px-2 py-1 bg-gray-200 hover:bg-gray-300 transition-all  rounded-lg flex justify-between items-center gap-1 cursor-pointer`}
             onClick={() => setChatStatus("snooze", currentChatId)}
           >
             <BedtimeIcon fontSize="small" />
@@ -35,7 +35,7 @@ const ChatHeader = ({
         )}
         {chatStatus !== "close" && (
           <div
-            className={`px-2 py-1 bg-black hover:bg-gray-900 rounded-lg text-white flex justify-between items-center gap-1 cursor-pointer`}
+            className={`px-2 py-1 bg-black hover:bg-gray-900  transition-all rounded-lg text-white flex justify-between items-center gap-1 cursor-pointer`}
             onClick={() => setChatStatus("close", currentChatId)}
           >
             <BeenhereOutlinedIcon fontSize="small" />
@@ -44,7 +44,7 @@ const ChatHeader = ({
         )}
         {chatStatus !== "open" && (
           <div
-            className={`px-2 py-1 bg-green-600 text-white hover:bg-green-500 rounded-lg ${
+            className={`px-2 py-1 bg-green-600 text-white hover:bg-green-500 transition-all  rounded-lg ${
               chatStatus === "open" ? "hidden" : "flex"
             } justify-between items-center gap-1 cursor-pointer`}
             onClick={() => setChatStatus("open", currentChatId)}
