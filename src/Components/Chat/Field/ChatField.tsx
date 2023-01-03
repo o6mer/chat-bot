@@ -29,7 +29,6 @@ const ChatField = () => {
     socket.on(
       "receiveMessage",
       ({ message, id }: { message: TMessage; id: string }) => {
-        console.log(message);
         addMessage(message);
       }
     );
@@ -56,8 +55,6 @@ const ChatField = () => {
   };
 
   const getResponse = (conversationId: string) => {
-    console.log(conversationId, chatId);
-
     socket.emit("getResponse", { conversationId, chatId });
   };
 

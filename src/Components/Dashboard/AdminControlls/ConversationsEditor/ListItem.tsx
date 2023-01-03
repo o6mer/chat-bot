@@ -86,12 +86,12 @@ const ListItem = ({
                         // }
                       >
                         <p>Title: {followUp.input}</p>
-                        <p>
+                        {/* <p>
                           Covnersation Id:{" "}
                           {followUp.conversation === "defualt"
                             ? "none"
                             : followUp.conversation}
-                        </p>
+                        </p> */}
                       </li>
                     );
                   })

@@ -1,6 +1,11 @@
 import React, { useContext, useRef, useState } from "react";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { TChat } from "../../../../../Types/Types";
+import {
+  TChat,
+  TMessage,
+  TMultipleChoiseMessage,
+  TTextMessage,
+} from "../../../../../Types/Types";
 import {
   DashboardContext,
   TDashbaordContext,
@@ -33,6 +38,18 @@ const SidebarChatListItem = ({
     rippleRef.current.stop(e);
   };
 
+  const renderMessage = (
+    type: string | undefined,
+    content: TMessage["content"]
+  ) => {
+    if (type === "text") return <p>{content || "No messages yet"}</p>;
+
+    if (type === "multiple")
+      return <p>{content.response || "No messages yet"}</p>;
+
+    return <p>No messages yet</p>;
+  };
+
   return (
     <li
       onMouseDown={onRippleStart}
@@ -50,7 +67,7 @@ const SidebarChatListItem = ({
       <div className="flex flex-col w-full">
         <p>{customerName || "New Customer"}</p>
         <div className={`flex justify-between `}>
-          <p>{lastMessage?.content || "No messages yet"}</p>
+          {renderMessage(lastMessage?.type, lastMessage?.content)}
           <p>{lastMessage?.time?.toString()}</p>
         </div>
       </div>

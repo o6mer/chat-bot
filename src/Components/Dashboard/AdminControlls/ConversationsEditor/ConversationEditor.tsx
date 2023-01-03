@@ -23,7 +23,7 @@ const ConversationEditor = () => {
   };
 
   return (
-    <div className="w-full h-full grow m-12 p-4 flex flex-col  bg-white shadow-[0px_0px_25px_3px_rgba(0,0,0,0.07)] rounded-lg">
+    <div className="w-full grow m-12 p-4 flex flex-col  bg-white shadow-[0px_0px_25px_3px_rgba(0,0,0,0.07)] rounded-lg">
       <header className="flex gap-2">
         <button
           className="border px-2 py-1 rounded-lg flex items-center hover:bg-gray-200 transition-all font-bold"
@@ -40,7 +40,7 @@ const ConversationEditor = () => {
           Save
         </button>
       </header>
-      <ul className="flex w-full h-full gap-4 box relative">
+      <ul className="flex grow shrink-0 flex-wrap gap-4 box relative">
         {conversations.map((conversation: TConversation) => {
           return (
             <ListItem
