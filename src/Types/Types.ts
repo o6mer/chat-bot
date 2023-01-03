@@ -1,4 +1,5 @@
 import React from "react";
+import { ControlPosition } from "react-draggable";
 
 export type TUser = {
   username: string;
@@ -55,6 +56,7 @@ export type TConversation = {
   question: string;
   response: string;
   followUp: Array<TFollowUp>;
+  position?: ControlPosition;
 };
 
 export type TFollowUp = {

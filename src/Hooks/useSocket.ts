@@ -209,6 +209,10 @@ export const useSocket = (socket: any) => {
     });
   };
 
+  const saveAllConversations = () => {
+    socket.emit("saveAllConversations", conversations);
+  };
+
   return {
     chatList,
     deleteAllChats,
@@ -224,5 +228,6 @@ export const useSocket = (socket: any) => {
     createConversation,
     deleteConversation,
     updateConversation,
+    saveAllConversations,
   };
 };
