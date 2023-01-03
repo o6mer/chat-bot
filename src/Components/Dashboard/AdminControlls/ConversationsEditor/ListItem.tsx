@@ -52,7 +52,9 @@ const ListItem = ({
     >
       <div
         ref={nodeRef}
-        className="flex flex-col p-8 shadow-lg relative transition-all h-min bg-white w-fit"
+        className={`flex flex-col p-8 shadow-lg relative transition-all h-min rounded-lg bg-white w-fit ${
+          conversation.isFirst && "border border-gray-400 border-solid"
+        }`}
         onMouseEnter={() => !editMode && setIsHover(true)}
         onMouseLeave={() => !editMode && setIsHover(false)}
       >
@@ -81,17 +83,16 @@ const ListItem = ({
                     return (
                       <li
                         key={"edit_follow-up" + conversation.id + index}
-                        // onClick={() =>
-                        //   showFollowUpConversation(followUp.conversation)
-                        // }
+                        className={`${
+                          followUp.conversation === "defualt" && "text-red-500"
+                        }`}
                       >
-                        <p>Title: {followUp.input}</p>
-                        {/* <p>
-                          Covnersation Id:{" "}
+                        <p>{followUp.input || "No title"}</p>
+                        <p>
                           {followUp.conversation === "defualt"
-                            ? "none"
+                            ? "No follow-up"
                             : followUp.conversation}
-                        </p> */}
+                        </p>
                       </li>
                     );
                   })

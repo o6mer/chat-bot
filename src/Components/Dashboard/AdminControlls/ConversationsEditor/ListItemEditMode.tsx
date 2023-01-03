@@ -103,14 +103,17 @@ const ListItemEditMode = ({
               <option value={"defualt"} disabled>
                 Select Conversation
               </option>
-              {conversations.map((conversation) => (
-                <option
-                  value={conversation.id}
-                  key={`option-${conversation.id}`}
-                >
-                  {conversation.question}
-                </option>
-              ))}
+              {conversations.map((conversation) => {
+                if (!conversation.question) return null;
+                return (
+                  <option
+                    value={conversation.id}
+                    key={`option-${conversation.id}`}
+                  >
+                    {conversation.question}
+                  </option>
+                );
+              })}
             </select>
             <Tooltip title="Delete" arrow>
               <button

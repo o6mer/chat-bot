@@ -53,6 +53,7 @@ export type TTemplate = {
 
 export type TConversation = {
   id?: string;
+  isFirst?: boolean;
   question: string;
   response: string;
   followUp: Array<TFollowUp>;

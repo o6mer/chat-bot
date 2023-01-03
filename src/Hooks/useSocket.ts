@@ -184,8 +184,10 @@ export const useSocket = (socket: any) => {
     socket.emit(
       "createConversation",
       conversation,
-      (conversation: TConversation) =>
-        setConversations((prev) => [...prev, conversation])
+      (conversation: TConversation) => {
+        console.log(conversation);
+        setConversations((prev) => [...prev, conversation]);
+      }
     );
   };
 
