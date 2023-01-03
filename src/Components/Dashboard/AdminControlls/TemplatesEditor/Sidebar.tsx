@@ -1,7 +1,8 @@
 import { TTemplate } from "../../../../Types/Types";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import Divider from "@mui/material/Divider";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
 
 const Sidebar = ({
   templateList,
@@ -87,15 +88,21 @@ const TemplateListItem = ({
   selectedTemplate?: TTemplate;
   setSelectedTemplate: (template: TTemplate) => void;
 }) => {
+  const rippleRef = useRef<any>(null);
+
   return (
     <li
-      className={`p-2 cursor-pointer hover:bg-slate-200 ${
+      className={`p-2 cursor-pointer hover:bg-slate-200 relative rounded-md ${
         template.id === selectedTemplate?.id && "bg-gray-200 hover:bg-gray-300"
       } transition-all`}
       onClick={() => {
         setSelectedTemplate(template);
       }}
+      onMouseDown={(e) => rippleRef.current.start(e)}
+      onMouseUp={(e) => rippleRef.current.stop(e)}
     >
+      <TouchRipple ref={rippleRef} center={false} />
+
       {template.title}
     </li>
   );
