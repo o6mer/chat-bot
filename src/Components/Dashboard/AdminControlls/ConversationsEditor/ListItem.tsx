@@ -53,7 +53,7 @@ const ListItem = ({
       <div
         ref={nodeRef}
         className={`flex flex-col p-8 shadow-lg relative transition-all h-min rounded-lg bg-white w-fit ${
-          conversation.isFirst && "border border-gray-400 border-solid"
+          conversation.id === "main" && "border border-gray-400 border-solid"
         }`}
         onMouseEnter={() => !editMode && setIsHover(true)}
         onMouseLeave={() => !editMode && setIsHover(false)}
@@ -87,11 +87,10 @@ const ListItem = ({
                           followUp.conversation === "defualt" && "text-red-500"
                         }`}
                       >
-                        <p>{followUp.input || "No title"}</p>
                         <p>
-                          {followUp.conversation === "defualt"
-                            ? "No follow-up"
-                            : followUp.conversation}
+                          {followUp.input || "No title"}{" "}
+                          {followUp.conversation === "defualt" &&
+                            "No follow-up selected"}
                         </p>
                       </li>
                     );
