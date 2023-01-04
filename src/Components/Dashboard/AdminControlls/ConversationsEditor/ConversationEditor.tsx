@@ -33,7 +33,7 @@ const ConversationEditor = () => {
           New
         </button>
         <button
-          className="gap-1 flex items-center transition-all bg-green-600 hover:bg-green-500 px-2 py-1 rounded-lg m-w-16 text-white"
+          className="gap-1 flex items-center transition-all bg-green-600 hover:bg-green-500 px-2 py-1 rounded-lg m-w-16 font-bold text-white"
           onClick={saveAllConversations}
         >
           <SaveAltOutlinedIcon fontSize="small" />
