@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext } from "react";
+import React, { useState, useEffect, ReactNode, useContext } from "react";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -16,7 +16,11 @@ import {
   TDashbaordContext,
 } from "../../../Contexts/DashbaordContext";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
-const drawerWidth = 240;
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import Avatar from "@mui/material/Avatar";
+
+const drawerWidth = 200;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -39,15 +43,6 @@ const closedMixin = (theme: Theme): CSSObject => ({
   },
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
-
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -66,14 +61,20 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function NavigationBar() {
-  const [open, setOpen] = React.useState(false);
-  const { screen, setScreen } = useContext(
+  const [open, setOpen] = useState(false);
+  const [profileBGColor, setProfileBGColor] = useState("");
+
+  const { user, screen, setScreen } = useContext(
     DashboardContext
   ) as TDashbaordContext;
 
   const toggleDrawer = () => {
     setOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    setProfileBGColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -101,16 +102,63 @@ export default function NavigationBar() {
             open={open}
             icon={<DisplaySettingsOutlinedIcon />}
           />
+          <NavigationListItem
+            screenIndex={3}
+            text="Settings"
+            screen={screen}
+            setScreen={setScreen}
+            open={open}
+            icon={<SettingsOutlinedIcon />}
+          />
         </List>
         <Divider />
-        <List></List>
+        <List
+          sx={{
+            marginTop: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: open ? "start" : "center",
+          }}
+        >
+          <button className="flex justify-center items-center">
+            <Avatar
+              sx={{
+                width: "1.8rem",
+                height: "1.8rem",
+                backgroundColor: profileBGColor,
+                text: "white",
+                fontSize: 14,
+              }}
+            >
+              {user?.username?.slice(0, 2)}
+            </Avatar>
+          </button>
+          {/* <NavigationListItem
+            screenIndex={3}
+            text="Profile"
+            screen={screen}
+            setScreen={setScreen}
+            open={open}
+            icon={
+              <Avatar
+                sx={{
+                  backgroundColor: profileBGColor,
+                  text: "white",
+                  fontSize: 18,
+                }}
+              >
+                {user?.username?.slice(0, 2)}
+              </Avatar>
+            }
+          /> */}
+        </List>
       </Drawer>
     </div>
   );
 }
 
 type TNavigationListItem = {
-  screenIndex: number;
+  screenIndex?: number;
   text?: string;
   screen?: number;
   setScreen: (screen: number) => void;
@@ -131,7 +179,7 @@ const NavigationListItem = ({
       key={text}
       disablePadding
       sx={{ display: "block" }}
-      onClick={() => setScreen(screenIndex)}
+      onClick={() => setScreen(screenIndex || 0)}
     >
       <ListItemButton
         sx={{
@@ -146,7 +194,9 @@ const NavigationListItem = ({
             minWidth: 0,
             mr: open ? 1 : "auto",
             justifyContent: "center",
+            cursor: "pointer",
           }}
+          onClick={() => {}}
         >
           {icon}
         </ListItemIcon>

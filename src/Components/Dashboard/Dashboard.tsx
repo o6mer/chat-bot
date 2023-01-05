@@ -31,8 +31,6 @@ const Dashboard = () => {
   const { screen } = useContext(DashboardContext) as TDashbaordContext;
   const { isConnected } = useContext(SocketContext) as TSocketContext;
 
-  console.log(isConnected);
-
   const theme = createTheme({
     palette: {
       primary: {

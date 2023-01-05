@@ -24,9 +24,12 @@ export const useSocket = (
     console.log(token);
 
     socket.on("connect", () => {
-      socket.emit("newAdminConnection", onNewAdminConnection);
       setIsConnected(true);
     });
+
+    if (!token) return;
+    socket.emit("newAdminConnection", token, onNewAdminConnection);
+
     socket.on("receiveMessage", onReceiveMessage);
     socket.on("disconnect", () => {
       setIsConnected(false);
@@ -55,11 +58,16 @@ export const useSocket = (
     });
   }, [currentChatId]);
 
-  const onNewAdminConnection = (prevChatList: Array<TChat>) => {
-    console.log("admin connected", prevChatList);
-    setChatList(prevChatList);
-    getAllTemplates();
-    getAllConversations();
+  const onNewAdminConnection = (adaminData: {
+    isAuth: boolean;
+    chatList: Array<TChat>;
+    templateList: Array<TTemplate>;
+    covnersationList: Array<TConversation>;
+  }) => {
+    console.log("admin connected", adaminData);
+    setChatList(adaminData.chatList);
+    setConversations(adaminData.covnersationList);
+    setTemplateLst(adaminData.templateList);
   };
 
   const onNewChat = (newChat: TChat) => {
@@ -127,6 +135,7 @@ export const useSocket = (
       })
     );
   };
+
   const deleteAllChats = () => {
     socket?.emit("deleteAllChats");
   };
@@ -137,12 +146,6 @@ export const useSocket = (
     socket?.emit("getFilteredChatList", filter, (chatList: Array<TChat>) => {
       setChatFilter(filter);
       setChatList([...chatList]);
-    });
-  };
-
-  const getAllTemplates = () => {
-    socket?.emit("getAllTemplates", (list: Array<TTemplate>) => {
-      setTemplateLst(list);
     });
   };
 
@@ -169,15 +172,6 @@ export const useSocket = (
   const createTemplate = (title?: string, content?: string) => {
     socket?.emit("createTemplate", { title, content }, (template: TTemplate) =>
       setTemplateLst((prev: Array<TTemplate>) => [...prev, template])
-    );
-  };
-
-  const getAllConversations = () => {
-    socket?.emit(
-      "getAllConversations",
-      (conversations: Array<TConversation>) => {
-        setConversations([...conversations]);
-      }
     );
   };
 
