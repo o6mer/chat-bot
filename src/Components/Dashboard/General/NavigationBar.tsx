@@ -110,48 +110,28 @@ export default function NavigationBar() {
             open={open}
             icon={<SettingsOutlinedIcon />}
           />
-        </List>
-        <Divider />
-        <List
-          sx={{
-            marginTop: "auto",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: open ? "start" : "center",
-          }}
-        >
-          <button className="flex justify-center items-center">
-            <Avatar
-              sx={{
-                width: "1.8rem",
-                height: "1.8rem",
-                backgroundColor: profileBGColor,
-                text: "white",
-                fontSize: 14,
-              }}
-            >
-              {user?.username?.slice(0, 2)}
-            </Avatar>
-          </button>
-          {/* <NavigationListItem
-            screenIndex={3}
-            text="Profile"
+          <NavigationListItem
+            screenIndex={-1}
+            text="Settings"
             screen={screen}
             setScreen={setScreen}
             open={open}
             icon={
               <Avatar
                 sx={{
+                  width: "1.8rem",
+                  height: "1.8rem",
                   backgroundColor: profileBGColor,
                   text: "white",
-                  fontSize: 18,
+                  fontSize: 14,
                 }}
               >
                 {user?.username?.slice(0, 2)}
               </Avatar>
             }
-          /> */}
+          />
         </List>
+        <Divider />
       </Drawer>
     </div>
   );
@@ -179,7 +159,9 @@ const NavigationListItem = ({
       key={text}
       disablePadding
       sx={{ display: "block" }}
-      onClick={() => setScreen(screenIndex || 0)}
+      onClick={() => {
+        screenIndex !== -1 && setScreen(screenIndex || 0);
+      }}
     >
       <ListItemButton
         sx={{
