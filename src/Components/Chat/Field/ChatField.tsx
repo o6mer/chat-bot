@@ -10,38 +10,35 @@ import {
 import { io } from "socket.io-client";
 import MultipleChoiceMessage from "../../Messages/MultipleChoiceMessage";
 
-const socket = io("http://localhost:3002/", {
-  closeOnBeforeunload: false,
-});
+// const socket = io("http://localhost:3002/", {
+//   closeOnBeforeunload: false,
+// });
 
 const ChatField = () => {
-  const [isConnected, setIsConnected] = useState(socket.connected);
+  const [isConnected, setIsConnected] = useState(false);
   const [messagesList, setMessagesList] = useState<TMessage[]>([]);
 
   const { chatId, setChatId } = useContext(CustomerContext) as TCustomerContext;
 
   useEffect(() => {
-    socket.on("connect", () => {
-      setIsConnected(true);
-      socket.emit("newUserConnection", onNewUserConnection);
-    });
-
-    socket.on(
-      "receiveMessage",
-      ({ message, id }: { message: TMessage; id: string }) => {
-        addMessage(message);
-      }
-    );
-
-    socket.on("disconnect", () => {
-      setIsConnected(false);
-    });
-
-    return () => {
-      socket.off("connect");
-      socket.off("receiveMessage");
-      socket.off("disconnect");
-    };
+    // socket.on("connect", () => {
+    //   setIsConnected(true);
+    //   socket.emit("newUserConnection", onNewUserConnection);
+    // });
+    // socket.on(
+    //   "receiveMessage",
+    //   ({ message, id }: { message: TMessage; id: string }) => {
+    //     addMessage(message);
+    //   }
+    // );
+    // socket.on("disconnect", () => {
+    //   setIsConnected(false);
+    // });
+    // return () => {
+    //   socket.off("connect");
+    //   socket.off("receiveMessage");
+    //   socket.off("disconnect");
+    // };
   }, []);
 
   const onNewUserConnection = (chatId: string) => {
@@ -55,19 +52,19 @@ const ChatField = () => {
   };
 
   const getResponse = (conversationId: string) => {
-    socket.emit("getResponse", { conversationId, chatId });
+    // socket.emit("getResponse", { conversationId, chatId });
   };
 
   const sendMessage = (messageContent: string) => {
     if (!isConnected) return;
-    socket.emit(
-      "sendMessage",
-      {
-        id: chatId,
-        messageContent,
-      },
-      addMessage
-    );
+    // socket.emit(
+    //   "sendMessage",
+    //   {
+    //     id: chatId,
+    //     messageContent,
+    //   },
+    //   addMessage
+    // );
   };
 
   const addMessage = (message: TMessage): void => {
@@ -76,7 +73,7 @@ const ChatField = () => {
 
   return (
     <section className="">
-      {socket ? (
+      {/* {socket ? (
         <>
           <div className="flex flex-col gap-1 w-full h-80 px-1 py-2 overflow-y-scroll">
             {messagesList?.map((message: TMessage, index: number) => {
@@ -108,7 +105,7 @@ const ChatField = () => {
         </>
       ) : (
         <h1>Loading...</h1>
-      )}
+      )} */}
     </section>
   );
 };

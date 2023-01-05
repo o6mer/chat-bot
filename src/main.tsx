@@ -8,6 +8,8 @@ import Chat from "./Components/Chat/Chat";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import DashboardContextProvider from "./Contexts/DashbaordContext";
 import CustomerContextProvider from "./Contexts/CustomerContext";
+import ProtectedRoutes from "./Components/General/ProtectedRoutes";
+import SocketContextProvider from "./Contexts/SocketContext";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,7 +33,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoutes>
+        <Dashboard />
+      </ProtectedRoutes>
+    ),
     errorElement: <ErrorPage />,
   },
 ]);
@@ -40,7 +46,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <DashboardContextProvider>
       <CustomerContextProvider>
-        <RouterProvider router={router} />
+        <SocketContextProvider>
+          <RouterProvider router={router} />
+        </SocketContextProvider>
       </CustomerContextProvider>
     </DashboardContextProvider>
   </React.StrictMode>

@@ -2,11 +2,11 @@ import React from "react";
 import { ControlPosition } from "react-draggable";
 
 export type TUser = {
-  username: string;
-  email: string;
-  password: string;
-  roll: string;
-  id: string;
+  username?: string;
+  email?: string;
+  password?: string;
+  role?: string;
+  id?: string;
 };
 
 export type TMessage = {

@@ -3,6 +3,8 @@ import { useSocket } from "../Hooks/useSocket";
 import { TChat, TUser } from "../Types/Types";
 
 export type TDashbaordContext = {
+  token: string;
+  setToken: (token: string) => void;
   user?: TUser;
   setUser: (user: TUser) => void;
   darkMode?: boolean;
@@ -18,6 +20,7 @@ export const DashboardContext = createContext<TDashbaordContext | null>(null);
 
 const DashboardContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<TUser>();
+  const [token, setToken] = useState<string>("");
   const [darkMode, setDarkMode] = useState(false);
   const [currentChatId, setCurrentChatId] = useState<string>();
   const [screen, setScreen] = useState(1);
@@ -27,6 +30,8 @@ const DashboardContextProvider = ({ children }: { children: ReactNode }) => {
       value={{
         user,
         setUser,
+        token,
+        setToken,
         darkMode,
         currentChatId,
         setCurrentChatId,

@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useState } from "react";
+import React, { FormEvent, useContext, useState, useEffect } from "react";
 import LabeldInput from "../../General/LabeldInput";
 import axios from "axios";
 import {
@@ -11,9 +11,17 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setUser } = useContext(DashboardContext) as TDashbaordContext;
+  const { token, setToken, setUser } = useContext(
+    DashboardContext
+  ) as TDashbaordContext;
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) return;
+    localStorage.setItem("token", token);
+    navigate("/dashboard");
+  }, [token]);
 
   const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
@@ -23,10 +31,9 @@ const LoginPage = () => {
         password,
       });
 
-      const userData = res.data;
-      setUser(userData);
-      if (userData.roll == "admin") return navigate("/dashboard");
-      if (userData.roll == "user") return navigate("/chat");
+      const { token, id, username, role } = res.data;
+      setToken(token);
+      setUser({ id, username, role });
     } catch (err: any) {
       alert(err.response.data.message);
     }

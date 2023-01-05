@@ -1,7 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import MainFrame from "./Conversations/MainFrame/MainFrame";
-import SideBar from "./Conversations/Sidebar/Sidebar";
-import { useSocket } from "../../Hooks/useSocket";
 import Conversations from "./Conversations/Conversations";
 import NavigationBar from "./General/NavigationBar";
 import {
@@ -10,7 +7,12 @@ import {
 } from "../../Contexts/DashbaordContext";
 import AdminControlls from "./AdminControlls/AdminsControlls";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-import SocketContextProvider from "../../Contexts/SocketContext";
+import SocketContextProvider, {
+  SocketContext,
+  TSocketContext,
+} from "../../Contexts/SocketContext";
+import axios from "axios";
+
 declare module "@mui/material/styles" {
   interface Theme {
     status: {
@@ -27,6 +29,9 @@ declare module "@mui/material/styles" {
 
 const Dashboard = () => {
   const { screen } = useContext(DashboardContext) as TDashbaordContext;
+  const { isConnected } = useContext(SocketContext) as TSocketContext;
+
+  console.log(isConnected);
 
   const theme = createTheme({
     palette: {
@@ -45,15 +50,19 @@ const Dashboard = () => {
     },
   });
   return (
-    <SocketContextProvider>
-      <ThemeProvider theme={theme}>
-        <main className="w-full h-full flex">
-          <NavigationBar />
-          {screen === 1 && <Conversations />}
-          {screen === 2 && <AdminControlls />}
-        </main>
-      </ThemeProvider>
-    </SocketContextProvider>
+    <>
+      {isConnected ? (
+        <ThemeProvider theme={theme}>
+          <main className="w-full h-full flex">
+            <NavigationBar />
+            {screen === 1 && <Conversations />}
+            {screen === 2 && <AdminControlls />}
+          </main>
+        </ThemeProvider>
+      ) : (
+        <p>Loadig...</p>
+      )}
+    </>
   );
 };
 

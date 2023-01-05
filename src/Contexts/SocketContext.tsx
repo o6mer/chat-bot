@@ -1,9 +1,10 @@
 import React, { createContext, useEffect, useState, ReactNode } from "react";
 import { useSocket } from "../Hooks/useSocket";
 import { TChat, TConversation, TTemplate, TUser } from "../Types/Types";
-import io from "socket.io-client";
+import io, { Socket } from "socket.io-client";
 
 export type TSocketContext = {
+  isConnected: boolean;
   chatList?: Array<TChat>;
   deleteAllChats?: () => void;
   sendMessage: (message: string) => void;
@@ -21,14 +22,15 @@ export type TSocketContext = {
   saveAllConversations: () => void;
 };
 
-export const SocketContext = createContext<TSocketContext | null>(null);
-
 const socket = io("http://localhost:3002/", {
   closeOnBeforeunload: false,
 });
 
+export const SocketContext = createContext<TSocketContext | null>(null);
+
 const SocketContextProvider = ({ children }: { children: ReactNode }) => {
   const {
+    isConnected,
     chatList,
     deleteAllChats,
     sendMessage,
@@ -48,6 +50,7 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
   return (
     <SocketContext.Provider
       value={{
+        isConnected,
         chatList,
         deleteAllChats,
         sendMessage,
