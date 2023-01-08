@@ -7,6 +7,7 @@ export type TUser = {
   password?: string;
   role?: string;
   id?: string;
+  status?: string;
 };
 
 export type TMessage = {

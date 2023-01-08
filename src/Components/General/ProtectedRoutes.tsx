@@ -3,34 +3,16 @@ import {
   DashboardContext,
   TDashbaordContext,
 } from "../../Contexts/DashbaordContext";
-import { Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
-import SocketContextProvider from "../../Contexts/SocketContext";
+import { useAuth } from "../../Hooks/useAuth";
 
 const ProtectedRoutes = ({ children }: { children: ReactNode }) => {
-  const { token, setToken, setUser } = useContext(
-    DashboardContext
-  ) as TDashbaordContext;
+  const { token } = useContext(DashboardContext) as TDashbaordContext;
+  const { auth } = useAuth();
 
   useEffect(() => {
-    const relogin = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:3002/api/user/auth", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!token) return;
-
-        setUser(res.data);
-        setToken(token);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    relogin();
+    auth();
   }, []);
 
   return <>{token ? children : <Navigate to={"/"} />}</>;

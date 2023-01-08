@@ -20,6 +20,7 @@ export type TSocketContext = {
   deleteConversation: (conversationId?: string) => void;
   updateConversation: (conversation: TConversation) => void;
   saveAllConversations: () => void;
+  disconnectAdmin: () => void;
 };
 
 const socket = io("http://localhost:3002/", {
@@ -46,6 +47,7 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
     deleteConversation,
     updateConversation,
     saveAllConversations,
+    disconnectAdmin,
   } = useSocket(socket);
   return (
     <SocketContext.Provider
@@ -66,6 +68,7 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
         deleteConversation,
         updateConversation,
         saveAllConversations,
+        disconnectAdmin,
       }}
     >
       {children}

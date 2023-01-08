@@ -14,6 +14,8 @@ export type TDashbaordContext = {
   screen?: number;
   setScreen: (screen: number) => void;
   chatList?: Array<TChat>;
+  userStatus?: string;
+  setUserStatus: (userStatus: string) => void;
 };
 
 export const DashboardContext = createContext<TDashbaordContext | null>(null);
@@ -24,6 +26,7 @@ const DashboardContextProvider = ({ children }: { children: ReactNode }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [currentChatId, setCurrentChatId] = useState<string>();
   const [screen, setScreen] = useState(1);
+  const [userStatus, setUserStatus] = useState<string>("active");
 
   return (
     <DashboardContext.Provider
@@ -37,6 +40,8 @@ const DashboardContextProvider = ({ children }: { children: ReactNode }) => {
         setCurrentChatId,
         screen,
         setScreen,
+        userStatus,
+        setUserStatus,
       }}
     >
       {children}

@@ -3,7 +3,13 @@ import {
   DashboardContext,
   TDashbaordContext,
 } from "../Contexts/DashbaordContext";
-import { TChat, TConversation, TMessage, TTemplate } from "../Types/Types";
+import {
+  TChat,
+  TConversation,
+  TMessage,
+  TTemplate,
+  TUser,
+} from "../Types/Types";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 
@@ -16,13 +22,12 @@ export const useSocket = (
   const [currentChatData, setCurrentChatData] = useState<TChat>();
   const [templateList, setTemplateLst] = useState<Array<TTemplate>>([]);
   const [conversations, setConversations] = useState<Array<TConversation>>([]);
+  const [onlineAdmins, setOnlineAdmins] = useState<Array<TUser>>();
   const { token, user, currentChatId, setCurrentChatId } = useContext(
     DashboardContext
   ) as TDashbaordContext;
 
   useEffect(() => {
-    console.log(token);
-
     socket.on("connect", () => {
       setIsConnected(true);
     });
@@ -31,6 +36,8 @@ export const useSocket = (
     socket.emit("newAdminConnection", token, onNewAdminConnection);
 
     socket.on("receiveMessage", onReceiveMessage);
+    socket.on("adminDisconnected", onAdminDisconnected);
+
     socket.on("disconnect", () => {
       setIsConnected(false);
     });
@@ -63,11 +70,13 @@ export const useSocket = (
     chatList: Array<TChat>;
     templateList: Array<TTemplate>;
     covnersationList: Array<TConversation>;
+    onlineAdmins: Array<TUser>;
   }) => {
     console.log("admin connected", adaminData);
     setChatList(adaminData.chatList);
     setConversations(adaminData.covnersationList);
     setTemplateLst(adaminData.templateList);
+    setOnlineAdmins(adaminData.onlineAdmins);
   };
 
   const onNewChat = (newChat: TChat) => {
@@ -210,22 +219,41 @@ export const useSocket = (
     socket?.emit("saveAllConversations", conversations);
   };
 
+  const onAdminDisconnected = (onlineAdmins: Array<TUser>) => {
+    setOnlineAdmins([...onlineAdmins]);
+  };
+
+  const disconnectAdmin = () => {
+    socket?.emit("adminDisconnect", user?.id);
+  };
+
   return {
+    //socket
     isConnected,
+
+    //chats
     chatList,
     deleteAllChats,
     sendMessage,
     currentChatData,
     setChatStatus,
     setFilteredChatList,
+
+    //templates
     templateList,
     updateTemplate,
     deleteTemplate,
     createTemplate,
+
+    //covnersations
     conversations,
     createConversation,
     deleteConversation,
     updateConversation,
     saveAllConversations,
+
+    //admins
+    onlineAdmins,
+    disconnectAdmin,
   };
 };

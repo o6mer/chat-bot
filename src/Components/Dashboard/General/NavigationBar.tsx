@@ -1,5 +1,11 @@
 import React, { useState, useEffect, ReactNode, useContext } from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import {
+  styled,
+  useTheme,
+  Theme,
+  CSSObject,
+  SxProps,
+} from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
@@ -18,7 +24,7 @@ import {
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import Avatar from "@mui/material/Avatar";
+import ProfileMenu from "./ProfileMenu";
 
 const drawerWidth = 200;
 
@@ -62,19 +68,14 @@ const Drawer = styled(MuiDrawer, {
 
 export default function NavigationBar() {
   const [open, setOpen] = useState(false);
-  const [profileBGColor, setProfileBGColor] = useState("");
 
-  const { user, screen, setScreen } = useContext(
+  const { screen, setScreen } = useContext(
     DashboardContext
   ) as TDashbaordContext;
 
   const toggleDrawer = () => {
     setOpen((prev) => !prev);
   };
-
-  useEffect(() => {
-    setProfileBGColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
-  }, []);
 
   return (
     <div className="flex flex-col">
@@ -85,7 +86,14 @@ export default function NavigationBar() {
           </button>
         </div>
         <Divider />
-        <List sx={{ padding: "0" }}>
+        <List
+          sx={{
+            padding: "0",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <NavigationListItem
             screenIndex={1}
             text="Conversations"
@@ -110,26 +118,7 @@ export default function NavigationBar() {
             open={open}
             icon={<SettingsOutlinedIcon />}
           />
-          <NavigationListItem
-            screenIndex={-1}
-            text="Settings"
-            screen={screen}
-            setScreen={setScreen}
-            open={open}
-            icon={
-              <Avatar
-                sx={{
-                  width: "1.8rem",
-                  height: "1.8rem",
-                  backgroundColor: profileBGColor,
-                  text: "white",
-                  fontSize: 14,
-                }}
-              >
-                {user?.username?.slice(0, 2)}
-              </Avatar>
-            }
-          />
+          <ProfileMenu open={open} />
         </List>
         <Divider />
       </Drawer>
@@ -144,6 +133,7 @@ type TNavigationListItem = {
   setScreen: (screen: number) => void;
   open?: boolean;
   icon?: ReactNode;
+  sx?: SxProps<Theme> | undefined;
 };
 
 const NavigationListItem = ({
@@ -153,13 +143,14 @@ const NavigationListItem = ({
   setScreen,
   open,
   icon,
+  sx,
 }: TNavigationListItem) => {
   return (
     <ListItem
       key={text}
       disablePadding
-      sx={{ display: "block" }}
-      onClick={() => {
+      sx={{ ...sx, display: "block" }}
+      onClick={(e) => {
         screenIndex !== -1 && setScreen(screenIndex || 0);
       }}
     >
@@ -178,7 +169,6 @@ const NavigationListItem = ({
             justifyContent: "center",
             cursor: "pointer",
           }}
-          onClick={() => {}}
         >
           {icon}
         </ListItemIcon>

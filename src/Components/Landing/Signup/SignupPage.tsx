@@ -6,39 +6,18 @@ import {
   TDashbaordContext,
 } from "../../../Contexts/DashbaordContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../Hooks/useAuth";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
-  const { token, setToken, setUser } = useContext(
-    DashboardContext
-  ) as TDashbaordContext;
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!token) return;
-    navigate("/dashboard");
-  }, [token]);
+  const { signup } = useAuth();
 
   const signupHandler = async (e: FormEvent) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:3002/api/user/signup", {
-        email: email,
-        password: password,
-        username: username,
-        role: "admin",
-      });
-
-      const data = res.data;
-      setToken(data.token);
-      setUser({ id: data.id, username: data.uername, role: data.role });
-    } catch (err: any) {
-      alert(err.response.data.message);
-    }
-
+    await signup(email, password, username);
     clearForm();
   };
 
