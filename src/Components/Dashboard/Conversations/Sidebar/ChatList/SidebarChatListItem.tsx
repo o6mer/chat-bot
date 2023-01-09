@@ -11,6 +11,7 @@ import {
   TDashbaordContext,
 } from "../../../../../Contexts/DashbaordContext";
 import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
+import { Avatar } from "@mui/material";
 
 const SidebarChatListItem = ({
   customerName,
@@ -18,6 +19,7 @@ const SidebarChatListItem = ({
   isSeen,
   messages,
   id,
+  assignedAdmin,
 }: TChat) => {
   const { currentChatId, setCurrentChatId } = useContext(
     DashboardContext
@@ -62,9 +64,23 @@ const SidebarChatListItem = ({
       <TouchRipple ref={rippleRef} center={false} />
 
       <div className="flex items-center">
-        <AccountCircleOutlinedIcon />
+        <Avatar
+          onClick={(e) => {
+            console.log(e.currentTarget);
+          }}
+          sx={{
+            fontWeight: "normal",
+            width: "1.8rem",
+            height: "1.8rem",
+            backgroundColor: "rgb(34 197 94 / 1)",
+            text: "white",
+            fontSize: 14,
+          }}
+        >
+          {assignedAdmin?.slice(0, 2)}
+        </Avatar>
       </div>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full ">
         <p>{customerName || "New Customer"}</p>
         <div className={`flex justify-between `}>
           {renderMessage(lastMessage?.type, lastMessage?.content)}

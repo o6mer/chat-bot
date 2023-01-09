@@ -44,6 +44,7 @@ export type TChat = {
   isSeen: boolean;
   messages: Array<TMessage>;
   creationTime: Date | string;
+  assignedAdmin: string;
 };
 
 export type TTemplate = {

@@ -47,7 +47,7 @@ export const useSocket = (
       socket.off("receiveMessage");
       socket.off("disconnect");
     };
-  }, [token, chatFilter]);
+  }, [token]);
 
   useEffect(() => {
     socket?.on("newChatStarted", onNewChat);
@@ -64,6 +64,14 @@ export const useSocket = (
       setCurrentChatData(chat);
     });
   }, [currentChatId]);
+
+  const getUserById = (userId: string) => {
+    let user;
+    socket?.emit("getUserById", userId, (userData: TUser) => {
+      user = userData;
+    });
+    return user;
+  };
 
   const onNewAdminConnection = (adaminData: {
     isAuth: boolean;
