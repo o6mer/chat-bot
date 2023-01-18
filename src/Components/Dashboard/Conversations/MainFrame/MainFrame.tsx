@@ -16,7 +16,7 @@ const MainFrame = () => {
   const { currentChatData } = useContext(SocketContext) as TSocketContext;
 
   return (
-    <section className=" h-full flex grow">
+    <section className=" h-full flex grow relative">
       {currentChatId ? (
         <>
           <Chat currentChatData={currentChatData} />

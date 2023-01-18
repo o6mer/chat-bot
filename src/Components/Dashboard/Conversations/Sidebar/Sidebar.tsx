@@ -1,17 +1,15 @@
-import React, { useState, useContext } from "react";
-import { TChat } from "../../../../Types/Types";
+import { useState, useContext } from "react";
 import SidebarChatsList from "./ChatList/SidebarChatsList";
 import SidebarFilters from "./Filters/SidebarFilters";
 import SidebarHeader from "./Header/SidebarHeader";
 import Divider from "@mui/material/Divider";
 import {
-  DashboardContext,
-  TDashbaordContext,
-} from "../../../../Contexts/DashbaordContext";
-import {
   SocketContext,
   TSocketContext,
 } from "../../../../Contexts/SocketContext";
+import { Panel, PanelGroup } from "react-resizable-panels";
+import { PanelResizeHandle } from "react-resizable-panels";
+
 const SideBar = () => {
   const [sortBy, setSortBy] = useState("new");
 
@@ -20,7 +18,7 @@ const SideBar = () => {
   ) as TSocketContext;
 
   return (
-    <aside className="flex flex-col h-full w-[20%] p-2 outline-[3px] outline outline-gray-200 ">
+    <aside className="flex flex-col h-full w-[20%] p-2 outline-[3px] outline outline-gray-200 resize-x">
       <SidebarHeader />
 
       <Divider />
