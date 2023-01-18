@@ -3,6 +3,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import Divider from "@mui/material/Divider";
 import { useEffect, useRef, useState } from "react";
 import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
+import NewButton from "../../../General/Buttons/NewButton";
 
 const Sidebar = ({
   templateList,
@@ -46,13 +47,7 @@ const Sidebar = ({
           className="min-w-0 p-1 border rounded-lg "
           placeholder="Search template..."
         />
-        <button
-          className="border px-2 py-1 rounded-lg flex items-center hover:bg-gray-200 transition-all font-bold"
-          onClick={onNewTemplate}
-        >
-          <AddOutlinedIcon fontSize="small" />
-          New
-        </button>
+        <NewButton onClick={onNewTemplate} />
       </div>
       <Divider />
       <ul className="list-none text-md flex flex-col grow h-0 overflow-y-scroll dashboard-scrollbar px-2">

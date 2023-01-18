@@ -8,7 +8,7 @@ export type TDashbaordContext = {
   user?: TUser;
   setUser: (user: TUser) => void;
   darkMode?: boolean;
-  setDarkMode?: (mode: boolean) => void;
+  setDarkMode: (mode: boolean) => void;
   currentChatId?: string;
   setCurrentChatId: (chatId?: string) => void;
   screen?: number;
@@ -36,6 +36,7 @@ const DashboardContextProvider = ({ children }: { children: ReactNode }) => {
         token,
         setToken,
         darkMode,
+        setDarkMode,
         currentChatId,
         setCurrentChatId,
         screen,

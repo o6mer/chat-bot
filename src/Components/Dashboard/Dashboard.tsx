@@ -12,6 +12,7 @@ import SocketContextProvider, {
   TSocketContext,
 } from "../../Contexts/SocketContext";
 import axios from "axios";
+import Settigns from "./Settings/Settigns";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -55,6 +56,7 @@ const Dashboard = () => {
             <NavigationBar />
             {screen === 1 && <Conversations />}
             {screen === 2 && <AdminControlls />}
+            {screen === 3 && <Settigns />}
           </main>
         </ThemeProvider>
       ) : (
