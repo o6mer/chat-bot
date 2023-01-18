@@ -4,6 +4,7 @@ import InfoSidebarHeader from "./Header/InfoSidebarHeader";
 import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import ChevronLeftOutlinedIcon from "@mui/icons-material/ChevronLeftOutlined";
+
 const InfoSidebar = ({ currentChatData }: { currentChatData?: TChat }) => {
   const [isOpen, setIsOpen] = useState(true);
   return (
