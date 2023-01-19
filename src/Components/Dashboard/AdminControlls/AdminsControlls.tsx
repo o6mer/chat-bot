@@ -41,9 +41,9 @@ export default function BasicTabs() {
     padding: "1.05rem",
     margin: "0",
     letterSpacing: "inherit",
-    backgroundColor: darkMode ? "#1E2022" : "#F0F5F9",
+    backgroundColor: darkMode ? "#1E2022" : "#fff",
     "&.MuiButtonBase-root": {
-      color: darkMode ? "#F0F5F9" : "#1E2022",
+      color: darkMode ? "#fff" : "#1E2022",
     },
   };
 
@@ -55,9 +55,9 @@ export default function BasicTabs() {
           onChange={handleChange}
           aria-label="basic tabs example"
           sx={{
-            backgroundColor: darkMode ? "#1E2022" : "#F0F5F9",
+            backgroundColor: darkMode ? "#1E2022" : "#fff",
             "&.MuiTabs-indicator": {
-              backgroundColor: darkMode ? "#F0F5F9" : "#1E2022",
+              backgroundColor: darkMode ? "#fff" : "#1E2022",
             },
           }}
         >
