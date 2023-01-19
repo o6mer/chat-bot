@@ -47,7 +47,7 @@ export const useSocket = (
       socket.off("receiveMessage");
       socket.off("disconnect");
     };
-  }, [token]);
+  }, [token, currentChatId]);
 
   useEffect(() => {
     socket?.on("newChatStarted", onNewChat);
@@ -112,6 +112,8 @@ export const useSocket = (
       prev[index]?.messages.push(message);
       return [...prev];
     });
+
+    if (currentChatId !== id) return;
 
     setCurrentChatData((prev: TChat | undefined) => {
       if (!prev) return;

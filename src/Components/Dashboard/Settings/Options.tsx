@@ -41,6 +41,7 @@ const Options = ({ categories }: { categories: Array<string> }) => {
             Email
           </label>
           <input
+            type="email"
             id="email"
             className="border grow rounded-lg p-1"
             placeholder={user?.email}
@@ -51,19 +52,10 @@ const Options = ({ categories }: { categories: Array<string> }) => {
             User Name
           </label>
           <input
+            type="text"
             id="email"
             className="border grow rounded-lg p-1"
             placeholder={user?.username}
-          />
-        </div>
-        <div className="flex items-center gap-1 justify-between w-full px-4 py-2">
-          <label htmlFor="email" className="">
-            Email
-          </label>
-          <input
-            id="email"
-            className="border grow rounded-lg p-1"
-            placeholder={user?.email}
           />
         </div>
       </section>
