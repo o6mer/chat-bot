@@ -10,6 +10,10 @@ import {
 import ListItemEditMode from "./ListItemEditMode";
 import Draggable, { ControlPosition } from "react-draggable";
 import DragIndicatorOutlinedIcon from "@mui/icons-material/DragIndicatorOutlined";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../../Contexts/DashbaordContext";
 const ListItem = ({
   conversation,
   conversations,
@@ -20,6 +24,7 @@ const ListItem = ({
   const [isHover, setIsHover] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
+  const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
   const { updateConversation, deleteConversation } = useContext(
     SocketContext
   ) as TSocketContext;
@@ -52,8 +57,10 @@ const ListItem = ({
     >
       <div
         ref={nodeRef}
-        className={`flex flex-col p-8 shadow-lg relative transition-all h-min rounded-lg bg-white w-fit ${
-          conversation.id === "main" && "border border-gray-400 border-solid"
+        className={`flex flex-col p-8 shadow-lg relative transition-all h-min rounded-lg ${
+          darkMode ? "bg-darkSecondary" : "bg-secondary"
+        }  w-fit ${
+          conversation.id === "main" && "border-secondary  border-solid border"
         }`}
         onMouseEnter={() => !editMode && setIsHover(true)}
         onMouseLeave={() => !editMode && setIsHover(false)}

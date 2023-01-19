@@ -1,9 +1,14 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import TemplateEditor from "./TemplatesEditor/TemplateEditor";
 import ConversationEditor from "./ConversationsEditor/ConversationEditor";
+import { useContext } from "react";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../Contexts/DashbaordContext";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -19,7 +24,9 @@ function a11yProps(index: number) {
 }
 
 export default function BasicTabs() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+
+  const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -34,20 +41,30 @@ export default function BasicTabs() {
     padding: "1.05rem",
     margin: "0",
     letterSpacing: "inherit",
+    backgroundColor: darkMode ? "#1E2022" : "#F0F5F9",
+    "&.MuiButtonBase-root": {
+      color: darkMode ? "#F0F5F9" : "#1E2022",
+    },
   };
 
   return (
     <div className="w-full h-full flex flex-col">
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <div>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          sx={{
+            backgroundColor: darkMode ? "#1E2022" : "#F0F5F9",
+            "&.MuiTabs-indicator": {
+              backgroundColor: darkMode ? "#F0F5F9" : "#1E2022",
+            },
+          }}
         >
           <Tab label="Conversations Editor" {...a11yProps(0)} sx={tabStyling} />
           <Tab label="Templates Editor" {...a11yProps(1)} sx={tabStyling} />
         </Tabs>
-      </Box>
+      </div>
       <TabPanel value={value} index={0}>
         <ConversationEditor />
       </TabPanel>
@@ -59,10 +76,15 @@ export default function BasicTabs() {
 }
 
 const TabPanel = ({ children, value, index, ...other }: TabPanelProps) => {
+  const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
+
   return (
     <div
       className={`${
-        value === index && "w-full flex grow justify-center bg-gray-100"
+        value === index &&
+        `w-full flex grow justify-center ${
+          darkMode ? "bg-darkSecondary" : "bg-secondary"
+        } `
       }`}
       role="tabpanel"
       hidden={value !== index}

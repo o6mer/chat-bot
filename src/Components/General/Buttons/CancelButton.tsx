@@ -8,7 +8,7 @@ const CancelButton = ({
 }) => {
   return (
     <button
-      className="gap-1 flex items-center transition-all hover:bg-gray-200 border px-2 py-1 rounded-lg m-w-16"
+      className="gap-1 flex items-center transition-all hover:bg-gray-200 border-secondary border border-solid px-2 py-1 rounded-lg m-w-16"
       onClick={onClick}
     >
       <CloseOutlinedIcon fontSize="small" />

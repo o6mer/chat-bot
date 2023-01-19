@@ -18,7 +18,7 @@ const MultipleChoiceMessage = ({
           {content?.followUp.map((followUp) => (
             <li
               key={followUp.conversation}
-              className="cursor-pointer px-2 py-1 rounded-lg flex justify-start items-center border bg-gray-600 hover:bg-gray-500 transition-all font-bold text-sm text-white"
+              className="cursor-pointer px-2 py-1 rounded-lg flex justify-start items-center border-secondary border border-solid bg-gray-600 hover:bg-gray-500 transition-all font-bold text-sm text-white"
               onClick={() => chooseFollowUp && chooseFollowUp(followUp)}
             >
               {followUp.input}

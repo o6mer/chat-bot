@@ -7,18 +7,25 @@ import {
   SocketContext,
   TSocketContext,
 } from "../../../../Contexts/SocketContext";
-import { Panel, PanelGroup } from "react-resizable-panels";
-import { PanelResizeHandle } from "react-resizable-panels";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../../Contexts/DashbaordContext";
 
 const SideBar = () => {
   const [sortBy, setSortBy] = useState("new");
 
+  const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
   const { chatList, deleteAllChats } = useContext(
     SocketContext
   ) as TSocketContext;
 
   return (
-    <aside className="flex flex-col h-full w-[20%] p-2 outline-[3px] outline outline-gray-200 resize-x">
+    <aside
+      className={`flex flex-col h-full w-[20%] p-2 outline-[3px] outline-secondary resize-x ${
+        darkMode ? "bg-darkPrimary" : "bg-primary"
+      }`}
+    >
       <SidebarHeader />
 
       <Divider />

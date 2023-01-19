@@ -62,14 +62,14 @@ const ListItemEditMode = ({
           placeholder="Question..."
           type="text"
           value={updatedQuestion}
-          className="border "
+          className="border-secondary border border-solid"
           onChange={(e) => setUpdatedQuestion(e.currentTarget.value)}
         />
         <input
           placeholder="Response..."
           type="text"
           value={updatedResponse}
-          className="border"
+          className="border-secondary border border-solid"
           onChange={(e) => setUpdatedResponse(e.currentTarget.value)}
         />
         {updatedFollowUps.map((followUp, index) => (
@@ -81,7 +81,7 @@ const ListItemEditMode = ({
               placeholder="Follow-up title..."
               type="text"
               value={followUp.input}
-              className="border grow"
+              className="border-secondary border border-solid grow"
               onChange={(e) => {
                 const value = e.currentTarget.value;
                 setUpdatedFollowUps((prev) => {
@@ -129,7 +129,7 @@ const ListItemEditMode = ({
           <Tooltip title="Add Follow-up" arrow>
             <button
               onClick={onAddFollowUpClicked}
-              className="border w-max p-1 rounded-lg flex justify-center items-center hover:bg-gray-200 transition-all"
+              className="border-secondary border border-solid w-max p-1 rounded-lg flex justify-center items-center hover:bg-gray-200 transition-all"
             >
               <AddOutlinedIcon fontSize="small" />
             </button>

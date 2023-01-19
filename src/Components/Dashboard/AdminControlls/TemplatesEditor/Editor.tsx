@@ -63,7 +63,7 @@ const Editor = ({
             Title:
           </label>
           <input
-            className="border grow rounded-lg"
+            className="border-secondary border border-solid grow rounded-lg text-black"
             type="text"
             id="template-title_input"
             placeholder={"Current Title"}
@@ -81,12 +81,12 @@ const Editor = ({
             name=""
             id="template-content_textarea"
             placeholder="Current Content"
-            className="flex self-stretch resize-none border rounded-lg h-full"
+            className="flex self-stretch resize-none border-secondary border border-solid rounded-lg h-full text-black"
             value={content}
             onChange={(e: React.FormEvent<HTMLTextAreaElement>) =>
               setContent(e.currentTarget.value)
             }
-          ></textarea>
+          />
         </div>
       </section>
       <section className="flex justify-between font-bold">

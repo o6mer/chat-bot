@@ -1,9 +1,13 @@
 import { TTemplate } from "../../../../Types/Types";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import Divider from "@mui/material/Divider";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
 import NewButton from "../../../General/Buttons/NewButton";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../../Contexts/DashbaordContext";
 
 const Sidebar = ({
   templateList,
@@ -44,7 +48,7 @@ const Sidebar = ({
           onChange={onSearch}
           value={search}
           type="text"
-          className="min-w-0 p-1 border rounded-lg "
+          className="min-w-0 p-1 border-secondary border border-solid rounded-lg "
           placeholder="Search template..."
         />
         <NewButton onClick={onNewTemplate} />
@@ -83,13 +87,24 @@ const TemplateListItem = ({
   selectedTemplate?: TTemplate;
   setSelectedTemplate: (template: TTemplate) => void;
 }) => {
+  const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
   const rippleRef = useRef<any>(null);
 
   return (
     <li
-      className={`p-2 cursor-pointer hover:bg-slate-200 relative rounded-md ${
-        template.id === selectedTemplate?.id && "bg-gray-200 hover:bg-gray-300"
-      } transition-all`}
+      className={`p-2 cursor-pointer hover:bg-slate-200 relative rounded-md 
+      ${
+        template.id === selectedTemplate?.id
+          ? darkMode
+            ? "bg-darkSecondary hover:bg-darkThird"
+            : "bg-secondary hover:bg-third "
+          : darkMode
+          ? "bg-darkPrimary"
+          : "bg-primary"
+      }  ${darkMode ? "hover:bg-darkSecondary" : "hover:bg-secondary"}
+      
+      
+      transition-all`}
       onClick={() => {
         setSelectedTemplate(template);
       }}

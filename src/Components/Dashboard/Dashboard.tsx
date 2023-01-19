@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Conversations from "./Conversations/Conversations";
 import NavigationBar from "./General/NavigationBar";
 import {
@@ -6,12 +6,8 @@ import {
   TDashbaordContext,
 } from "../../Contexts/DashbaordContext";
 import AdminControlls from "./AdminControlls/AdminsControlls";
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-import SocketContextProvider, {
-  SocketContext,
-  TSocketContext,
-} from "../../Contexts/SocketContext";
-import axios from "axios";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { SocketContext, TSocketContext } from "../../Contexts/SocketContext";
 import Settigns from "./Settings/Settigns";
 
 declare module "@mui/material/styles" {
@@ -29,30 +25,39 @@ declare module "@mui/material/styles" {
 }
 
 const Dashboard = () => {
-  const { screen } = useContext(DashboardContext) as TDashbaordContext;
+  const { screen, darkMode } = useContext(
+    DashboardContext
+  ) as TDashbaordContext;
   const { isConnected } = useContext(SocketContext) as TSocketContext;
 
-  const theme = createTheme({
+  const light = createTheme({
     palette: {
+      mode: "light",
       primary: {
-        light: "#F0F5F9",
-        main: "#1E2022",
-        dark: "#1E2022",
-        contrastText: "#1E2022",
-      },
-      secondary: {
-        light: "#ff7961",
-        main: "#f44336",
-        dark: "#ba000d",
-        contrastText: "#000",
+        main: "#F0F5F9",
       },
     },
   });
+
+  const dark = createTheme({
+    palette: {
+      mode: "dark",
+      primary: {
+        main: "#1E2022",
+        contrastText: "#F0F5F9",
+      },
+    },
+  });
+
   return (
     <>
       {isConnected ? (
-        <ThemeProvider theme={theme}>
-          <main className="w-full h-full flex">
+        <ThemeProvider theme={darkMode ? dark : light}>
+          <main
+            className={`w-full h-full flex ${
+              darkMode ? "text-white" : "text-black"
+            }`}
+          >
             <NavigationBar />
             {screen === 1 && <Conversations />}
             {screen === 2 && <AdminControlls />}

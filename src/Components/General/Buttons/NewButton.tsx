@@ -8,7 +8,7 @@ const NewButton = ({
 }) => {
   return (
     <button
-      className="border px-2 py-1 rounded-lg flex items-center hover:bg-gray-200 transition-all font-bold"
+      className="border-secondary border-1 border-solid px-2 py-1 rounded-lg flex items-center hover:bg-gray-200 transition-all font-bold"
       onClick={onClick}
     >
       <AddOutlinedIcon fontSize="small" />

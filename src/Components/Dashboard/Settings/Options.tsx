@@ -5,7 +5,7 @@ import {
   DashboardContext,
   TDashbaordContext,
 } from "../../../Contexts/DashbaordContext";
-import { Divider } from "@mui/material";
+import { createTheme, Divider, ThemeProvider } from "@mui/material";
 import SaveButton from "../../General/Buttons/SaveButton";
 
 const Options = ({ categories }: { categories: Array<string> }) => {
@@ -15,6 +15,17 @@ const Options = ({ categories }: { categories: Array<string> }) => {
 
   const saveClickHandler = () => {};
 
+  const switchTheme = createTheme({
+    palette: {
+      mode: darkMode ? "dark" : undefined,
+      primary: {
+        light: "#1E2022",
+        main: "#F0F5F9",
+        contrastText: "#1E2022",
+      },
+    },
+  });
+
   return (
     <div className="flex flex-col h-full px-16 py-4 w-full">
       <section className="py-2">
@@ -23,12 +34,14 @@ const Options = ({ categories }: { categories: Array<string> }) => {
         </p>
         <div className=" px-4 py-2 flex items-center justify-between w-full">
           <p>Dark Mode </p>
-          <Switch
-            checked={darkMode}
-            onChange={(e) => {
-              setDarkMode(e.currentTarget.checked);
-            }}
-          />
+          <ThemeProvider theme={switchTheme}>
+            <Switch
+              checked={darkMode}
+              onChange={(e) => {
+                setDarkMode(e.currentTarget.checked);
+              }}
+            />
+          </ThemeProvider>
         </div>
       </section>
       <Divider />
@@ -43,7 +56,7 @@ const Options = ({ categories }: { categories: Array<string> }) => {
           <input
             type="email"
             id="email"
-            className="border grow rounded-lg p-1"
+            className="border-secondary border border-solid grow rounded-lg p-1"
             placeholder={user?.email}
           />
         </div>
@@ -54,7 +67,7 @@ const Options = ({ categories }: { categories: Array<string> }) => {
           <input
             type="text"
             id="email"
-            className="border grow rounded-lg p-1"
+            className="border-secondary border border-solid grow rounded-lg p-1"
             placeholder={user?.username}
           />
         </div>
