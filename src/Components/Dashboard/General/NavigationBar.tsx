@@ -96,7 +96,7 @@ export default function NavigationBar() {
             height: "100%",
             display: "flex",
             flexDirection: "column",
-            backgroundColor: darkMode ? "#1E2022" : "#fff",
+            // backgroundColor: darkMode ? "#1E2022" : "#fff",
           }}
         >
           <NavigationListItem
