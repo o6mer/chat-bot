@@ -69,7 +69,7 @@ const Drawer = styled(MuiDrawer, {
 export default function NavigationBar() {
   const [open, setOpen] = useState(false);
 
-  const { screen, setScreen } = useContext(
+  const { screen, setScreen, darkMode } = useContext(
     DashboardContext
   ) as TDashbaordContext;
 
@@ -80,7 +80,11 @@ export default function NavigationBar() {
   return (
     <div className="flex flex-col">
       <Drawer variant="permanent" open={open}>
-        <div className={`flex p-4 ${open ? "justify-end" : "justify-center"}`}>
+        <div
+          className={`flex p-4 ${open ? "justify-end" : "justify-center"} ${
+            darkMode ? "bg-darkPrimary" : "bg-primary"
+          }`}
+        >
           <button onClick={toggleDrawer} className="text-lg">
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </button>
@@ -92,6 +96,7 @@ export default function NavigationBar() {
             height: "100%",
             display: "flex",
             flexDirection: "column",
+            backgroundColor: darkMode ? "#1E2022" : "#fff",
           }}
         >
           <NavigationListItem

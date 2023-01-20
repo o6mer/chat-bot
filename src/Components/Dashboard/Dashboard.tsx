@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Conversations from "./Conversations/Conversations";
 import NavigationBar from "./General/NavigationBar";
 import {
@@ -9,6 +9,8 @@ import AdminControlls from "./AdminControlls/AdminsControlls";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SocketContext, TSocketContext } from "../../Contexts/SocketContext";
 import Settigns from "./Settings/Settigns";
+import { ThemeOptions } from "@mui/material/styles";
+import { PaletteOptions } from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -25,26 +27,31 @@ declare module "@mui/material/styles" {
 }
 
 const Dashboard = () => {
-  const { screen, darkMode } = useContext(
+  const { screen, darkMode, setDarkMode } = useContext(
     DashboardContext
   ) as TDashbaordContext;
   const { isConnected } = useContext(SocketContext) as TSocketContext;
 
-  const light = createTheme({
-    palette: {
-      mode: "light",
-      primary: {
-        main: "#F0F5F9",
-      },
-    },
-  });
+  useEffect(() => {
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    setDarkMode(prefersDark);
+  }, []);
 
   const dark = createTheme({
     palette: {
       mode: "dark",
       primary: {
         main: "#1E2022",
-        contrastText: "#F0F5F9",
+      },
+    },
+  });
+  const light = createTheme({
+    palette: {
+      mode: "light",
+      primary: {
+        main: "#fff",
       },
     },
   });
