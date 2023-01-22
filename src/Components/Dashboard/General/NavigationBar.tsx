@@ -1,15 +1,8 @@
-import React, { useState, useEffect, ReactNode, useContext } from "react";
-import {
-  styled,
-  useTheme,
-  Theme,
-  CSSObject,
-  SxProps,
-} from "@mui/material/styles";
+import { useState, ReactNode, useContext } from "react";
+import { styled, Theme, CSSObject, SxProps } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
@@ -22,7 +15,6 @@ import {
   TDashbaordContext,
 } from "../../../Contexts/DashbaordContext";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ProfileMenu from "./ProfileMenu";
 
@@ -96,13 +88,12 @@ export default function NavigationBar() {
             height: "100%",
             display: "flex",
             flexDirection: "column",
-            // backgroundColor: darkMode ? "#1E2022" : "#fff",
           }}
         >
           <NavigationListItem
             screenIndex={1}
             text="Conversations"
-            screen={screen}
+            selected={screen === 1}
             setScreen={setScreen}
             open={open}
             icon={<ForumOutlinedIcon />}
@@ -110,7 +101,7 @@ export default function NavigationBar() {
           <NavigationListItem
             screenIndex={2}
             text="Bot and Templates"
-            screen={screen}
+            selected={screen === 2}
             setScreen={setScreen}
             open={open}
             icon={<DisplaySettingsOutlinedIcon />}
@@ -118,7 +109,7 @@ export default function NavigationBar() {
           <NavigationListItem
             screenIndex={3}
             text="Settings"
-            screen={screen}
+            selected={screen === 3}
             setScreen={setScreen}
             open={open}
             icon={<SettingsOutlinedIcon />}
@@ -132,23 +123,23 @@ export default function NavigationBar() {
 }
 
 type TNavigationListItem = {
-  screenIndex?: number;
+  screenIndex: number;
   text?: string;
-  screen?: number;
   setScreen: (screen: number) => void;
   open?: boolean;
   icon?: ReactNode;
   sx?: SxProps<Theme> | undefined;
+  selected: boolean;
 };
 
 const NavigationListItem = ({
   screenIndex,
   text,
-  screen,
   setScreen,
   open,
   icon,
   sx,
+  selected,
 }: TNavigationListItem) => {
   return (
     <ListItem
@@ -156,7 +147,7 @@ const NavigationListItem = ({
       disablePadding
       sx={{ ...sx, display: "block" }}
       onClick={(e) => {
-        screenIndex !== -1 && setScreen(screenIndex || 0);
+        screenIndex !== -1 && setScreen(screenIndex);
       }}
     >
       <ListItemButton
@@ -165,7 +156,7 @@ const NavigationListItem = ({
           justifyContent: open ? "initial" : "center",
           px: 2.5,
         }}
-        selected={screen === screenIndex}
+        selected={selected}
       >
         <ListItemIcon
           sx={{

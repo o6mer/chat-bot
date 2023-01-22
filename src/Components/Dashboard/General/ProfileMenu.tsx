@@ -79,9 +79,6 @@ const ProfileMenu = ({ open }: { open: boolean }) => {
             }}
           >
             <Avatar
-              onClick={(e) => {
-                console.log(e.currentTarget);
-              }}
               sx={{
                 mr: open ? 1 : "auto",
                 width: "1.8rem",
