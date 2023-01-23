@@ -6,7 +6,6 @@ import {
   TDashbaordContext,
 } from "../Contexts/DashbaordContext";
 import { SocketContext, TSocketContext } from "../Contexts/SocketContext";
-import { TUser } from "../Types/Types";
 
 export const useAuth = () => {
   const { token, setToken, setUser } = useContext(
@@ -60,7 +59,7 @@ export const useAuth = () => {
     setToken("");
     localStorage.removeItem("token");
     disconnectAdmin();
-    navigate("/");
+    navigate("/login");
   };
 
   const auth = async () => {

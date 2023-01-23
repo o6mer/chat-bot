@@ -28,31 +28,39 @@ const SignupPage = () => {
   };
 
   return (
-    <form action="" className="flex flex-col gap-6" onSubmit={signupHandler}>
-      <div>
-        <LabeldInput
-          type="username"
-          label="Username:"
-          state={username}
-          setState={setUsername}
-        />
-        <LabeldInput
-          type="email"
-          label="Email:"
-          state={email}
-          setState={setEmail}
-        />
-        <LabeldInput
-          type="password"
-          label="Password:"
-          state={password}
-          setState={setPassword}
-        />
+    <main className="h-screen -screen flex justify-center items-center">
+      <div className="bg-gray-400 p-4">
+        <form
+          action=""
+          className="flex flex-col gap-6"
+          onSubmit={signupHandler}
+        >
+          <div>
+            <LabeldInput
+              type="username"
+              label="Username:"
+              state={username}
+              setState={setUsername}
+            />
+            <LabeldInput
+              type="email"
+              label="Email:"
+              state={email}
+              setState={setEmail}
+            />
+            <LabeldInput
+              type="password"
+              label="Password:"
+              state={password}
+              setState={setPassword}
+            />
+          </div>
+          <button type="submit" className="bg-gray-200">
+            Signup
+          </button>
+        </form>
       </div>
-      <button type="submit" className="bg-gray-200">
-        Signup
-      </button>
-    </form>
+    </main>
   );
 };
 
