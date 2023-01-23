@@ -1,6 +1,5 @@
 import React from "react";
 import { TMultipleChoiseMessage, TTextMessage } from "../../Types/Types";
-import { generateKey } from "../../Utils/General";
 import Message from "./Message";
 
 const MultipleChoiceMessage = ({

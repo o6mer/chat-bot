@@ -8,6 +8,7 @@ import {
   DashboardContext,
   TDashbaordContext,
 } from "../../../../Contexts/DashbaordContext";
+import StyledInput from "../../../General/StyledInput";
 
 const Sidebar = ({
   templateList,
@@ -44,12 +45,11 @@ const Sidebar = ({
   return (
     <aside className="flex w-[22%] flex-col  gap-2 h-full ">
       <div className="flex gap-2 px-2 w-full">
-        <input
+        <StyledInput
+          placeholder="Search template..."
           onChange={onSearch}
           value={search}
           type="text"
-          className="min-w-0 p-1 border-secondary border border-solid rounded-lg "
-          placeholder="Search template..."
         />
         <NewButton onClick={onNewTemplate} />
       </div>

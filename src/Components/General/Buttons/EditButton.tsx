@@ -1,9 +1,9 @@
 import React, { MouseEventHandler, useContext } from "react";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import {
   DashboardContext,
   TDashbaordContext,
 } from "../../../Contexts/DashbaordContext";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 const NewButton = ({
   onClick,
@@ -21,8 +21,8 @@ const NewButton = ({
       }`}
       onClick={onClick}
     >
-      <AddOutlinedIcon fontSize="small" />
-      New
+      <EditOutlinedIcon fontSize="small" />
+      Edit
     </button>
   );
 };

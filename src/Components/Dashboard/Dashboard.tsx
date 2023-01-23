@@ -9,8 +9,6 @@ import AdminControlls from "./AdminControlls/AdminsControlls";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SocketContext, TSocketContext } from "../../Contexts/SocketContext";
 import Settigns from "./Settings/Settigns";
-import { ThemeOptions } from "@mui/material/styles";
-import { PaletteOptions } from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface Theme {

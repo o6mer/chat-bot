@@ -1,19 +1,63 @@
-import React from "react";
+import { useState } from "react";
 import Switch from "@mui/material/Switch";
 import { useContext } from "react";
 import {
   DashboardContext,
   TDashbaordContext,
 } from "../../../Contexts/DashbaordContext";
-import { createTheme, Divider, ThemeProvider } from "@mui/material";
+import { createTheme, Divider, ThemeProvider, Tooltip } from "@mui/material";
 import SaveButton from "../../General/Buttons/SaveButton";
+import EditButton from "../../General/Buttons/EditButton";
+import CancelButton from "../../General/Buttons/CancelButton";
+import StyledInput from "../../General/StyledInput";
+import axios from "axios";
+import { useAuth } from "../../../Hooks/useAuth";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Options = ({ categories }: { categories: Array<string> }) => {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { user, darkMode, setDarkMode } = useContext(
     DashboardContext
   ) as TDashbaordContext;
 
-  const saveClickHandler = () => {};
+  const [editEmail, setEditEmail] = useState(user?.email);
+  const [editUsername, setEditUsername] = useState(user?.username);
+  const [editRole, setEditRole] = useState(user?.role);
+
+  const { updateUser } = useAuth();
+
+  const saveClickHandler = async () => {
+    try {
+      setIsLoading(true);
+      const res = await axios.post("http://localhost:3002/api/user/update", {
+        id: user?.id,
+        username: editUsername,
+        email: editEmail,
+        role: editRole,
+        // password: editPassword,
+      });
+      await updateUser(res.data);
+      setDefualtValeus();
+      setIsLoading(false);
+      setIsEditMode(false);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
+
+  const setDefualtValeus = () => {
+    setEditEmail(user?.email);
+    setEditUsername(user?.username);
+    setEditRole(user?.role);
+  };
+
+  const cancelClickHandler = () => {
+    setDefualtValeus();
+    setIsEditMode(false);
+  };
 
   const switchTheme = createTheme({
     palette: {
@@ -27,55 +71,102 @@ const Options = ({ categories }: { categories: Array<string> }) => {
   });
 
   return (
-    <div className="flex flex-col h-full px-16 py-4 w-full">
-      <section className="py-2">
-        <p className="uppercase font-bold text-lg" id="general">
-          General
-        </p>
-        <div className=" px-4 py-2 flex items-center justify-between w-full">
-          <p>Dark Mode </p>
-          <ThemeProvider theme={switchTheme}>
+    <ThemeProvider theme={switchTheme}>
+      <div className="flex flex-col h-full px-16 py-4 w-full">
+        <section className="py-2">
+          <p className="uppercase font-bold text-lg" id="general">
+            General
+          </p>
+          <div className=" px-4 py-2 flex items-center justify-between w-full">
+            <p>Dark Mode </p>
             <Switch
               checked={darkMode}
               onChange={(e) => {
                 setDarkMode(e.currentTarget.checked);
               }}
             />
-          </ThemeProvider>
-        </div>
-      </section>
-      <Divider />
-      <section className="py-2">
-        <p className="uppercase font-bold text-lg" id="general">
-          User
-        </p>
-        <div className="flex items-center gap-1 justify-between w-full px-4 py-2">
-          <label htmlFor="email" className="">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="border-secondary border border-solid grow rounded-lg p-1"
-            placeholder={user?.email}
-          />
-        </div>
-        <div className="flex items-center gap-1 justify-between w-full px-4 py-2">
-          <label htmlFor="email" className="">
-            User Name
-          </label>
-          <input
-            type="text"
-            id="email"
-            className="border-secondary border border-solid grow rounded-lg p-1"
-            placeholder={user?.username}
-          />
-        </div>
-      </section>
-      <div className="mt-auto flex justify-end">
+          </div>
+        </section>
+        <Divider />
+        <section className="py-2">
+          {isLoading ? (
+            <div className="flex w-full h-full justify-center items-center">
+              <CircularProgress />
+            </div>
+          ) : (
+            <>
+              <p className="uppercase font-bold text-lg" id="general">
+                User
+              </p>
+              <div className="flex items-center gap-1 justify-between w-full px-4 py-2">
+                <label htmlFor="email" className="">
+                  Email
+                </label>
+                {isEditMode ? (
+                  <StyledInput
+                    type="text"
+                    placeholder={user?.email}
+                    onChange={(e) => setEditEmail(e.currentTarget.value)}
+                    value={editEmail}
+                  />
+                ) : (
+                  <p>{user?.email}</p>
+                )}
+              </div>
+              <div className="flex items-center gap-1 justify-between w-full px-4 py-2">
+                <label htmlFor="email" className="">
+                  User Name
+                </label>
+                {isEditMode ? (
+                  <StyledInput
+                    type="text"
+                    placeholder={user?.username}
+                    onChange={(e) => setEditUsername(e.currentTarget.value)}
+                    value={editUsername}
+                  />
+                ) : (
+                  <p>{user?.username}</p>
+                )}
+              </div>
+              <div className="flex items-center gap-1 justify-between w-full px-4 py-2">
+                <label htmlFor="email" className="">
+                  Role
+                </label>
+                {isEditMode ? (
+                  <StyledInput
+                    type="text"
+                    placeholder={user?.role}
+                    onChange={(e) => setEditRole(e.currentTarget.value)}
+                    value={editRole}
+                  />
+                ) : (
+                  <p>{user?.role}</p>
+                )}
+              </div>
+              <>
+                {isEditMode ? (
+                  <div className="flex justify-between">
+                    <CancelButton onClick={cancelClickHandler} />
+                    <SaveButton onClick={saveClickHandler} />
+                  </div>
+                ) : (
+                  <div className="flex justify-end">
+                    <EditButton
+                      onClick={() => {
+                        setIsEditMode(true);
+                      }}
+                    />
+                  </div>
+                )}
+              </>
+            </>
+          )}
+        </section>
+        {/* <div className="mt-auto flex justify-end">
         <SaveButton onClick={saveClickHandler} />
+      </div> */}
       </div>
-    </div>
+    </ThemeProvider>
   );
 };
 
