@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../../Assets/logo.svg";
 const NavigationBar = () => {
   return (
-    <nav className="flex w-full px-4 py-2 text-xl font-bold justify-around items-cente">
+    <nav className="flex px-4 py-2 text-xl font-bold justify-around items-cente">
       <a href="/" className="flex items-center text-black">
         <img src={logo} className="w-12" />
         <p>Helpster</p>

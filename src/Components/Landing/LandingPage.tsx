@@ -4,10 +4,12 @@ import NavigationBar from "./Home/NavigationBar";
 
 const LandingPage = () => {
   return (
-    <main className="w-full h-full flex flex-col overflow-y-scroll">
-      <NavigationBar />
-      <Hero />
-      <div>sdasdsa</div>
+    <main className="h-full">
+      <div className="h-screen flex flex-col">
+        <NavigationBar />
+        <Hero />
+      </div>
+      <div>sdas</div>
     </main>
   );
 };

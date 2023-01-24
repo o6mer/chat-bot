@@ -15,7 +15,7 @@ const ProtectedRoutes = ({ children }: { children: ReactNode }) => {
     auth();
   }, []);
 
-  return <>{token ? children : <Navigate to={"/"} />}</>;
+  return <>{token ? children : <Navigate to={"/login"} />}</>;
 };
 
 export default ProtectedRoutes;
