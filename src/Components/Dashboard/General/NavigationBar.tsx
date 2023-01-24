@@ -17,7 +17,6 @@ import {
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ProfileMenu from "./ProfileMenu";
-
 const drawerWidth = 200;
 
 const openedMixin = (theme: Theme): CSSObject => ({

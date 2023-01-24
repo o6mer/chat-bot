@@ -1,76 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import ChatKeyboard from "./ChatKeyboard";
 import TextMessage from "../../Messages/TextMessage";
-import { TConversation, TFollowUp, TMessage } from "../../../Types/Types";
+import { TFollowUp, TMessage } from "../../../Types/Types";
 import InputMessage from "../../Messages/InputMessage";
-import {
-  CustomerContext,
-  TCustomerContext,
-} from "../../../Contexts/CustomerContext";
-import { io } from "socket.io-client";
 import MultipleChoiceMessage from "../../Messages/MultipleChoiceMessage";
+import { Socket } from "socket.io-client";
 
-const socket = io("http://localhost:3002/", {
-  closeOnBeforeunload: false,
-});
-
-const ChatField = () => {
-  const [isConnected, setIsConnected] = useState(false);
-  const [messagesList, setMessagesList] = useState<TMessage[]>([]);
-
-  const { chatId, setChatId } = useContext(CustomerContext) as TCustomerContext;
-
-  useEffect(() => {
-    socket.on("connect", () => {
-      setIsConnected(true);
-      socket.emit("newUserConnection", onNewUserConnection);
-    });
-    socket.on(
-      "receiveMessage",
-      ({ message, id }: { message: TMessage; id: string }) => {
-        addMessage(message);
-      }
-    );
-    socket.on("disconnect", () => {
-      setIsConnected(false);
-    });
-    return () => {
-      socket.off("connect");
-      socket.off("receiveMessage");
-      socket.off("disconnect");
-    };
-  }, []);
-
-  const onNewUserConnection = (chatId: string) => {
-    console.log("connected");
-    setChatId(chatId);
-  };
-
-  const chooseFollowUp = (followUp: TFollowUp) => {
-    sendMessage(followUp.input);
-    getResponse(followUp.conversation);
-  };
-
-  const getResponse = (conversationId: string) => {
-    socket.emit("getResponse", { conversationId, chatId });
-  };
-
-  const sendMessage = (messageContent: string) => {
-    if (!isConnected) return;
-    socket.emit(
-      "sendMessage",
-      {
-        id: chatId,
-        messageContent,
-      },
-      addMessage
-    );
-  };
-
-  const addMessage = (message: TMessage): void => {
-    setMessagesList((prev) => [...prev, message]);
-  };
-
+const ChatField = ({
+  socket,
+  messagesList,
+  chooseFollowUp,
+  sendMessage,
+}: {
+  socket: Socket;
+  messagesList: TMessage[];
+  chooseFollowUp: (followUp: TFollowUp) => void;
+  sendMessage: (message: string) => void;
+}) => {
   return (
     <section className="">
       {socket ? (
