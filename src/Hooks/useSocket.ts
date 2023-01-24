@@ -66,14 +66,6 @@ export const useSocket = (
     setCurrentChatData(chat);
   }, [currentChatId, chatList]);
 
-  const getUserById = (userId: string) => {
-    let user;
-    socket?.emit("getUserById", userId, (userData: TUser) => {
-      user = userData;
-    });
-    return user;
-  };
-
   const onNewAdminConnection = (adaminData: {
     isAuth: boolean;
     chatList: Array<TChat>;

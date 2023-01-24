@@ -97,6 +97,7 @@ export default function NavigationBar() {
             setScreen={setScreen}
             open={open}
             icon={<ForumOutlinedIcon />}
+            darkMode={darkMode}
           />
           <NavigationListItem
             screenIndex={2}
@@ -105,6 +106,7 @@ export default function NavigationBar() {
             setScreen={setScreen}
             open={open}
             icon={<DisplaySettingsOutlinedIcon />}
+            darkMode={darkMode}
           />
           <NavigationListItem
             screenIndex={3}
@@ -113,6 +115,7 @@ export default function NavigationBar() {
             setScreen={setScreen}
             open={open}
             icon={<SettingsOutlinedIcon />}
+            darkMode={darkMode}
           />
           <ProfileMenu open={open} />
         </List>
@@ -130,6 +133,7 @@ type TNavigationListItem = {
   icon?: ReactNode;
   sx?: SxProps<Theme> | undefined;
   selected: boolean;
+  darkMode?: boolean;
 };
 
 const NavigationListItem = ({
@@ -140,6 +144,7 @@ const NavigationListItem = ({
   icon,
   sx,
   selected,
+  darkMode,
 }: TNavigationListItem) => {
   return (
     <ListItem
@@ -155,6 +160,12 @@ const NavigationListItem = ({
           minHeight: 48,
           justifyContent: open ? "initial" : "center",
           px: 2.5,
+          "&.Mui-selected": {
+            backgroundColor: darkMode ? "#43484d " : "#e4eaed ",
+            "&:hover": {
+              backgroundColor: darkMode ? "#606870" : "#b7bdc4",
+            },
+          },
         }}
         selected={selected}
       >
