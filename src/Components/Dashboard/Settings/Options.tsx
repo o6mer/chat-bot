@@ -13,6 +13,7 @@ import StyledInput from "../../General/StyledInput";
 import axios from "axios";
 import { useAuth } from "../../../Hooks/useAuth";
 import CircularProgress from "@mui/material/CircularProgress";
+import LoadingPage from "../General/LoadingPage";
 
 const Options = ({ categories }: { categories: Array<string> }) => {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -90,9 +91,7 @@ const Options = ({ categories }: { categories: Array<string> }) => {
         <Divider />
         <section className="py-2">
           {isLoading ? (
-            <div className="flex w-full h-full justify-center items-center">
-              <CircularProgress />
-            </div>
+            <LoadingPage />
           ) : (
             <>
               <p className="uppercase font-bold text-lg" id="general">

@@ -23,6 +23,7 @@ export const useSocket = (
   const [templateList, setTemplateLst] = useState<Array<TTemplate>>([]);
   const [conversations, setConversations] = useState<Array<TConversation>>([]);
   const [onlineAdmins, setOnlineAdmins] = useState<Array<TUser>>();
+  const [isLoading, setIsLoading] = useState(false);
   const { token, user, currentChatId, setCurrentChatId } = useContext(
     DashboardContext
   ) as TDashbaordContext;
@@ -30,6 +31,7 @@ export const useSocket = (
   useEffect(() => {
     socket.on("connect", () => {
       setIsConnected(true);
+      setIsLoading(true);
     });
 
     if (!token) return;
@@ -47,7 +49,7 @@ export const useSocket = (
       socket.off("receiveMessage");
       socket.off("disconnect");
     };
-  }, [token, currentChatId]);
+  }, [token]);
 
   useEffect(() => {
     socket?.on("newChatStarted", onNewChat);
@@ -60,10 +62,9 @@ export const useSocket = (
 
   useEffect(() => {
     if (!isConnected) return;
-    socket?.emit("getChatData", currentChatId, (chat: TChat) => {
-      setCurrentChatData(chat);
-    });
-  }, [currentChatId]);
+    const chat = chatList.find((chat: TChat) => chat.id === currentChatId);
+    setCurrentChatData(chat);
+  }, [currentChatId, chatList]);
 
   const getUserById = (userId: string) => {
     let user;
@@ -85,6 +86,7 @@ export const useSocket = (
     setConversations(adaminData.covnersationList);
     setTemplateLst(adaminData.templateList);
     setOnlineAdmins(adaminData.onlineAdmins);
+    setIsLoading(false);
   };
 
   const onNewChat = (newChat: TChat) => {
@@ -240,6 +242,8 @@ export const useSocket = (
   return {
     //socket
     isConnected,
+    isLoading,
+    setIsLoading,
 
     //chats
     chatList,

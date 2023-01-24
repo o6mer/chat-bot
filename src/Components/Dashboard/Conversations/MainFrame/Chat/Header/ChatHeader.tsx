@@ -17,14 +17,16 @@ const ChatHeader = ({
   customerName?: string;
   chatStatus?: string;
 }) => {
-  const { currentChatId } = useContext(DashboardContext) as TDashbaordContext;
+  const { currentChatId, darkMode } = useContext(
+    DashboardContext
+  ) as TDashbaordContext;
   const { setChatStatus } = useContext(SocketContext) as TSocketContext;
 
   return (
     <header className="w-full text-lg p-2 font-bold flex justify-between items-center">
       <p>{customerName || "New Customer"}</p>
       <div className="flex items-center gap-2">
-        {chatStatus !== "snooze" && (
+        {/* {chatStatus !== "snooze" && (
           <div
             className={`px-2 py-1 bg-gray-200 hover:bg-gray-300 transition-all  rounded-lg flex justify-between items-center gap-1 cursor-pointer`}
             onClick={() => setChatStatus("snooze", currentChatId)}
@@ -32,10 +34,14 @@ const ChatHeader = ({
             <BedtimeIcon fontSize="small" />
             <p>Snooze</p>
           </div>
-        )}
+        )} */}
         {chatStatus !== "close" && (
           <div
-            className={`px-2 py-1 bg-black hover:bg-gray-900  transition-all rounded-lg text-white flex justify-between items-center gap-1 cursor-pointer`}
+            className={`px-2 py-1 transition-all rounded-lg flex justify-between items-center gap-1 cursor-pointer text-white ${
+              darkMode
+                ? "bg-darkSecondary hover:bg-darkThird"
+                : "bg-darkPrimary hover:bg-darkSecondary"
+            }`}
             onClick={() => setChatStatus("close", currentChatId)}
           >
             <BeenhereOutlinedIcon fontSize="small" />

@@ -9,6 +9,7 @@ import AdminControlls from "./AdminControlls/AdminsControlls";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SocketContext, TSocketContext } from "../../Contexts/SocketContext";
 import Settigns from "./Settings/Settigns";
+import LoadingPage from "./General/LoadingPage";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -28,7 +29,9 @@ const Dashboard = () => {
   const { screen, darkMode, setDarkMode } = useContext(
     DashboardContext
   ) as TDashbaordContext;
-  const { isConnected } = useContext(SocketContext) as TSocketContext;
+  const { isConnected, isLoading } = useContext(
+    SocketContext
+  ) as TSocketContext;
 
   useEffect(() => {
     const prefersDark = window.matchMedia(
@@ -56,22 +59,24 @@ const Dashboard = () => {
 
   return (
     <>
-      {isConnected ? (
-        <ThemeProvider theme={darkMode ? dark : light}>
-          <main
-            className={`w-full h-full flex ${
-              darkMode ? "text-white" : "text-black"
-            }`}
-          >
-            <NavigationBar />
-            {screen === 1 && <Conversations />}
-            {screen === 2 && <AdminControlls />}
-            {screen === 3 && <Settigns />}
-          </main>
-        </ThemeProvider>
-      ) : (
-        <p>Loadig...</p>
-      )}
+      <ThemeProvider theme={darkMode ? dark : light}>
+        <main
+          className={`w-full h-full flex ${
+            darkMode ? "text-white" : "text-black"
+          }`}
+        >
+          <NavigationBar />
+          {!isLoading ? (
+            <>
+              {screen === 1 && <Conversations />}
+              {screen === 2 && <AdminControlls />}
+              {screen === 3 && <Settigns />}
+            </>
+          ) : (
+            <LoadingPage />
+          )}
+        </main>
+      </ThemeProvider>
     </>
   );
 };

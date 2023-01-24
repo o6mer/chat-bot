@@ -5,6 +5,8 @@ import io, { Socket } from "socket.io-client";
 
 export type TSocketContext = {
   isConnected: boolean;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
   chatList?: Array<TChat>;
   deleteAllChats?: () => void;
   sendMessage: (message: string) => void;
@@ -32,6 +34,8 @@ export const SocketContext = createContext<TSocketContext | null>(null);
 const SocketContextProvider = ({ children }: { children: ReactNode }) => {
   const {
     isConnected,
+    isLoading,
+    setIsLoading,
     chatList,
     deleteAllChats,
     sendMessage,
@@ -53,6 +57,8 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
     <SocketContext.Provider
       value={{
         isConnected,
+        isLoading,
+        setIsLoading,
         chatList,
         deleteAllChats,
         sendMessage,

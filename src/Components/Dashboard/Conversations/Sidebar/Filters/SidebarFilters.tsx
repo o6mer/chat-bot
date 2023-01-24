@@ -79,9 +79,9 @@ const SidebarFilters = ({
           <MenuItem onClick={handleClose} data-value={"close"}>
             Closed
           </MenuItem>
-          <MenuItem onClick={handleClose} data-value={"snooze"}>
+          {/* <MenuItem onClick={handleClose} data-value={"snooze"}>
             Snoozed
-          </MenuItem>
+          </MenuItem> */}
         </Menu>
         {/* <p>Open</p>
         <TuneOutlinedIcon fontSize="small" /> */}
@@ -113,13 +113,13 @@ const SidebarFilters = ({
           <MenuItem onClick={handleClose} data-type="sort" data-value={"old"}>
             Old
           </MenuItem>
-          <MenuItem
+          {/* <MenuItem
             onClick={handleClose}
             data-type="sort"
             data-value={"waiting"}
           >
             Waiting
-          </MenuItem>
+          </MenuItem> */}
         </Menu>
         {/* <p>Open</p>
         <TuneOutlinedIcon fontSize="small" /> */}

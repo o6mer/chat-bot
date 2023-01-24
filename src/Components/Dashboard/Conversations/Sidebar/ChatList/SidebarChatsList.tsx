@@ -51,7 +51,7 @@ const SidebarChatsList = ({
 
   return (
     <section className={`w-full h-full overflow-y-scroll dashboard-scrollbar `}>
-      <ul className="h-full flex flex-col gap-1 ">
+      <ul className="h-full flex flex-col ">
         {sortedList?.length ? (
           sortedList?.map((chat, index) => {
             return <SidebarChatListItem {...chat} key={chat.id || index} />;
