@@ -32,53 +32,9 @@ const socket = io("http://localhost:3002/", {
 export const SocketContext = createContext<TSocketContext | null>(null);
 
 const SocketContextProvider = ({ children }: { children: ReactNode }) => {
-  const {
-    isConnected,
-    isLoading,
-    setIsLoading,
-    chatList,
-    deleteAllChats,
-    sendMessage,
-    currentChatData,
-    setChatStatus,
-    setFilteredChatList,
-    templateList,
-    updateTemplate,
-    deleteTemplate,
-    createTemplate,
-    conversations,
-    createConversation,
-    deleteConversation,
-    updateConversation,
-    saveAllConversations,
-    disconnectAdmin,
-  } = useSocket(socket);
+  const values = useSocket(socket);
   return (
-    <SocketContext.Provider
-      value={{
-        isConnected,
-        isLoading,
-        setIsLoading,
-        chatList,
-        deleteAllChats,
-        sendMessage,
-        currentChatData,
-        setChatStatus,
-        setFilteredChatList,
-        templateList,
-        updateTemplate,
-        deleteTemplate,
-        createTemplate,
-        conversations,
-        createConversation,
-        deleteConversation,
-        updateConversation,
-        saveAllConversations,
-        disconnectAdmin,
-      }}
-    >
-      {children}
-    </SocketContext.Provider>
+    <SocketContext.Provider value={values}>{children}</SocketContext.Provider>
   );
 };
 

@@ -1,22 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
 import ChatKeyboard from "./ChatKeyboard";
 import TextMessage from "../../Messages/TextMessage";
-import { TFollowUp, TMessage } from "../../../Types/Types";
+import { TMessage } from "../../../Types/Types";
 import InputMessage from "../../Messages/InputMessage";
 import MultipleChoiceMessage from "../../Messages/MultipleChoiceMessage";
-import { Socket } from "socket.io-client";
+import { useSocketUser } from "../../../Hooks/useSocketUser";
+import { useContext } from "react";
+import {
+  SocketContextUser,
+  TSocketContextUser,
+} from "../../../Contexts/SocketContextUser";
 
-const ChatField = ({
-  socket,
-  messagesList,
-  chooseFollowUp,
-  sendMessage,
-}: {
-  socket: Socket;
-  messagesList: TMessage[];
-  chooseFollowUp: (followUp: TFollowUp) => void;
-  sendMessage: (message: string) => void;
-}) => {
+const ChatField = () => {
+  const { socket, messagesList, chooseFollowUp, sendMessage } = useContext(
+    SocketContextUser
+  ) as TSocketContextUser;
+
   return (
     <section className="">
       {socket ? (

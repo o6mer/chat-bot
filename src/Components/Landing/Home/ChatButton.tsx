@@ -2,6 +2,7 @@ import { Menu } from "@mui/material";
 import React from "react";
 import ChatIcon from "@mui/icons-material/Chat";
 import Chat from "../../Chat/Chat";
+import { useSocketUser } from "../../../Hooks/useSocketUser";
 
 const ChatButton = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -13,6 +14,7 @@ const ChatButton = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <>
       <button

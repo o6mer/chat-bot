@@ -12,6 +12,7 @@ import ProtectedRoutes from "./Components/General/ProtectedRoutes";
 import SocketContextProvider from "./Contexts/SocketContext";
 import LoginPage from "./Components/Landing/Login/LoginPage";
 import SignupPage from "./Components/Landing/Signup/SignupPage";
+import SocketContextUserProvider from "./Contexts/SocketContextUser";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,7 +50,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <DashboardContextProvider>
       <CustomerContextProvider>
         <SocketContextProvider>
-          <RouterProvider router={router} />
+          <SocketContextUserProvider>
+            <RouterProvider router={router} />
+          </SocketContextUserProvider>
         </SocketContextProvider>
       </CustomerContextProvider>
     </DashboardContextProvider>
