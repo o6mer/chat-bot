@@ -57,8 +57,8 @@ const ListItem = ({
     >
       <div
         ref={nodeRef}
-        className={`flex flex-col p-8 shadow-lg relative transition-all h-min rounded-lg ${
-          darkMode ? "bg-darkSecondary" : "bg-secondary"
+        className={`flex flex-col flex-wrap max-w-md p-8 shadow-lg absolute transition-all h-min  rounded-lg  ${
+          darkMode ? "bg-darkSecondary text-white" : "bg-secondary text-black"
         }  w-fit ${
           conversation.id === "main" && "border-secondary  border-solid border"
         }`}

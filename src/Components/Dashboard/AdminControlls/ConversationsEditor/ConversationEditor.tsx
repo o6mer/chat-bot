@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
   SocketContext,
   TSocketContext,
@@ -11,8 +11,11 @@ import {
   DashboardContext,
   TDashbaordContext,
 } from "../../../../Contexts/DashbaordContext";
+import LoadingPage from "../../General/LoadingPage";
 
 const ConversationEditor = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { conversations, createConversation, saveAllConversations } =
     useContext(SocketContext) as TSocketContext;
   const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
@@ -22,7 +25,7 @@ const ConversationEditor = () => {
       question: "",
       response: "",
       followUp: [],
-      position: { x: 0, y: 0 },
+      position: { x: 600, y: 200 },
     });
   };
 
@@ -34,19 +37,23 @@ const ConversationEditor = () => {
     >
       <header className="flex gap-2">
         <NewButton onClick={addNewCovnersation} />
-        <SaveButton onClick={saveAllConversations} />
+        <SaveButton onClick={() => saveAllConversations(setIsLoading)} />
       </header>
-      <ul className="flex grow shrink-0 flex-wrap gap-4 box relative">
-        {conversations.map((conversation: TConversation) => {
-          return (
-            <ListItem
-              conversation={conversation}
-              conversations={conversations}
-              key={conversation.id}
-            />
-          );
-        })}
-      </ul>
+      {isLoading ? (
+        <LoadingPage />
+      ) : (
+        <ul className="w-full h-full flex shrink-0 gap-4 box relative">
+          {conversations.map((conversation: TConversation) => {
+            return (
+              <ListItem
+                conversation={conversation}
+                conversations={conversations}
+                key={conversation.id}
+              />
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 };

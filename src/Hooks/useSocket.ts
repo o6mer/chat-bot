@@ -221,8 +221,11 @@ export const useSocket = (
     });
   };
 
-  const saveAllConversations = () => {
-    socket?.emit("saveAllConversations", conversations);
+  const saveAllConversations = (setIsLoading: (isLoading: boolean) => void) => {
+    setIsLoading(true);
+    socket?.emit("saveAllConversations", conversations, () =>
+      setIsLoading(false)
+    );
   };
 
   const onAdminDisconnected = (onlineAdmins: Array<TUser>) => {

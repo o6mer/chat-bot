@@ -21,7 +21,7 @@ export type TSocketContext = {
   createConversation: (coversation: TConversation) => void;
   deleteConversation: (conversationId?: string) => void;
   updateConversation: (conversation: TConversation) => void;
-  saveAllConversations: () => void;
+  saveAllConversations: (setIsLoading: (isLoading: boolean) => void) => void;
   disconnectAdmin: () => void;
 };
 
