@@ -25,13 +25,15 @@ export type TSocketContext = {
   disconnectAdmin: () => void;
 };
 
-const socket = io("http://localhost:3002/", {
-  closeOnBeforeunload: false,
-});
-
 export const SocketContext = createContext<TSocketContext | null>(null);
 
-const SocketContextProvider = ({ children }: { children: ReactNode }) => {
+const SocketContextProvider = ({
+  socket,
+  children,
+}: {
+  socket: Socket;
+  children: ReactNode;
+}) => {
   const values = useSocket(socket);
   return (
     <SocketContext.Provider value={values}>{children}</SocketContext.Provider>

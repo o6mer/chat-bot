@@ -10,6 +10,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SocketContext, TSocketContext } from "../../Contexts/SocketContext";
 import Settigns from "./Settings/Settigns";
 import LoadingPage from "./General/LoadingPage";
+import {
+  SocketContextUser,
+  TSocketContextUser,
+} from "../../Contexts/SocketContextUser";
 
 declare module "@mui/material/styles" {
   interface Theme {

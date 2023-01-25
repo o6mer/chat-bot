@@ -1,14 +1,22 @@
-import { Menu } from "@mui/material";
-import React from "react";
+import { Menu, SpeedDial } from "@mui/material";
+import React, { useContext, useState } from "react";
 import ChatIcon from "@mui/icons-material/Chat";
 import Chat from "../../Chat/Chat";
 import { useSocketUser } from "../../../Hooks/useSocketUser";
+import {
+  SocketContextUser,
+  TSocketContextUser,
+} from "../../../Contexts/SocketContextUser";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 
 const ChatButton = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { startNewChat } = useContext(SocketContextUser) as TSocketContextUser;
 
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    startNewChat();
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
@@ -24,12 +32,16 @@ const ChatButton = () => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        className="bg-darkPrimary text-white p-2 rounded-xl fixed bottom-4 right-4"
+        className="bg-darkPrimary text-white p-2 rounded-xl fixed bottom-4 right-4 transition-all hover:scale-[1.04]"
       >
-        <ChatIcon fontSize="large" />
+        {open ? (
+          <KeyboardArrowDownOutlinedIcon fontSize="large" />
+        ) : (
+          <ChatIcon fontSize="large" />
+        )}
       </button>
       <Menu
-        sx={{ translate: "0 -2rem" }}
+        sx={{ translate: "-2rem -2rem" }}
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}

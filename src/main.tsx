@@ -13,6 +13,7 @@ import SocketContextProvider from "./Contexts/SocketContext";
 import LoginPage from "./Components/Landing/Login/LoginPage";
 import SignupPage from "./Components/Landing/Signup/SignupPage";
 import SocketContextUserProvider from "./Contexts/SocketContextUser";
+import { io } from "socket.io-client";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -45,12 +46,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+const socket = io("http://localhost:3002/", {
+  closeOnBeforeunload: false,
+});
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <DashboardContextProvider>
       <CustomerContextProvider>
-        <SocketContextProvider>
-          <SocketContextUserProvider>
+        <SocketContextProvider socket={socket}>
+          <SocketContextUserProvider socket={socket}>
             <RouterProvider router={router} />
           </SocketContextUserProvider>
         </SocketContextProvider>

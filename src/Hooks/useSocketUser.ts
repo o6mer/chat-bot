@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { CustomerContext, TCustomerContext } from "../Contexts/CustomerContext";
-import { TFollowUp, TMessage } from "../Types/Types";
+import { TChat, TFollowUp, TMessage } from "../Types/Types";
 
 export const useSocketUser = (socket: Socket) => {
   const [isConnected, setIsConnected] = useState(false);
@@ -12,13 +12,18 @@ export const useSocketUser = (socket: Socket) => {
   useEffect(() => {
     socket?.on("connect", () => {
       setIsConnected(true);
-      socket.emit("newUserConnection", onNewUserConnection);
+      console.log("connected");
+
+      const storedChatId = localStorage.getItem("id");
+
+      if (!storedChatId) return;
+
+      setChatId(storedChatId || "");
+      socket.emit("getChatData", storedChatId, onGetChatData);
     });
     socket?.on(
       "receiveMessage",
       ({ message, id }: { message: TMessage; id: string }) => {
-        console.log(message);
-
         addMessage(message);
       }
     );
@@ -32,9 +37,20 @@ export const useSocketUser = (socket: Socket) => {
     };
   }, []);
 
+  const startNewChat = () => {
+    const storedChatId = localStorage.getItem("id");
+    if (storedChatId) return;
+
+    socket.emit("newUserConnection", onNewUserConnection);
+  };
+
+  const onGetChatData = (chat: TChat) => {
+    setMessagesList([...chat.messages]);
+  };
+
   const onNewUserConnection = (chatId: string) => {
     setChatId(chatId);
-    console.log("connected");
+    localStorage.setItem("id", chatId);
   };
 
   const chooseFollowUp = (followUp: TFollowUp) => {
@@ -68,5 +84,6 @@ export const useSocketUser = (socket: Socket) => {
     messagesList,
     sendMessage,
     chooseFollowUp,
+    startNewChat,
   };
 };

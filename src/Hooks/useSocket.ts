@@ -30,6 +30,8 @@ export const useSocket = (
 
   useEffect(() => {
     socket.on("connect", () => {
+      console.log("admin connected");
+
       setIsConnected(true);
       setIsLoading(true);
     });
