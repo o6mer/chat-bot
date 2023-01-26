@@ -108,7 +108,9 @@ const Options = ({ categories }: { categories: Array<string> }) => {
                   <StyledInput
                     type="text"
                     placeholder={user?.email}
-                    onChange={(e) => setEditEmail(e.currentTarget.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setEditEmail(e.currentTarget.value)
+                    }
                     value={editEmail}
                   />
                 ) : (
@@ -123,7 +125,9 @@ const Options = ({ categories }: { categories: Array<string> }) => {
                   <StyledInput
                     type="text"
                     placeholder={user?.username}
-                    onChange={(e) => setEditUsername(e.currentTarget.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setEditUsername(e.currentTarget.value)
+                    }
                     value={editUsername}
                   />
                 ) : (
@@ -138,7 +142,9 @@ const Options = ({ categories }: { categories: Array<string> }) => {
                   <StyledInput
                     type="text"
                     placeholder={user?.role}
-                    onChange={(e) => setEditRole(e.currentTarget.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setEditRole(e.currentTarget.value)
+                    }
                     value={editRole}
                   />
                 ) : (

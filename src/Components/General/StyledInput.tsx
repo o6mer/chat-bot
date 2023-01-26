@@ -5,14 +5,20 @@ const StyledInput = ({
   value,
   placeholder,
   type,
+  id,
 }: {
-  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  onChange:
+    | React.ChangeEventHandler<HTMLInputElement>
+    | React.Dispatch<React.SetStateAction<any>>
+    | undefined;
   value: string | number | readonly string[] | undefined;
   placeholder: string | undefined;
   type: React.HTMLInputTypeAttribute | undefined;
+  id?: string;
 }) => {
   return (
     <input
+      id={id}
       onChange={onChange}
       value={value}
       type={type}
