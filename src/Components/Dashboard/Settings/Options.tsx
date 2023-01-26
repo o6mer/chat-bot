@@ -32,13 +32,16 @@ const Options = ({ categories }: { categories: Array<string> }) => {
   const saveClickHandler = async () => {
     try {
       setIsLoading(true);
-      const res = await axios.post("http://localhost:3002/api/user/update", {
-        id: user?.id,
-        username: editUsername,
-        email: editEmail,
-        role: editRole,
-        // password: editPassword,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/user/update`,
+        {
+          id: user?.id,
+          username: editUsername,
+          email: editEmail,
+          role: editRole,
+          // password: editPassword,
+        }
+      );
       await updateUser(res.data);
       setDefualtValeus();
       setIsLoading(false);

@@ -24,10 +24,13 @@ export const useAuth = () => {
 
   const login = async (email: string, password: string) => {
     try {
-      const res = await axios.post("http://localhost:3002/api/user/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/user/login`,
+        {
+          email,
+          password,
+        }
+      );
 
       const { token, id, username, role } = res.data;
       setToken(token);
@@ -39,12 +42,15 @@ export const useAuth = () => {
 
   const signup = async (email: string, password: string, username: string) => {
     try {
-      const res = await axios.post("http://localhost:3002/api/user/signup", {
-        email: email,
-        password: password,
-        username: username,
-        role: "admin",
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/user/signup`,
+        {
+          email: email,
+          password: password,
+          username: username,
+          role: "admin",
+        }
+      );
 
       const data = res.data;
       setToken(data.token);
@@ -65,11 +71,14 @@ export const useAuth = () => {
   const auth = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:3002/api/user/auth", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/user/auth`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!token) return;
 

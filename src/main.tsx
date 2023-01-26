@@ -31,11 +31,6 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/chat",
-    element: <Chat />,
-    errorElement: <ErrorPage />,
-  },
-  {
     path: "/dashboard",
     element: (
       <ProtectedRoutes>
@@ -46,7 +41,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-const socket = io("http://localhost:3002/", {
+const socket = io(import.meta.env.VITE_API_URL, {
   closeOnBeforeunload: false,
 });
 

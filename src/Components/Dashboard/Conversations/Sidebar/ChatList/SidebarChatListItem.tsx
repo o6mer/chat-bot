@@ -86,7 +86,7 @@ const SidebarChatListItem = ({
       </div>
       <div className="flex flex-col w-full ">
         <p>{customerName || "New Customer"}</p>
-        <div className={`flex justify-between clamp-text`}>
+        <div className={`flex justify-between   `}>
           {renderMessage(lastMessage?.type, lastMessage?.content)}
           <p>{lastMessage?.time?.toString()}</p>
         </div>
