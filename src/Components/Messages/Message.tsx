@@ -10,21 +10,27 @@ const ChatMessage = ({ writer, time, children }: TMessage) => {
 
   return (
     <div
-      className={`flex flex-col max-w-[80%] w-max py-1 px-2 rounded-md ${
-        writer === "Customer"
-          ? darkMode
-            ? "self-end bg-darkSecondary"
-            : "self-end bg-secondary"
-          : darkMode
-          ? "bg-darkThird"
-          : "bg-blue-200"
+      className={`flex flex-col max-w-[80%] w-max  ${
+        writer === "Customer" ? "self-end " : ""
       }`}
     >
-      <div className="flex justify-between gap-4 items-center">
-        <p>{writer}</p>
+      <div
+        className={`p-2 rounded-md  ${
+          writer === "Customer"
+            ? darkMode
+              ? "bg-darkSecondary"
+              : "bg-secondary"
+            : darkMode
+            ? "bg-darkThird"
+            : "bg-secondary"
+        }`}
+      >
+        <>{children}</>
+      </div>
+      <div className="flex text-darkThird text-xs">
+        <p className="">{writer} - </p>
         <p>{time.toString()}</p>
       </div>
-      <>{children}</>
     </div>
   );
 };

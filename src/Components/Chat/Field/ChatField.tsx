@@ -19,7 +19,7 @@ const ChatField = () => {
     <section className="">
       {socket ? (
         <>
-          <div className="flex flex-col gap-1 w-full h-80 px-1 py-2 overflow-y-scroll">
+          <div className="flex flex-col gap-1 w-full h-80 p-2 overflow-y-scroll dashboard-scrollbar">
             {messagesList?.map((message: TMessage, index: number) => {
               if (message?.type === "text")
                 return (

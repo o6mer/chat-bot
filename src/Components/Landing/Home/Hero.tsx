@@ -4,7 +4,7 @@ import logo from "../../../Assets/logo.svg";
 
 const Hero = () => {
   return (
-    <section className="w-full bg-darkPrimary text-white flex flex-col min-h-max flex-grow items-center py-12">
+    <section className="w-full h-max bg-darkPrimary text-white flex flex-col  flex-grow items-center py-12">
       <div className="flex flex-col h-full justify-center items-center max-w-3xl gap-8">
         <img src={logo} alt="" />
         <div className="flex flex-col justify-center text-center gap-4">

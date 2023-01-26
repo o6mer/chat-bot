@@ -1,13 +1,21 @@
-import { Menu, SpeedDial } from "@mui/material";
+import { Menu } from "@mui/material";
+import { createStyles, makeStyles } from "@mui/styles";
 import React, { useContext, useState } from "react";
 import ChatIcon from "@mui/icons-material/Chat";
 import Chat from "../../Chat/Chat";
-import { useSocketUser } from "../../../Hooks/useSocketUser";
 import {
   SocketContextUser,
   TSocketContextUser,
 } from "../../../Contexts/SocketContextUser";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    list: {
+      paddingTop: "0 !important",
+    },
+  })
+);
 
 const ChatButton = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -22,6 +30,8 @@ const ChatButton = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const classes = useStyles();
 
   return (
     <>
@@ -41,7 +51,10 @@ const ChatButton = () => {
         )}
       </button>
       <Menu
-        sx={{ translate: "-2rem -2rem" }}
+        classes={{ list: classes.list }}
+        sx={{
+          translate: "-2rem -2rem",
+        }}
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
@@ -58,7 +71,7 @@ const ChatButton = () => {
           horizontal: "left",
         }}
       >
-        <Chat />
+        <Chat handleClose={handleClose} />
       </Menu>
     </>
   );

@@ -48,3 +48,11 @@ input {
 .dashboard-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.clamp-text {
+  overflow: hidden;
+  width: 200px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
