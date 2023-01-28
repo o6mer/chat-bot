@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { TMessage } from "../../../../../../Types/Types";
 import MultipleChoiceMessage from "../../../../../Messages/MultipleChoiceMessage";
 import TextMessage from "../../../../../Messages/TextMessage";
 
 const ChatMain = ({ messages }: { messages?: Array<TMessage> }) => {
+  const bottomRef: any = useRef(null);
+
+  useEffect(() => {
+    if (!bottomRef.current) return;
+    bottomRef.current.scrollIntoView();
+  }, [messages]);
+
   return (
     <div className=" h-full flex flex-col gap-1 overflow-y-scroll dashboard-scrollbar p-2">
       {messages?.map((message: TMessage, index) => {
@@ -17,6 +24,7 @@ const ChatMain = ({ messages }: { messages?: Array<TMessage> }) => {
             />
           );
       })}
+      <div ref={bottomRef}></div>
     </div>
   );
 };

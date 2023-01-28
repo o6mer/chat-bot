@@ -4,7 +4,7 @@ import { TMessage } from "../../../Types/Types";
 import InputMessage from "../../Messages/InputMessage";
 import MultipleChoiceMessage from "../../Messages/MultipleChoiceMessage";
 import { useSocketUser } from "../../../Hooks/useSocketUser";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import {
   SocketContextUser,
   TSocketContextUser,
@@ -14,6 +14,13 @@ const ChatField = () => {
   const { socket, messagesList, chooseFollowUp, sendMessage } = useContext(
     SocketContextUser
   ) as TSocketContextUser;
+
+  const bottomRef: any = useRef(null);
+
+  useEffect(() => {
+    if (!bottomRef.current) return;
+    bottomRef.current.scrollIntoView();
+  }, [messagesList]);
 
   return (
     <section className="">
@@ -44,6 +51,7 @@ const ChatField = () => {
                   />
                 );
             })}
+            <div ref={bottomRef}></div>
           </div>
           <ChatKeyboard sendMessage={sendMessage} />
         </>

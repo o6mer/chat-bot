@@ -22,8 +22,13 @@ export const useAuth = () => {
     navigate("/dashboard");
   }, [token]);
 
-  const login = async (email: string, password: string) => {
+  const login = async (
+    email: string,
+    password: string,
+    setIsLoading: (isLoading: boolean) => void
+  ) => {
     try {
+      setIsLoading(true);
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/user/login`,
         {
@@ -35,13 +40,21 @@ export const useAuth = () => {
       const { token, id, username, role } = res.data;
       setToken(token);
       setUser({ id, username, role });
+      setIsLoading(false);
     } catch (err: any) {
+      setIsLoading(false);
       alert(err.response.data.message);
     }
   };
 
-  const signup = async (email: string, password: string, username: string) => {
+  const signup = async (
+    email: string,
+    password: string,
+    username: string,
+    setIsLoading: (isLoading: boolean) => void
+  ) => {
     try {
+      setIsLoading(true);
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/user/signup`,
         {
@@ -55,8 +68,10 @@ export const useAuth = () => {
       const data = res.data;
       setToken(data.token);
       setUser({ id: data.id, username: data.uername, role: data.role });
+      setIsLoading(false);
     } catch (err: any) {
       alert(err.response.data.message);
+      setIsLoading(false);
     }
   };
 

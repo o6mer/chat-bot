@@ -14,6 +14,21 @@ import LoginPage from "./Components/Landing/Login/LoginPage";
 import SignupPage from "./Components/Landing/Signup/SignupPage";
 import SocketContextUserProvider from "./Contexts/SocketContextUser";
 import { io } from "socket.io-client";
+import { createTheme, ThemeProvider } from "@mui/material";
+
+const landingTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#232323",
+      dark: "#343434",
+      contrastText: "#fff",
+    },
+    secondary: {
+      main: "#fff",
+    },
+  },
+});
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,12 +37,20 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: (
+      <ThemeProvider theme={landingTheme}>
+        <LoginPage />
+      </ThemeProvider>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/signup",
-    element: <SignupPage />,
+    element: (
+      <ThemeProvider theme={landingTheme}>
+        <SignupPage />
+      </ThemeProvider>
+    ),
     errorElement: <ErrorPage />,
   },
   {
