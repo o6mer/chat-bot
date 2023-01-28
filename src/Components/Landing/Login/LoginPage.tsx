@@ -36,9 +36,9 @@ const LoginPage = () => {
       <img
         src={logo}
         alt=""
-        className="absolute w-full h-full top-0 left-[50%] -translate-x-[50%] z-0 opacity-10"
+        className="absolute aspect-square w-full h-full top-0 left-[50%] -translate-x-[50%] z-0 opacity-10"
       />
-      <div className="w-full max-w-3xl h-[50%] flex z-10 bg-darkPrimary shadow-lg rounded-lg text-white ">
+      <div className="w-full max-w-3xl flex z-10 bg-darkPrimary shadow-lg rounded-lg text-white ">
         <div className="w-[50%] h-full p-4 flex flex-col justify-center">
           <p className="text-4xl font-bold">Login to get Started</p>
           {isLoading ? (
@@ -92,7 +92,7 @@ const LoginPage = () => {
             </>
           )}
         </div>
-        <img src={callCenterImage} alt="" className="w-[50%]" />
+        <img src={callCenterImage} alt="" className="w-[50%] h-min" />
       </div>
     </main>
   );
