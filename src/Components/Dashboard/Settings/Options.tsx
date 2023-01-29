@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Switch from "@mui/material/Switch";
 import { useContext } from "react";
 import {
@@ -15,7 +15,7 @@ import { useAuth } from "../../../Hooks/useAuth";
 import CircularProgress from "@mui/material/CircularProgress";
 import LoadingPage from "../General/LoadingPage";
 
-const Options = ({ categories }: { categories: Array<string> }) => {
+const Options = ({ selectedCategory }: { selectedCategory: string }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,6 +28,14 @@ const Options = ({ categories }: { categories: Array<string> }) => {
   const [editRole, setEditRole] = useState(user?.role);
 
   const { updateUser } = useAuth();
+
+  useEffect(() => {
+    const element = document.getElementById(selectedCategory);
+
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [selectedCategory]);
 
   const saveClickHandler = async () => {
     try {
@@ -76,8 +84,8 @@ const Options = ({ categories }: { categories: Array<string> }) => {
 
   return (
     <ThemeProvider theme={switchTheme}>
-      <div className="flex flex-col h-full px-16 py-4 w-full">
-        <section className="py-2">
+      <div className="flex flex-col h-full px-16 py-4 w-full overflow-y-scroll dashboard-scrollbar">
+        <section className="py-2" id="general">
           <p className="uppercase font-bold text-lg" id="general">
             General
           </p>
@@ -92,7 +100,7 @@ const Options = ({ categories }: { categories: Array<string> }) => {
           </div>
         </section>
         <Divider />
-        <section className="py-2">
+        <section className="py-2" id="user">
           {isLoading ? (
             <LoadingPage />
           ) : (

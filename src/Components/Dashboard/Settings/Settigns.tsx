@@ -7,10 +7,9 @@ import Options from "./Options";
 import SideBar from "./SideBar";
 
 // const categories = [{title: 'General', options: {darkMode : true}, {title: 'User'}];
-const categories: string[] = [];
 
 const Settigns = () => {
-  const [selectCategory, setSelectCategory] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState("general");
 
   const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
 
@@ -26,11 +25,10 @@ const Settigns = () => {
         } m-12 rounded-lg`}
       >
         <SideBar
-          categories={categories}
-          selectCategory={selectCategory}
-          setSelectCategory={setSelectCategory}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
         />
-        <Options categories={categories} />
+        <Options selectedCategory={selectedCategory} />
       </div>
     </main>
   );

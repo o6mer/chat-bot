@@ -1,16 +1,20 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import Divider from "@mui/material/Divider";
 import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../Contexts/DashbaordContext";
 
 const SideBar = ({
-  categories,
-  selectCategory,
-  setSelectCategory,
+  selectedCategory,
+  setSelectedCategory,
 }: {
-  categories: Array<string>;
-  selectCategory: string;
-  setSelectCategory: (title: string) => void;
+  selectedCategory: string;
+  setSelectedCategory: (title: string) => void;
 }) => {
+  const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
+
   return (
     <aside className="w-[15%] h-full">
       <header className="p-2">
@@ -18,44 +22,40 @@ const SideBar = ({
       </header>
       <Divider />
       <ul className="h-full flex flex-col p-2">
-        {categories.map((setting: string) => (
-          <SettignsListItem
-            title={setting}
-            selectCategory={selectCategory}
-            setSelectCategory={setSelectCategory}
-          />
-        ))}
+        <li
+          className={`p-2 cursor-pointer ${
+            "general" === selectedCategory
+              ? darkMode
+                ? "bg-darkSecondary hover:bg-darkThird"
+                : "bg-secondary hover:bg-third"
+              : darkMode
+              ? "bg-darkPrimary hover:bg-darkSecondary"
+              : "bg-primary hover:bg-secondary"
+          } relative rounded-md transition-all`}
+          onClick={() => {
+            setSelectedCategory("general");
+          }}
+        >
+          General
+        </li>
+        <li
+          className={`p-2 cursor-pointer ${
+            "user" === selectedCategory
+              ? darkMode
+                ? "bg-darkSecondary hover:bg-darkThird"
+                : "bg-secondary hover:bg-third"
+              : darkMode
+              ? "bg-darkPrimary hover:bg-darkSecondary"
+              : "bg-primary hover:bg-secondary"
+          } relative rounded-md transition-all`}
+          onClick={() => {
+            setSelectedCategory("user");
+          }}
+        >
+          User
+        </li>
       </ul>
     </aside>
-  );
-};
-
-const SettignsListItem = ({
-  title,
-  selectCategory,
-  setSelectCategory,
-}: {
-  title: string;
-  selectCategory: string;
-  setSelectCategory: (title: string) => void;
-}) => {
-  const rippleRef = useRef<any>(null);
-
-  return (
-    <li
-      className={`p-2 cursor-pointer hover:bg-slate-200 relative rounded-md ${
-        title === selectCategory && "bg-gray-200 hover:bg-gray-300"
-      } transition-all`}
-      onClick={() => {
-        setSelectCategory(title);
-      }}
-      onMouseDown={(e) => rippleRef.current.start(e)}
-      onMouseUp={(e) => rippleRef.current.stop(e)}
-    >
-      <TouchRipple ref={rippleRef} center={false} />
-
-      {title}
-    </li>
   );
 };
 
