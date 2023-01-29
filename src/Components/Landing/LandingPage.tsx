@@ -4,7 +4,7 @@ import Features from "./Home/Features";
 import Footer from "./Home/Footer";
 import Hero from "./Home/Hero";
 import NavigationBar from "./Home/NavigationBar";
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-awesome-reveal";
 
 const LandingPage = () => {
   return (
