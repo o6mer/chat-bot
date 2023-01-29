@@ -1,16 +1,12 @@
 import React, { useContext, useRef, useState } from "react";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import {
-  TChat,
-  TMessage,
-  TMultipleChoiseMessage,
-  TTextMessage,
-} from "../../../../../Types/Types";
+import { TChat, TMessage } from "../../../../../Types/Types";
 import {
   DashboardContext,
   TDashbaordContext,
 } from "../../../../../Contexts/DashbaordContext";
 import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
+import { Avatar } from "@mui/material";
 
 const SidebarChatListItem = ({
   customerName,
@@ -18,8 +14,9 @@ const SidebarChatListItem = ({
   isSeen,
   messages,
   id,
+  assignedAdmin,
 }: TChat) => {
-  const { currentChatId, setCurrentChatId } = useContext(
+  const { currentChatId, setCurrentChatId, darkMode } = useContext(
     DashboardContext
   ) as TDashbaordContext;
   const [seen, setSeen] = useState(isSeen);
@@ -54,19 +51,42 @@ const SidebarChatListItem = ({
     <li
       onMouseDown={onRippleStart}
       onMouseUp={onRippleStop}
-      className={`flex gap-2 w-full p-2 rounded-md cursor-pointer items-center transition-all relative ${
-        currentChatId === id ? "bg-slate-200 hover:bg-slate-300 " : "bg-white"
-      } hover:bg-slate-200 ${seen ? "font-normal" : "font-bold"}`}
+      className={`flex gap-2 w-full p-2 rounded-md cursor-pointer items-center transition-all relative 
+      ${
+        currentChatId === id
+          ? darkMode
+            ? "bg-darkSecondary hover:bg-darkThird"
+            : "bg-secondary hover:bg-third "
+          : darkMode
+          ? "bg-darkPrimary"
+          : "bg-primary"
+      }  ${darkMode ? "hover:bg-darkSecondary" : "hover:bg-secondary"} ${
+        seen ? "font-normal" : "font-bold"
+      }`}
       onClick={chatSelectHandler}
     >
       <TouchRipple ref={rippleRef} center={false} />
 
       <div className="flex items-center">
-        <AccountCircleOutlinedIcon />
+        <Avatar
+          onClick={(e) => {
+            console.log(e.currentTarget);
+          }}
+          sx={{
+            fontWeight: "normal",
+            width: "1.8rem",
+            height: "1.8rem",
+            backgroundColor: "rgb(34 197 94 / 1)",
+            text: "white",
+            fontSize: 14,
+          }}
+        >
+          {assignedAdmin?.slice(0, 2)}
+        </Avatar>
       </div>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full ">
         <p>{customerName || "New Customer"}</p>
-        <div className={`flex justify-between `}>
+        <div className={`flex justify-between   `}>
           {renderMessage(lastMessage?.type, lastMessage?.content)}
           <p>{lastMessage?.time?.toString()}</p>
         </div>

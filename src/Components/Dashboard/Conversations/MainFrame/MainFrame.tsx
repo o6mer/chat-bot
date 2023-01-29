@@ -7,16 +7,21 @@ import {
   SocketContext,
   TSocketContext,
 } from "../../../../Contexts/SocketContext";
-import { TChat, TMessage } from "../../../../Types/Types";
 import Chat from "./Chat/Chat";
 import InfoSidebar from "./InfoSidebar/InfoSidebar";
 
 const MainFrame = () => {
-  const { currentChatId } = useContext(DashboardContext) as TDashbaordContext;
+  const { currentChatId, darkMode } = useContext(
+    DashboardContext
+  ) as TDashbaordContext;
   const { currentChatData } = useContext(SocketContext) as TSocketContext;
 
   return (
-    <section className=" h-full flex grow">
+    <section
+      className={`h-full flex grow relative ${
+        darkMode ? "bg-darkPrimary" : "bg-primary"
+      }`}
+    >
       {currentChatId ? (
         <>
           <Chat currentChatData={currentChatData} />

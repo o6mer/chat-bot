@@ -1,63 +1,86 @@
-import { Socket } from "dgram";
 import { useContext, useEffect, useState } from "react";
 import {
   DashboardContext,
   TDashbaordContext,
 } from "../Contexts/DashbaordContext";
-import { TChat, TConversation, TMessage, TTemplate } from "../Types/Types";
+import {
+  TChat,
+  TConversation,
+  TMessage,
+  TTemplate,
+  TUser,
+} from "../Types/Types";
+import { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 
-export const useSocket = (socket: any) => {
-  const [isConnected, setIsConnected] = useState(socket.connected);
+export const useSocket = (
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>
+) => {
+  const [isConnected, setIsConnected] = useState<boolean>(false);
   const [chatList, setChatList] = useState<Array<TChat>>([]);
   const [chatFilter, setChatFilter] = useState<string>("open");
   const [currentChatData, setCurrentChatData] = useState<TChat>();
   const [templateList, setTemplateLst] = useState<Array<TTemplate>>([]);
   const [conversations, setConversations] = useState<Array<TConversation>>([]);
-  const { user, currentChatId, setCurrentChatId } = useContext(
+  const [onlineAdmins, setOnlineAdmins] = useState<Array<TUser>>();
+  const [isLoading, setIsLoading] = useState(false);
+  const { token, user, currentChatId, setCurrentChatId } = useContext(
     DashboardContext
   ) as TDashbaordContext;
 
   useEffect(() => {
     socket.on("connect", () => {
+      console.log("admin connected");
+
       setIsConnected(true);
-      socket.emit("newAdminConnection", onNewAdminConnection);
+      setIsLoading(true);
     });
 
+    if (!token) return;
+    socket.emit("newAdminConnection", token, onNewAdminConnection);
+
     socket.on("receiveMessage", onReceiveMessage);
+    socket.on("adminDisconnected", onAdminDisconnected);
+
     socket.on("disconnect", () => {
       setIsConnected(false);
     });
-
     return () => {
       socket.off("connect");
       socket.off("newAdminConnection");
       socket.off("receiveMessage");
       socket.off("disconnect");
     };
-  }, []);
+  }, [token]);
 
   useEffect(() => {
-    socket.on("newChatStarted", onNewChat);
-    socket.on("chatStatusChanged", onChatStatusChanged);
-
+    socket?.on("newChatStarted", onNewChat);
+    socket?.on("chatStatusChanged", onChatStatusChanged);
     return () => {
-      socket.off("newChatStarted");
-      socket.off("chatStatusChanged");
+      socket?.off("newChatStarted");
+      socket?.off("chatStatusChanged");
     };
   }, [chatFilter]);
 
   useEffect(() => {
     if (!isConnected) return;
-    socket?.emit("getChatData", currentChatId, (chat: TChat) => {
-      setCurrentChatData(chat);
-    });
-  }, [currentChatId]);
+    const chat = chatList.find((chat: TChat) => chat.id === currentChatId);
+    setCurrentChatData(chat);
+  }, [currentChatId, chatList]);
 
-  const onNewAdminConnection = (prevChatList: Array<TChat>) => {
-    console.log("admin connected", prevChatList);
-    setChatList(prevChatList);
-    getAllTemplates();
-    getAllConversations();
+  const onNewAdminConnection = (adaminData: {
+    isAuth: boolean;
+    chatList: Array<TChat>;
+    templateList: Array<TTemplate>;
+    covnersationList: Array<TConversation>;
+    onlineAdmins: Array<TUser>;
+  }) => {
+    console.log("admin connected", adaminData);
+    setChatList(adaminData.chatList);
+    setConversations(adaminData.covnersationList);
+    setTemplateLst(adaminData.templateList);
+    setOnlineAdmins(adaminData.onlineAdmins);
+    setIsLoading(false);
   };
 
   const onNewChat = (newChat: TChat) => {
@@ -66,7 +89,7 @@ export const useSocket = (socket: any) => {
 
       return prev.filter((chat: TChat) => chat.id !== newChat.id);
     });
-    socket.emit("joinChat", newChat.id);
+    socket?.emit("joinChat", newChat.id);
   };
 
   const onReceiveMessage = ({
@@ -85,6 +108,8 @@ export const useSocket = (socket: any) => {
       prev[index]?.messages.push(message);
       return [...prev];
     });
+
+    if (currentChatId !== id) return;
 
     setCurrentChatData((prev: TChat | undefined) => {
       if (!prev) return;
@@ -116,7 +141,7 @@ export const useSocket = (socket: any) => {
 
   const setChatStatus = (status?: string, chatId?: string) => {
     if (!isConnected) return;
-    socket.emit("setChatStatus", status, chatId);
+    socket?.emit("setChatStatus", status, chatId);
     setCurrentChatId("");
     setChatList((prev: Array<TChat>) =>
       prev.filter((chat: TChat) => {
@@ -127,7 +152,7 @@ export const useSocket = (socket: any) => {
   };
 
   const deleteAllChats = () => {
-    socket.emit("deleteAllChats");
+    socket?.emit("deleteAllChats");
   };
 
   const setFilteredChatList = (filter: string) => {
@@ -139,16 +164,10 @@ export const useSocket = (socket: any) => {
     });
   };
 
-  const getAllTemplates = () => {
-    socket.emit("getAllTemplates", (list: Array<TTemplate>) => {
-      setTemplateLst(list);
-    });
-  };
-
   const updateTemplate = (updatedTemplate: TTemplate) => {
     if (!updatedTemplate.id)
       return createTemplate(updatedTemplate.title, updatedTemplate.content);
-    socket.emit("updateTemplate", updatedTemplate);
+    socket?.emit("updateTemplate", updatedTemplate);
     setTemplateLst((prev: Array<TTemplate>) => {
       const index = prev.findIndex(
         (template: TTemplate) => template.id === updatedTemplate.id
@@ -159,29 +178,20 @@ export const useSocket = (socket: any) => {
   };
 
   const deleteTemplate = (tempalteId?: string) => {
-    socket.emit("deleteTemplate", tempalteId);
+    socket?.emit("deleteTemplate", tempalteId);
     setTemplateLst((prev: Array<TTemplate>) =>
       prev.filter((template: TTemplate) => template.id !== tempalteId)
     );
   };
 
   const createTemplate = (title?: string, content?: string) => {
-    socket.emit("createTemplate", { title, content }, (template: TTemplate) =>
+    socket?.emit("createTemplate", { title, content }, (template: TTemplate) =>
       setTemplateLst((prev: Array<TTemplate>) => [...prev, template])
     );
   };
 
-  const getAllConversations = () => {
-    socket.emit(
-      "getAllConversations",
-      (conversations: Array<TConversation>) => {
-        setConversations([...conversations]);
-      }
-    );
-  };
-
   const createConversation = (conversation: TConversation) => {
-    socket.emit(
+    socket?.emit(
       "createConversation",
       conversation,
       (conversation: TConversation) => {
@@ -192,7 +202,7 @@ export const useSocket = (socket: any) => {
   };
 
   const deleteConversation = (conversationId?: string) => {
-    socket.emit("deleteConversation", conversationId);
+    socket?.emit("deleteConversation", conversationId);
     setConversations((prev) => {
       prev = prev.filter((conversation) => conversation.id !== conversationId);
       return [...prev];
@@ -200,7 +210,7 @@ export const useSocket = (socket: any) => {
   };
 
   const updateConversation = (updatedConversation: TConversation) => {
-    socket.emit("updateConversation", updatedConversation);
+    socket?.emit("updateConversation", updatedConversation);
     setConversations((prev: Array<TConversation>) => {
       const index = prev.findIndex(
         (conversation: TConversation) =>
@@ -211,25 +221,50 @@ export const useSocket = (socket: any) => {
     });
   };
 
-  const saveAllConversations = () => {
-    socket.emit("saveAllConversations", conversations);
+  const saveAllConversations = (setIsLoading: (isLoading: boolean) => void) => {
+    setIsLoading(true);
+    socket?.emit("saveAllConversations", conversations, () =>
+      setIsLoading(false)
+    );
+  };
+
+  const onAdminDisconnected = (onlineAdmins: Array<TUser>) => {
+    setOnlineAdmins([...onlineAdmins]);
+  };
+
+  const disconnectAdmin = () => {
+    socket?.emit("adminDisconnect", user?.id);
   };
 
   return {
+    //socket
+    isConnected,
+    isLoading,
+    setIsLoading,
+
+    //chats
     chatList,
     deleteAllChats,
     sendMessage,
     currentChatData,
     setChatStatus,
     setFilteredChatList,
+
+    //templates
     templateList,
     updateTemplate,
     deleteTemplate,
     createTemplate,
+
+    //covnersations
     conversations,
     createConversation,
     deleteConversation,
     updateConversation,
     saveAllConversations,
+
+    //admins
+    onlineAdmins,
+    disconnectAdmin,
   };
 };

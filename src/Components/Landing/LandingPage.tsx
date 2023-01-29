@@ -1,18 +1,23 @@
 import React from "react";
-import LoginPage from "./Login/LoginPage";
-import { useLocation } from "react-router-dom";
-import SignupPage from "./Signup/SignupPage";
+import ChatButton from "./Home/ChatButton";
+import Features from "./Home/Features";
+import Footer from "./Home/Footer";
+import Hero from "./Home/Hero";
+import NavigationBar from "./Home/NavigationBar";
+import Fade from "react-reveal/Fade";
 
 const LandingPage = () => {
-  const location = useLocation();
-
   return (
-    <main className="h-screen -screen flex justify-center items-center">
-      <div className="bg-gray-400 p-4">
-        {location.pathname === "/" && <LoginPage />}
-        {location.pathname === "/login" && <LoginPage />}
-        {location.pathname === "/signup" && <SignupPage />}
-      </div>
+    <main className="flex flex-col h-max relative">
+      <NavigationBar />
+      <Fade>
+        <Hero />
+      </Fade>
+      <Fade>
+        <Features />
+      </Fade>
+      <Footer />
+      <ChatButton />
     </main>
   );
 };

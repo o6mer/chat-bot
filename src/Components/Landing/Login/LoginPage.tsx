@@ -1,57 +1,100 @@
-import React, { FormEvent, useContext, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import LabeldInput from "../../General/LabeldInput";
-import axios from "axios";
-import {
-  DashboardContext,
-  TDashbaordContext,
-} from "../../../Contexts/DashbaordContext";
-import { useNavigate, redirect } from "react-router-dom";
+import { useAuth } from "../../../Hooks/useAuth";
+import logo from "../../../Assets/logo.svg";
+import StyledInput from "../../General/StyledInput";
+import callCenterImage from "../../../Assets/call_center.jpg";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { Button } from "@mui/material";
+import LoadingPage from "../../Dashboard/General/LoadingPage";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { setUser } = useContext(DashboardContext) as TDashbaordContext;
-
-  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:3002/api/user/login", {
-        email,
-        password,
-      });
-
-      const userData = res.data;
-      setUser(userData);
-      if (userData.roll == "admin") return navigate("/dashboard");
-      if (userData.roll == "user") return navigate("/chat");
-    } catch (err: any) {
-      alert(err.response.data.message);
-    }
+    await login(email, password, setIsLoading);
   };
 
   return (
-    <form action="" className="flex flex-col gap-6" onSubmit={loginHandler}>
-      <div>
-        <LabeldInput
-          type="email"
-          label="Email:"
-          state={email}
-          setState={setEmail}
-        />
-        <LabeldInput
-          type="password"
-          label="Password:"
-          state={password}
-          setState={setPassword}
-        />
+    <main
+      className={`h-screen flex flex-col items-center justify-center relative`}
+    >
+      <nav className="w-full absolute top-0 right-0 px-4 py-2 z-10 text-xl font-bold flex justify-center">
+        <div className="max-w-4xl w-full">
+          <Link to="/" className="flex items-center text-black ">
+            <img src={logo} className="w-12" />
+            <p>Helpster</p>
+          </Link>
+        </div>
+      </nav>
+      <img
+        src={logo}
+        alt=""
+        className="absolute aspect-square w-full h-full top-0 left-[50%] -translate-x-[50%] z-0 opacity-10"
+      />
+      <div className="w-full max-w-3xl flex z-10 bg-darkPrimary shadow-lg rounded-lg text-white ">
+        <div className="w-[50%] h-full p-4 flex flex-col justify-center">
+          <p className="text-4xl font-bold">Login to get Started</p>
+          {isLoading ? (
+            <LoadingPage />
+          ) : (
+            <>
+              <form
+                onSubmit={loginHandler}
+                className="w-full h-full flex flex-col gap-2 justify-center"
+              >
+                <label className="flex flex-col" htmlFor="email">
+                  Email
+                  <StyledInput
+                    id="email"
+                    type="email"
+                    value={email}
+                    placeholder="Your Email"
+                    onChange={(e: React.FormEvent<HTMLInputElement>) =>
+                      setEmail(e.currentTarget.value)
+                    }
+                  />
+                </label>
+                <label htmlFor="password" className="flex flex-col">
+                  Password
+                  <StyledInput
+                    id="password"
+                    placeholder="Your Password"
+                    type="password"
+                    value={password}
+                    onChange={(e: React.FormEvent<HTMLInputElement>) =>
+                      setPassword(e.currentTarget.value)
+                    }
+                  />
+                </label>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    width: "100%",
+                  }}
+                >
+                  Login
+                </Button>
+                <Link
+                  to="/signup"
+                  className="underline hover:text-secondary transition-all"
+                >
+                  Don't have an account?
+                </Link>
+              </form>
+            </>
+          )}
+        </div>
+        <img src={callCenterImage} alt="" className="w-[50%] h-min" />
       </div>
-      <button type="submit" className="bg-gray-200">
-        Login
-      </button>
-    </form>
+    </main>
   );
 };
 

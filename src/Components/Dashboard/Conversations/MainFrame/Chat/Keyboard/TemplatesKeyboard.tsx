@@ -84,7 +84,7 @@ const TemplatesKeyboard = ({
         <div className="w-96 flex flex-col p-2 gap-2 h-80">
           <div>
             <input
-              className="border w-full"
+              className="border-secondary border border-solid w-full"
               type="text"
               placeholder="Search template..."
               onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {

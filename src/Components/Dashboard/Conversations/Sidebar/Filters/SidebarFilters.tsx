@@ -7,6 +7,10 @@ import {
   SocketContext,
   TSocketContext,
 } from "../../../../../Contexts/SocketContext";
+import {
+  DashboardContext,
+  TDashbaordContext,
+} from "../../../../../Contexts/DashbaordContext";
 const SidebarFilters = ({
   sortBy,
   setSortBy,
@@ -22,6 +26,7 @@ const SidebarFilters = ({
   >();
   const [sortAnchorEl, setSortAnchorEl] = useState<HTMLElement | undefined>();
 
+  const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
   const { setFilteredChatList } = useContext(SocketContext) as TSocketContext;
 
   const filterOpen = Boolean(filterAnchorEl);
@@ -46,7 +51,7 @@ const SidebarFilters = ({
 
   return (
     <section className="w-full flex justify-between px-4 py-2">
-      <div className="flex gap-1 text-sm font-bold items-center cursor-pointer text-black">
+      <div className="flex gap-1 text-sm font-bold items-center cursor-pointer">
         <button
           id="filter"
           aria-controls={filterOpen ? "filter-menu" : undefined}
@@ -74,14 +79,14 @@ const SidebarFilters = ({
           <MenuItem onClick={handleClose} data-value={"close"}>
             Closed
           </MenuItem>
-          <MenuItem onClick={handleClose} data-value={"snooze"}>
+          {/* <MenuItem onClick={handleClose} data-value={"snooze"}>
             Snoozed
-          </MenuItem>
+          </MenuItem> */}
         </Menu>
         {/* <p>Open</p>
         <TuneOutlinedIcon fontSize="small" /> */}
       </div>
-      <div className="flex gap-1 text-sm font-bold items-center cursor-pointer text-black">
+      <div className="flex gap-1 text-sm font-bold items-center cursor-pointer">
         <button
           id="sort"
           aria-controls={sortOpen ? "sort-menu" : undefined}
@@ -108,13 +113,13 @@ const SidebarFilters = ({
           <MenuItem onClick={handleClose} data-type="sort" data-value={"old"}>
             Old
           </MenuItem>
-          <MenuItem
+          {/* <MenuItem
             onClick={handleClose}
             data-type="sort"
             data-value={"waiting"}
           >
             Waiting
-          </MenuItem>
+          </MenuItem> */}
         </Menu>
         {/* <p>Open</p>
         <TuneOutlinedIcon fontSize="small" /> */}

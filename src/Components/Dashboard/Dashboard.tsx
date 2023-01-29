@@ -1,7 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import MainFrame from "./Conversations/MainFrame/MainFrame";
-import SideBar from "./Conversations/Sidebar/Sidebar";
-import { useSocket } from "../../Hooks/useSocket";
+import { useContext, useEffect } from "react";
 import Conversations from "./Conversations/Conversations";
 import NavigationBar from "./General/NavigationBar";
 import {
@@ -9,8 +6,11 @@ import {
   TDashbaordContext,
 } from "../../Contexts/DashbaordContext";
 import AdminControlls from "./AdminControlls/AdminsControlls";
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-import SocketContextProvider from "../../Contexts/SocketContext";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { SocketContext, TSocketContext } from "../../Contexts/SocketContext";
+import Settigns from "./Settings/Settigns";
+import LoadingPage from "./General/LoadingPage";
+
 declare module "@mui/material/styles" {
   interface Theme {
     status: {
@@ -26,34 +26,58 @@ declare module "@mui/material/styles" {
 }
 
 const Dashboard = () => {
-  const { screen } = useContext(DashboardContext) as TDashbaordContext;
+  const { screen, darkMode, setDarkMode } = useContext(
+    DashboardContext
+  ) as TDashbaordContext;
+  const { isConnected, isLoading } = useContext(
+    SocketContext
+  ) as TSocketContext;
 
-  const theme = createTheme({
+  useEffect(() => {
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    setDarkMode(prefersDark);
+  }, []);
+
+  const dark = createTheme({
     palette: {
+      mode: "dark",
       primary: {
-        light: "#F0F5F9",
         main: "#1E2022",
-        dark: "#1E2022",
-        contrastText: "#1E2022",
-      },
-      secondary: {
-        light: "#ff7961",
-        main: "#f44336",
-        dark: "#ba000d",
-        contrastText: "#000",
       },
     },
   });
+  const light = createTheme({
+    palette: {
+      mode: "light",
+      primary: {
+        main: "#fff",
+      },
+    },
+  });
+
   return (
-    <SocketContextProvider>
-      <ThemeProvider theme={theme}>
-        <main className="w-full h-full flex">
+    <>
+      <ThemeProvider theme={darkMode ? dark : light}>
+        <main
+          className={`w-full h-full flex ${
+            darkMode ? "text-white" : "text-black"
+          }`}
+        >
           <NavigationBar />
-          {screen === 1 && <Conversations />}
-          {screen === 2 && <AdminControlls />}
+          {!isLoading ? (
+            <>
+              {screen === 1 && <Conversations />}
+              {screen === 2 && <AdminControlls />}
+              {screen === 3 && <Settigns />}
+            </>
+          ) : (
+            <LoadingPage />
+          )}
         </main>
       </ThemeProvider>
-    </SocketContextProvider>
+    </>
   );
 };
 

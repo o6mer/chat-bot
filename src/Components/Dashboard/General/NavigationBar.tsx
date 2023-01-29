@@ -1,9 +1,8 @@
-import React, { ReactNode, useContext } from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import { useState, ReactNode, useContext } from "react";
+import { styled, Theme, CSSObject, SxProps } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
@@ -16,7 +15,9 @@ import {
   TDashbaordContext,
 } from "../../../Contexts/DashbaordContext";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
-const drawerWidth = 240;
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import ProfileMenu from "./ProfileMenu";
+const drawerWidth = 200;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -39,15 +40,6 @@ const closedMixin = (theme: Theme): CSSObject => ({
   },
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
-
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -66,8 +58,9 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function NavigationBar() {
-  const [open, setOpen] = React.useState(false);
-  const { screen, setScreen } = useContext(
+  const [open, setOpen] = useState(false);
+
+  const { screen, setScreen, darkMode } = useContext(
     DashboardContext
   ) as TDashbaordContext;
 
@@ -78,32 +71,54 @@ export default function NavigationBar() {
   return (
     <div className="flex flex-col">
       <Drawer variant="permanent" open={open}>
-        <div className={`flex p-4 ${open ? "justify-end" : "justify-center"}`}>
+        <div
+          className={`flex p-4 ${open ? "justify-end" : "justify-center"} ${
+            darkMode ? "bg-darkPrimary" : "bg-primary"
+          }`}
+        >
           <button onClick={toggleDrawer} className="text-lg">
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </button>
         </div>
         <Divider />
-        <List sx={{ padding: "0" }}>
+        <List
+          sx={{
+            padding: "0",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <NavigationListItem
             screenIndex={1}
             text="Conversations"
-            screen={screen}
+            selected={screen === 1}
             setScreen={setScreen}
             open={open}
             icon={<ForumOutlinedIcon />}
+            darkMode={darkMode}
           />
           <NavigationListItem
             screenIndex={2}
             text="Bot and Templates"
-            screen={screen}
+            selected={screen === 2}
             setScreen={setScreen}
             open={open}
             icon={<DisplaySettingsOutlinedIcon />}
+            darkMode={darkMode}
           />
+          <NavigationListItem
+            screenIndex={3}
+            text="Settings"
+            selected={screen === 3}
+            setScreen={setScreen}
+            open={open}
+            icon={<SettingsOutlinedIcon />}
+            darkMode={darkMode}
+          />
+          <ProfileMenu open={open} />
         </List>
         <Divider />
-        <List></List>
       </Drawer>
     </div>
   );
@@ -112,40 +127,53 @@ export default function NavigationBar() {
 type TNavigationListItem = {
   screenIndex: number;
   text?: string;
-  screen?: number;
   setScreen: (screen: number) => void;
   open?: boolean;
   icon?: ReactNode;
+  sx?: SxProps<Theme> | undefined;
+  selected: boolean;
+  darkMode?: boolean;
 };
 
 const NavigationListItem = ({
   screenIndex,
   text,
-  screen,
   setScreen,
   open,
   icon,
+  sx,
+  selected,
+  darkMode,
 }: TNavigationListItem) => {
   return (
     <ListItem
       key={text}
       disablePadding
-      sx={{ display: "block" }}
-      onClick={() => setScreen(screenIndex)}
+      sx={{ ...sx, display: "block" }}
+      onClick={(e) => {
+        screenIndex !== -1 && setScreen(screenIndex);
+      }}
     >
       <ListItemButton
         sx={{
           minHeight: 48,
           justifyContent: open ? "initial" : "center",
           px: 2.5,
+          "&.Mui-selected": {
+            backgroundColor: darkMode ? "#43484d " : "#e4eaed ",
+            "&:hover": {
+              backgroundColor: darkMode ? "#606870" : "#b7bdc4",
+            },
+          },
         }}
-        selected={screen === screenIndex}
+        selected={selected}
       >
         <ListItemIcon
           sx={{
             minWidth: 0,
             mr: open ? 1 : "auto",
             justifyContent: "center",
+            cursor: "pointer",
           }}
         >
           {icon}

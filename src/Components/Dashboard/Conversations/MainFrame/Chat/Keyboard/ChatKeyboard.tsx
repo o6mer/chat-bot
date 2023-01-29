@@ -33,12 +33,12 @@ const ChatKeyboard = ({}: {}) => {
 
   return (
     <form
-      className="w-full h-[25%] flex flex-col p-2 outline outline-gray-200 outline-[1px] rounded-lg"
+      className="w-full h-[25%] flex flex-col p-2 outline-secondary outline-[1px] rounded-lg"
       onSubmit={sendMessageHandler}
       ref={formRef}
     >
       <textarea
-        className="w-full h-full p-1 border focus:outline-gray-200 outline-[1px] rounded-lg  resize-none dashboard-scrollbar "
+        className="w-full h-full text-black p-1 border-secondary border border-solid focus:outline-gray-200 outline-[1px] rounded-lg  resize-none dashboard-scrollbar "
         placeholder="Write here..."
         value={message}
         onChange={typingHandler}

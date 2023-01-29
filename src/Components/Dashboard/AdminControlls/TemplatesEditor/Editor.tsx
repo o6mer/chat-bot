@@ -5,6 +5,8 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import { TTemplate } from "../../../../Types/Types";
 import { SocketContext } from "../../../../Contexts/SocketContext";
 import { TSocketContext } from "../../../../Contexts/SocketContext";
+import CancelButton from "../../../General/Buttons/CancelButton";
+import SaveButton from "../../../General/Buttons/SaveButton";
 
 const Editor = ({
   selectedTemplate,
@@ -61,7 +63,7 @@ const Editor = ({
             Title:
           </label>
           <input
-            className="border grow rounded-lg"
+            className="border-secondary border border-solid grow rounded-lg text-black"
             type="text"
             id="template-title_input"
             placeholder={"Current Title"}
@@ -79,12 +81,12 @@ const Editor = ({
             name=""
             id="template-content_textarea"
             placeholder="Current Content"
-            className="flex self-stretch resize-none border rounded-lg h-full"
+            className="flex self-stretch resize-none border-secondary border border-solid rounded-lg h-full text-black"
             value={content}
             onChange={(e: React.FormEvent<HTMLTextAreaElement>) =>
               setContent(e.currentTarget.value)
             }
-          ></textarea>
+          />
         </div>
       </section>
       <section className="flex justify-between font-bold">
@@ -96,20 +98,8 @@ const Editor = ({
           Delete
         </button>
         <div className="flex gap-2">
-          <button
-            className="gap-1 flex items-center transition-all hover:bg-gray-200 border px-2 py-1 rounded-lg m-w-16"
-            onClick={onCancelClicked}
-          >
-            <CloseOutlinedIcon fontSize="small" />
-            Cancel
-          </button>
-          <button
-            className="gap-1 flex items-center transition-all bg-green-600 hover:bg-green-500 px-2 py-1 rounded-lg m-w-16 text-white"
-            onClick={onSaveClicked}
-          >
-            <SaveAltOutlinedIcon fontSize="small" />
-            Save
-          </button>
+          <CancelButton onClick={onCancelClicked} />
+          <SaveButton onClick={onSaveClicked} />
         </div>
       </section>
     </main>

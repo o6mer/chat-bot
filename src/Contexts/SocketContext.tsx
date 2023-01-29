@@ -1,9 +1,12 @@
 import React, { createContext, useEffect, useState, ReactNode } from "react";
 import { useSocket } from "../Hooks/useSocket";
 import { TChat, TConversation, TTemplate, TUser } from "../Types/Types";
-import io from "socket.io-client";
+import io, { Socket } from "socket.io-client";
 
 export type TSocketContext = {
+  isConnected: boolean;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
   chatList?: Array<TChat>;
   deleteAllChats?: () => void;
   sendMessage: (message: string) => void;
@@ -18,55 +21,22 @@ export type TSocketContext = {
   createConversation: (coversation: TConversation) => void;
   deleteConversation: (conversationId?: string) => void;
   updateConversation: (conversation: TConversation) => void;
-  saveAllConversations: () => void;
+  saveAllConversations: (setIsLoading: (isLoading: boolean) => void) => void;
+  disconnectAdmin: () => void;
 };
 
 export const SocketContext = createContext<TSocketContext | null>(null);
 
-const socket = io("http://localhost:3002/", {
-  closeOnBeforeunload: false,
-});
-
-const SocketContextProvider = ({ children }: { children: ReactNode }) => {
-  const {
-    chatList,
-    deleteAllChats,
-    sendMessage,
-    currentChatData,
-    setChatStatus,
-    setFilteredChatList,
-    templateList,
-    updateTemplate,
-    deleteTemplate,
-    createTemplate,
-    conversations,
-    createConversation,
-    deleteConversation,
-    updateConversation,
-    saveAllConversations,
-  } = useSocket(socket);
+const SocketContextProvider = ({
+  socket,
+  children,
+}: {
+  socket: Socket;
+  children: ReactNode;
+}) => {
+  const values = useSocket(socket);
   return (
-    <SocketContext.Provider
-      value={{
-        chatList,
-        deleteAllChats,
-        sendMessage,
-        currentChatData,
-        setChatStatus,
-        setFilteredChatList,
-        templateList,
-        updateTemplate,
-        deleteTemplate,
-        createTemplate,
-        conversations,
-        createConversation,
-        deleteConversation,
-        updateConversation,
-        saveAllConversations,
-      }}
-    >
-      {children}
-    </SocketContext.Provider>
+    <SocketContext.Provider value={values}>{children}</SocketContext.Provider>
   );
 };
 

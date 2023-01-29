@@ -2,11 +2,12 @@ import React from "react";
 import { ControlPosition } from "react-draggable";
 
 export type TUser = {
-  username: string;
-  email: string;
-  password: string;
-  roll: string;
-  id: string;
+  username?: string;
+  email?: string;
+  password?: string;
+  role?: string;
+  id?: string;
+  status?: string;
 };
 
 export type TMessage = {
@@ -43,6 +44,7 @@ export type TChat = {
   isSeen: boolean;
   messages: Array<TMessage>;
   creationTime: Date | string;
+  assignedAdmin: string;
 };
 
 export type TTemplate = {
