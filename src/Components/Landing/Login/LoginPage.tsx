@@ -26,7 +26,7 @@ const LoginPage = () => {
       className={`h-screen flex flex-col items-center justify-center relative`}
     >
       <nav className="w-full absolute top-0 right-0 px-4 py-2 z-10 text-xl font-bold flex justify-center">
-        <div className="max-w-3xl w-full">
+        <div className="max-w-4xl w-full">
           <Link to="/" className="flex items-center text-black ">
             <img src={logo} className="w-12" />
             <p>Helpster</p>

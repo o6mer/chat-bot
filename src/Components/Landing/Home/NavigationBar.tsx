@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import logo from "../../../Assets/logo.svg";
 const NavigationBar = () => {
   return (
-    <nav className="flex px-4 py-2 text-xl font-bold justify-center">
-      <div className="w-full max-w-3xl flex justify-between items-center">
+    <nav className="flex px-4 py-2 text-xl font-bold justify-center sticky top-0 bg-primary">
+      <div className="w-full max-w-4xl flex justify-between items-center bg-primary">
         <a href="/" className="flex items-center text-black">
           <img src={logo} className="w-12" />
           <p>Helpster</p>
@@ -12,15 +12,9 @@ const NavigationBar = () => {
         <div className="flex gap-2 items-center">
           <Link
             to={"/login"}
-            className="flex items-center bg-darkPrimary px-2 py-1 rounded-lg text-white hover:bg-darkSecondary  transition-all"
+            className="bg-darkPrimary text-white hover:bg-darkSecondary text-xl px-2 py-1 rounded-lg transition-all"
           >
-            Login
-          </Link>
-          <Link
-            to={"/signup"}
-            className="border-2 hover:bg-secondary px-2 py-1 rounded-lg transition-all"
-          >
-            Signup{" "}
+            Get Started{" "}
           </Link>
         </div>
       </div>
