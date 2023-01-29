@@ -1,9 +1,9 @@
 import React, { FormEvent, useState } from "react";
 import LabeldInput from "../../General/LabeldInput";
 import { useAuth } from "../../../Hooks/useAuth";
-import logo from "../../../Assets/logo.svg";
+import logo from "../../../assets/logo.svg";
 import StyledInput from "../../General/StyledInput";
-import callCenterImage from "../../../Assets/call_center.jpg";
+import callCenterImage from "../../../assets/call_center.jpg";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Button } from "@mui/material";
 import LoadingPage from "../../Dashboard/General/LoadingPage";
