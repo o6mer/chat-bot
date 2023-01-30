@@ -12,6 +12,7 @@ const ChatKeyboard = ({
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!messageContent.trim()) return;
     sendMessage(messageContent);
     setMessageContent("");
   };
@@ -22,12 +23,13 @@ const ChatKeyboard = ({
 
   return (
     <form action="" onSubmit={submitHandler}>
-      <div className="w-full flex justify-between p-2">
+      <div className="w-full flex justify-between gap-2 p-2">
         <StyledInput
           placeholder="Write a message..."
           type="text"
           onChange={typeHandler}
           value={messageContent}
+          styles="w-full"
         />
         <Tooltip title="Send" arrow>
           <button type="submit" className="hover:text-gray-500 transition-all">
