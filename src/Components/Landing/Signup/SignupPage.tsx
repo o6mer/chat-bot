@@ -23,12 +23,6 @@ const SignupPage = () => {
     await signup(email, password, username, setIsLoading);
   };
 
-  const clearForm = () => {
-    setEmail("");
-    setPassword("");
-    setUsername("");
-  };
-
   return (
     <main
       className={`h-screen flex flex-col items-center justify-center relative`}
@@ -47,16 +41,18 @@ const SignupPage = () => {
         className="absolute w-full h-full top-0 left-[50%] -translate-x-[50%] z-0 opacity-10"
       />
       <div className="w-full max-w-3xl  flex z-10 bg-darkPrimary shadow-lg rounded-lg text-white ">
-        <div className="w-[50%] h-full p-4 flex flex-col justify-center">
+        <div className="w-full lg:w-[50%] h-full p-4 flex flex-col justify-center">
           <p className="text-4xl font-bold">Create Account</p>
-          {isLoading ? (
-            <LoadingPage />
-          ) : (
-            <>
-              <form
-                onSubmit={signupHandler}
-                className="w-full h-full flex flex-col gap-2 justify-center"
-              >
+          <form
+            onSubmit={signupHandler}
+            className="w-full h-full flex flex-col gap-2 justify-center"
+          >
+            {isLoading ? (
+              <div className="h-full w-full py-4">
+                <LoadingPage />
+              </div>
+            ) : (
+              <>
                 <label className="flex flex-col" htmlFor="email">
                   Email
                   <StyledInput
@@ -102,17 +98,21 @@ const SignupPage = () => {
                 >
                   Create Your Account
                 </Button>
-                <Link
-                  to="/login"
-                  className="underline hover:text-secondary transition-all"
-                >
-                  Already have an account?
-                </Link>
-              </form>
-            </>
-          )}
+              </>
+            )}
+            <Link
+              to="/login"
+              className="underline hover:text-secondary transition-all"
+            >
+              Already have an account?
+            </Link>
+          </form>
         </div>
-        <img src={callCenterImage} alt="" className="w-[50%] h-min" />
+        <img
+          src={callCenterImage}
+          alt=""
+          className="w-[50%] h-min lg:inline-block hidden"
+        />
       </div>
     </main>
   );

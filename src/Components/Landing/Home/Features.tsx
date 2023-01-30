@@ -4,9 +4,9 @@ import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 const Features = () => {
   return (
-    <section className="w-full py-24 px-2 md:px-48 flex justify-center bg-secondary">
-      <div className="w-full flex flex-col md:flex-row justify-center items-stretch gap-2 ">
-        <div className="md:max-w-[25%] w-fit flex flex-col justify-start  gap-2 shadow-lg p-8 rounded-lg transition-all hover:scale-[1.01] bg-primary">
+    <section className="w-full py-24 px-2 lg:px-48 flex justify-center bg-secondary">
+      <div className="w-full flex flex-col lg:flex-row justify-center items-stretch gap-2 ">
+        <div className="lg:max-w-[25%] w-fit flex flex-col justify-start  gap-2 shadow-lg p-8 rounded-lg transition-all hover:scale-[1.01] bg-primary">
           <div className=" bg-darkPrimary  text-white p-2 rounded-lg w-fit h-fit">
             <SupportAgentIcon fontSize="large" />
           </div>
@@ -16,7 +16,7 @@ const Features = () => {
             assingment of reprensentetives.
           </p>
         </div>
-        <div className="md:max-w-[25%] flex flex-col justify-start gap-2 shadow-lg p-8 rounded-lg transition-all hover:scale-[1.01] bg-primary">
+        <div className="lg:max-w-[25%] flex flex-col justify-start gap-2 shadow-lg p-8 rounded-lg transition-all hover:scale-[1.01] bg-primary">
           <div className=" bg-darkPrimary  text-white p-2 rounded-lg w-fit h-fit">
             <SmartToyOutlinedIcon fontSize="large" />
           </div>
@@ -26,7 +26,7 @@ const Features = () => {
             Fully control the conversation flow and edit it as you like.
           </p>
         </div>
-        <div className="md:max-w-[25%] flex flex-col justify-start gap-2 shadow-lg p-8 rounded-lg transition-all hover:scale-[1.01] bg-primary">
+        <div className="lg:max-w-[25%] flex flex-col justify-start gap-2 shadow-lg p-8 rounded-lg transition-all hover:scale-[1.01] bg-primary">
           <div className=" bg-darkPrimary  text-white p-2 rounded-lg w-fit h-fit">
             <EmojiEmotionsOutlinedIcon fontSize="large" />
           </div>

@@ -84,7 +84,7 @@ const Options = ({ selectedCategory }: { selectedCategory: string }) => {
 
   return (
     <ThemeProvider theme={switchTheme}>
-      <div className="flex flex-col h-full px-16 py-4 w-full overflow-y-scroll dashboard-scrollbar">
+      <div className="flex flex-col h-fit px-2 lg:px-16 py-4 w-full overflow-y-scroll dashboard-scrollbar">
         <section className="py-2" id="general">
           <p className="uppercase font-bold text-lg" id="general">
             General

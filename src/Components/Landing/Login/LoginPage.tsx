@@ -39,16 +39,18 @@ const LoginPage = () => {
         className="absolute aspect-square w-full h-full top-0 left-[50%] -translate-x-[50%] z-0 opacity-10"
       />
       <div className="w-full max-w-3xl flex z-10 bg-darkPrimary shadow-lg rounded-lg text-white ">
-        <div className="w-[50%] h-full p-4 flex flex-col justify-center">
+        <div className="w-full lg:w-[50%] h-full p-4 flex flex-col justify-center">
           <p className="text-4xl font-bold">Login to get Started</p>
-          {isLoading ? (
-            <LoadingPage />
-          ) : (
-            <>
-              <form
-                onSubmit={loginHandler}
-                className="w-full h-full flex flex-col gap-2 justify-center"
-              >
+          <form
+            onSubmit={loginHandler}
+            className="w-full h-full flex flex-col gap-2 justify-center"
+          >
+            {isLoading ? (
+              <div className="w-full h-full py-4">
+                <LoadingPage />
+              </div>
+            ) : (
+              <>
                 <label className="flex flex-col" htmlFor="email">
                   Email
                   <StyledInput
@@ -82,17 +84,21 @@ const LoginPage = () => {
                 >
                   Login
                 </Button>
-                <Link
-                  to="/signup"
-                  className="underline hover:text-secondary transition-all"
-                >
-                  Don't have an account?
-                </Link>
-              </form>
-            </>
-          )}
+              </>
+            )}
+            <Link
+              to="/signup"
+              className="underline hover:text-secondary transition-all"
+            >
+              Don't have an account?
+            </Link>
+          </form>
         </div>
-        <img src={callCenterImage} alt="" className="w-[50%] h-min" />
+        <img
+          src={callCenterImage}
+          alt=""
+          className="w-[50%] h-min lg:inline-block hidden"
+        />
       </div>
     </main>
   );

@@ -16,7 +16,7 @@ const SideBar = ({
   const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
 
   return (
-    <aside className="w-[15%] h-full">
+    <aside className="w-[15%] h-full hidden lg:block">
       <header className="p-2">
         <p className="font-bold text-xl">Settings</p>
       </header>

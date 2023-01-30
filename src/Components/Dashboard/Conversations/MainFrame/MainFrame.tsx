@@ -10,7 +10,7 @@ import {
 import Chat from "./Chat/Chat";
 import InfoSidebar from "./InfoSidebar/InfoSidebar";
 
-const MainFrame = () => {
+const MainFrame = ({ isSideBarOpen }: { isSideBarOpen: boolean }) => {
   const { currentChatId, darkMode } = useContext(
     DashboardContext
   ) as TDashbaordContext;
@@ -18,7 +18,7 @@ const MainFrame = () => {
 
   return (
     <section
-      className={`h-full flex grow relative ${
+      className={`h-full grow relative flex ${
         darkMode ? "bg-darkPrimary" : "bg-primary"
       }`}
     >

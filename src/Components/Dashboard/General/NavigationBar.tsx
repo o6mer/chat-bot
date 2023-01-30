@@ -1,4 +1,4 @@
-import { useState, ReactNode, useContext } from "react";
+import { useState, ReactNode, useContext, useEffect } from "react";
 import { styled, Theme, CSSObject, SxProps } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -59,6 +59,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function NavigationBar() {
   const [open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const { screen, setScreen, darkMode } = useContext(
     DashboardContext
@@ -67,6 +68,13 @@ export default function NavigationBar() {
   const toggleDrawer = () => {
     setOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -98,15 +106,17 @@ export default function NavigationBar() {
             icon={<ForumOutlinedIcon />}
             darkMode={darkMode}
           />
-          <NavigationListItem
-            screenIndex={2}
-            text="Bot and Templates"
-            selected={screen === 2}
-            setScreen={setScreen}
-            open={open}
-            icon={<DisplaySettingsOutlinedIcon />}
-            darkMode={darkMode}
-          />
+          {!isMobile && (
+            <NavigationListItem
+              screenIndex={2}
+              text="Bot and Templates"
+              selected={screen === 2}
+              setScreen={setScreen}
+              open={open}
+              icon={<DisplaySettingsOutlinedIcon />}
+              darkMode={darkMode}
+            />
+          )}
           <NavigationListItem
             screenIndex={3}
             text="Settings"

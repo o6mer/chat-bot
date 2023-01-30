@@ -10,7 +10,7 @@ const ChatMessage = ({ writer, time, children }: TMessage) => {
 
   return (
     <div
-      className={`flex flex-col max-w-[80%] w-max  ${
+      className={`flex flex-col max-w-[80%] w-fit flex-wrap ${
         writer === "Customer" ? "self-end " : ""
       }`}
     >

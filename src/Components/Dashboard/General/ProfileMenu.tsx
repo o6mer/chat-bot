@@ -107,10 +107,6 @@ const ProfileMenu = ({ open }: { open: boolean }) => {
         }}
         sx={{ translate: "1rem -2rem" }}
       >
-        <MenuItem onClick={handleClose}>
-          <AccountCircleOutlinedIcon />
-          Profile
-        </MenuItem>
         <MenuItem onClick={handleStatusClick}>
           <CircleIcon sx={{ color: userStatusColor }} fontSize="small" />
           Change Status

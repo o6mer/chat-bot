@@ -61,8 +61,8 @@ const Dashboard = () => {
     <>
       <ThemeProvider theme={darkMode ? dark : light}>
         <main
-          className={`w-full h-full flex ${
-            darkMode ? "text-white" : "text-black"
+          className={` w-screen h-full flex relative ${
+            darkMode ? "bg-darkPrimary text-white" : "bg-primary text-black"
           }`}
         >
           <NavigationBar />

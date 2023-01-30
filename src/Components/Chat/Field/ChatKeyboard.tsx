@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
-import { TMessage } from "../../../Types/Types";
+import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
+import { Tooltip } from "@mui/material";
+import StyledInput from "../../General/StyledInput";
 
 const ChatKeyboard = ({
   sendMessage,
@@ -18,22 +20,20 @@ const ChatKeyboard = ({
     setMessageContent(e.currentTarget.value);
   };
 
-  const getForamtedTime = (): string => {
-    const currentTime = new Date().toLocaleTimeString().slice(0, 4);
-
-    return Number(currentTime[0]) < 10 ? `0${currentTime}` : currentTime;
-  };
-
   return (
     <form action="" onSubmit={submitHandler}>
       <div className="w-full flex justify-between p-2">
-        <input
+        <StyledInput
+          placeholder="Write a message..."
           type="text"
-          className="w-full"
           onChange={typeHandler}
           value={messageContent}
         />
-        <button type="submit">{">"}</button>
+        <Tooltip title="Send" arrow>
+          <button type="submit" className="hover:text-gray-500 transition-all">
+            <SendOutlinedIcon fontSize="small" />
+          </button>
+        </Tooltip>
       </div>
     </form>
   );

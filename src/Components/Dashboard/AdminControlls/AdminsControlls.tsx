@@ -80,7 +80,7 @@ const TabPanel = ({ children, value, index, ...other }: TabPanelProps) => {
 
   return (
     <div
-      className={`${
+      className={` ${
         value === index &&
         `w-full flex grow justify-center ${
           darkMode ? "bg-darkSecondary" : "bg-secondary"

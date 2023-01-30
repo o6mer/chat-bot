@@ -6,7 +6,7 @@ import EmailIcon from "@mui/icons-material/Email";
 const Footer = () => {
   return (
     <footer className="w-full py-8 bg-darkPrimary flex justify-center">
-      <div className="w-fit flex flex-col md:flex-row justify-between items- gap-4 center text-white">
+      <div className="w-fit flex flex-col lg:flex-row justify-between items- gap-4 center text-white">
         <div className="flex  justify-center items-center gap-2">
           <img src={logo} alt="" className="w-min" />
           <p className=" font-bold text-3xl">Helpster</p>

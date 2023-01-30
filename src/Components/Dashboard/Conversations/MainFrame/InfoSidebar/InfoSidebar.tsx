@@ -11,14 +11,18 @@ import {
 } from "../../../../../Contexts/DashbaordContext";
 
 const InfoSidebar = ({ currentChatData }: { currentChatData?: TChat }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
 
   return (
     <>
       {isOpen ? (
-        <aside className="outline-[3px] outline-secondary w-[20%] flex flex-col h-full p-2">
+        <aside
+          className={`${
+            darkMode ? "bg-darkPrimary" : "bg-primary"
+          } outline-[3px] outline-secondary w-[90%] lg:w-[20%] flex flex-col h-full p-2 absolute lg:static right-0 z-20`}
+        >
           <InfoSidebarHeader setIsOpen={setIsOpen} />
 
           <Divider />
