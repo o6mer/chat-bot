@@ -14,15 +14,19 @@ const ChatMain = ({ messages }: { messages?: Array<TMessage> }) => {
   return (
     <div className=" h-full flex flex-col gap-1 overflow-y-scroll dashboard-scrollbar p-2">
       {messages?.map((message: TMessage, index) => {
-        if (message.type === "text")
+        if (!message) return;
+        if (message?.type === "text")
           return <TextMessage {...message} key={`${index}${message.time}`} />;
-        if (message.type === "multiple")
+        else if (message?.type === "multiple")
           return (
             <MultipleChoiceMessage
               {...message}
               key={`${index}${message.time}`}
             />
           );
+        else {
+          return <TextMessage {...message} key={`${index}${message.time}`} />;
+        }
       })}
       <div ref={bottomRef}></div>
     </div>
