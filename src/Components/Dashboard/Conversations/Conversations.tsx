@@ -10,7 +10,7 @@ const Conversations = () => {
         isSideBarOpen={isSideBarOpen}
         setIsSideBarOpen={setIsSideBarOpen}
       />
-      <MainFrame isSideBarOpen={isSideBarOpen} />
+      <MainFrame />
     </div>
   );
 };

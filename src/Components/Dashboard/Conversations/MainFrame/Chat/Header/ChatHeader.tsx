@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import BeenhereOutlinedIcon from "@mui/icons-material/BeenhereOutlined";
-import BedtimeIcon from "@mui/icons-material/Bedtime";
 import {
   DashboardContext,
   TDashbaordContext,
@@ -26,15 +25,6 @@ const ChatHeader = ({
     <header className="w-full text-lg p-2 font-bold flex justify-between items-center">
       <p>{customerName || "New Customer"}</p>
       <div className="flex items-center gap-2">
-        {/* {chatStatus !== "snooze" && (
-          <div
-            className={`px-2 py-1 bg-gray-200 hover:bg-gray-300 transition-all  rounded-lg flex justify-between items-center gap-1 cursor-pointer`}
-            onClick={() => setChatStatus("snooze", currentChatId)}
-          >
-            <BedtimeIcon fontSize="small" />
-            <p>Snooze</p>
-          </div>
-        )} */}
         {chatStatus !== "close" && (
           <div
             className={`px-2 py-1 transition-all rounded-lg flex justify-between items-center gap-1 cursor-pointer text-white ${

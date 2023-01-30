@@ -5,7 +5,6 @@ import { Tooltip } from "@mui/material";
 const AddFileKeyboard = () => {
   const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const file = e.target.files;
-    console.log(file);
   };
 
   return (

@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import SaveAltOutlinedIcon from "@mui/icons-material/SaveAltOutlined";
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { TTemplate } from "../../../../Types/Types";
 import { SocketContext } from "../../../../Contexts/SocketContext";

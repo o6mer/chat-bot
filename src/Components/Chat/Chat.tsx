@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
 import ChatField from "./Field/ChatField";
 import ChatHeader from "./Header/ChatHeader";
-import { Socket } from "socket.io-client";
 
 const Chat = ({ handleClose }: { handleClose: () => void }) => {
   return (

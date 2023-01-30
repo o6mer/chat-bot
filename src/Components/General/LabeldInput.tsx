@@ -1,5 +1,3 @@
-import React from "react";
-
 const LabeldInput = ({
   type,
   label,

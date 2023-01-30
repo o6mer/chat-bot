@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
-import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
-import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
-import { Menu, MenuItem, Select } from "@mui/material";
+import { Menu, MenuItem } from "@mui/material";
 import {
   SocketContext,
   TSocketContext,
@@ -11,6 +9,7 @@ import {
   DashboardContext,
   TDashbaordContext,
 } from "../../../../../Contexts/DashbaordContext";
+
 const SidebarFilters = ({
   sortBy,
   setSortBy,

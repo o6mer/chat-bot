@@ -14,7 +14,6 @@ import Popover from "@mui/material/Popover";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Divider } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useAuth } from "../../../Hooks/useAuth";
 
 const ProfileMenu = ({ open }: { open: boolean }) => {

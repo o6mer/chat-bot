@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import {
   DashboardContext,
   TDashbaordContext,
@@ -10,7 +10,7 @@ import {
 import Chat from "./Chat/Chat";
 import InfoSidebar from "./InfoSidebar/InfoSidebar";
 
-const MainFrame = ({ isSideBarOpen }: { isSideBarOpen: boolean }) => {
+const MainFrame = () => {
   const { currentChatId, darkMode } = useContext(
     DashboardContext
   ) as TDashbaordContext;

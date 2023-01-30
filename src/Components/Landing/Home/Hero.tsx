@@ -6,7 +6,6 @@ const Hero = () => {
   return (
     <section className="w-full h-screen text-black flex flex-col  flex-grow items-center">
       <div className="flex flex-col h-full justify-center items-center max-w-3xl gap-8">
-        {/* <img src={logo} alt="" /> */}
         <div className="flex flex-col justify-center text-center gap-4">
           <header className="font-bold text-7xl">
             Support customers at exactly the right moment
@@ -24,12 +23,6 @@ const Hero = () => {
           >
             Get Started{" "}
           </Link>
-          {/* <Link
-            to={"/signup"}
-            className="flex items-center bg-primary text-black px-2 py-1 rounded-lg hover:bg-third  transition-all"
-          >
-            Signup
-          </Link> */}
         </div>
       </div>
     </section>

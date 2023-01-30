@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import { Tooltip } from "@mui/material";
 import StyledInput from "../../General/StyledInput";

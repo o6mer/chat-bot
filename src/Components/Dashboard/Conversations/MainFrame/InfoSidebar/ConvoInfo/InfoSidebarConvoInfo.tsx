@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import Collapse from "@mui/material/Collapse";

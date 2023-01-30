@@ -1,5 +1,4 @@
 import React, { useContext, useRef, useState } from "react";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { TChat, TMessage } from "../../../../../Types/Types";
 import {
   DashboardContext,
@@ -69,9 +68,6 @@ const SidebarChatListItem = ({
 
       <div className="flex items-center">
         <Avatar
-          onClick={(e) => {
-            console.log(e.currentTarget);
-          }}
           sx={{
             fontWeight: "normal",
             width: "1.8rem",

@@ -11,7 +11,6 @@ const MultipleChoiceMessage = ({
   return (
     <Message writer={writer} time={time} type="text">
       <div className="flex flex-col">
-        {/* <p className="flex w-full">{content?.question}</p> */}
         <p className="flex w-full">{content?.response}</p>
         <ul className="flex flex-wrap gap-1">
           {content?.followUp.map((followUp) => (

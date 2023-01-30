@@ -1,4 +1,4 @@
-import { TChat, TMessage } from "../../../../../Types/Types";
+import { TChat } from "../../../../../Types/Types";
 import ChatHeader from "./Header/ChatHeader";
 import ChatKeyboard from "./Keyboard/ChatKeyboard";
 import ChatMain from "./Main/ChatMain";

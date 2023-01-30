@@ -1,10 +1,9 @@
-import React, { ReactNode, useContext, useEffect } from "react";
+import { ReactNode, useContext, useEffect } from "react";
 import {
   DashboardContext,
   TDashbaordContext,
 } from "../../Contexts/DashbaordContext";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../../Hooks/useAuth";
 
 const ProtectedRoutes = ({ children }: { children: ReactNode }) => {

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import { Socket } from "socket.io-client";
 import { CustomerContext, TCustomerContext } from "../Contexts/CustomerContext";
 import { TChat, TFollowUp, TMessage } from "../Types/Types";
 
@@ -12,7 +12,6 @@ export const useSocketUser = (socket: Socket) => {
   useEffect(() => {
     socket?.on("connect", () => {
       setIsConnected(true);
-      console.log("connected");
 
       const storedChatId = localStorage.getItem("id");
 
@@ -23,7 +22,7 @@ export const useSocketUser = (socket: Socket) => {
     });
     socket?.on(
       "receiveMessage",
-      ({ message, id }: { message: TMessage; id: string }) => {
+      ({ message }: { message: TMessage; id: string }) => {
         addMessage(message);
       }
     );

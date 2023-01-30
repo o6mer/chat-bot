@@ -1,5 +1,4 @@
 import { TTemplate } from "../../../../Types/Types";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import Divider from "@mui/material/Divider";
 import { useEffect, useRef, useState, useContext } from "react";
 import TouchRipple from "@mui/material/ButtonBase/TouchRipple";

@@ -30,8 +30,6 @@ export const useSocket = (
 
   useEffect(() => {
     socket.on("connect", () => {
-      console.log("admin connected");
-
       setIsConnected(true);
       setIsLoading(true);
     });
@@ -75,7 +73,6 @@ export const useSocket = (
     covnersationList: Array<TConversation>;
     onlineAdmins: Array<TUser>;
   }) => {
-    console.log("admin connected", adaminData);
     setChatList(adaminData.chatList);
     setConversations(adaminData.covnersationList);
     setTemplateLst(adaminData.templateList);
@@ -145,7 +142,6 @@ export const useSocket = (
     setCurrentChatId("");
     setChatList((prev: Array<TChat>) =>
       prev.filter((chat: TChat) => {
-        // if (chat.status !== status) return;
         return chat.id !== chatId;
       })
     );
@@ -156,7 +152,6 @@ export const useSocket = (
   };
 
   const setFilteredChatList = (filter: string) => {
-    // if (filter === chatFilter) return;
     if (!isConnected) return;
     socket?.emit("getFilteredChatList", filter, (chatList: Array<TChat>) => {
       setChatFilter(filter);
@@ -195,7 +190,6 @@ export const useSocket = (
       "createConversation",
       conversation,
       (conversation: TConversation) => {
-        console.log(conversation);
         setConversations((prev) => [...prev, conversation]);
       }
     );

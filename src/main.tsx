@@ -4,7 +4,6 @@ import App from "./App";
 import "./index.css";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import ErrorPage from "./Components/General/ErrorPage";
-import Chat from "./Components/Chat/Chat";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import DashboardContextProvider from "./Contexts/DashbaordContext";
 import CustomerContextProvider from "./Contexts/CustomerContext";

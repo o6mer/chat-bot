@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Switch from "@mui/material/Switch";
 import { useContext } from "react";
 import {
@@ -12,7 +12,6 @@ import CancelButton from "../../General/Buttons/CancelButton";
 import StyledInput from "../../General/StyledInput";
 import axios from "axios";
 import { useAuth } from "../../../Hooks/useAuth";
-import CircularProgress from "@mui/material/CircularProgress";
 import LoadingPage from "../General/LoadingPage";
 
 const Options = ({ selectedCategory }: { selectedCategory: string }) => {

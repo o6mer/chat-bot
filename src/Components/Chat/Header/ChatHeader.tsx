@@ -1,4 +1,3 @@
-import React from "react";
 import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 const ChatHeader = ({ handleClose }: { handleClose: () => void }) => {
