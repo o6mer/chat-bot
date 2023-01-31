@@ -47,7 +47,7 @@ export default function BasicTabs() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="flex h-full w-full flex-col">
       <div>
         <Tabs
           value={value}
@@ -81,7 +81,7 @@ const TabPanel = ({ children, value, index, ...other }: TabPanelProps) => {
     <div
       className={` ${
         value === index &&
-        `w-full flex grow justify-center ${
+        `flex w-full grow justify-center ${
           darkMode ? "bg-darkSecondary" : "bg-secondary"
         } `
       }`}

@@ -5,7 +5,7 @@ import SideBar from "./Sidebar/Sidebar";
 const Conversations = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   return (
-    <div className="flex grow relative z-0">
+    <div className="relative z-0 flex grow">
       <SideBar
         isSideBarOpen={isSideBarOpen}
         setIsSideBarOpen={setIsSideBarOpen}

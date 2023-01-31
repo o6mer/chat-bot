@@ -5,15 +5,15 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 const Footer = () => {
   return (
-    <footer className="w-full py-8 bg-darkPrimary flex justify-center">
-      <div className="w-fit flex flex-col lg:flex-row justify-between items- gap-4 center text-white">
-        <div className="flex  justify-center items-center gap-2">
+    <footer className="flex w-full justify-center bg-darkPrimary py-8">
+      <div className="items- center flex w-fit flex-col justify-between gap-4 text-white lg:flex-row">
+        <div className="flex  items-center justify-center gap-2">
           <img src={logo} alt="" className="w-min" />
-          <p className=" font-bold text-3xl">Helpster</p>
+          <p className=" text-3xl font-bold">Helpster</p>
         </div>
 
         <div className="flex items-center">
-          <p className="text-2xl text-center">
+          <p className="text-center text-2xl">
             This project was developed, designed and deployed by Omer Liraz.
           </p>
         </div>

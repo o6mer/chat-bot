@@ -33,18 +33,18 @@ const ChatKeyboard = ({}: {}) => {
 
   return (
     <form
-      className="w-full h-[25%] flex flex-col p-2 outline-secondary outline-[1px] rounded-lg"
+      className="flex h-[25%] w-full flex-col rounded-lg p-2 outline-[1px] outline-secondary"
       onSubmit={sendMessageHandler}
       ref={formRef}
     >
       <textarea
-        className="w-full h-full text-black p-1 border-secondary border border-solid focus:outline-gray-200 outline-[1px] rounded-lg  resize-none dashboard-scrollbar "
+        className="dashboard-scrollbar h-full w-full resize-none rounded-lg border border-solid border-secondary p-1 text-black  outline-[1px] focus:outline-gray-200 "
         placeholder="Write here..."
         value={message}
         onChange={typingHandler}
         onKeyDown={checkSubmit}
       />
-      <p className="text-xs text-gray-500 py-1">
+      <p className="py-1 text-xs text-gray-500">
         * <b>Enter</b>: New line. <b>Shift+Enter</b>: Send
       </p>
       <ChatKeyboardActions setMessage={setMessage} />

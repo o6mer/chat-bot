@@ -6,8 +6,8 @@ const InfoSidebarHeader = ({
   setIsOpen: (open: boolean) => void;
 }) => {
   return (
-    <header className="w-full flex justify-between items-center p-3">
-      <p className="font-bold text-lg">Details</p>
+    <header className="flex w-full items-center justify-between p-3">
+      <p className="text-lg font-bold">Details</p>
       <button onClick={() => setIsOpen(false)}>
         <CloseOutlinedIcon fontSize="small" />
       </button>

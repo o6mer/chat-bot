@@ -42,8 +42,8 @@ const Sidebar = ({
   };
 
   return (
-    <aside className="flex w-[22%] flex-col  gap-2 h-full ">
-      <div className="flex gap-2 px-2 w-full">
+    <aside className="flex h-full w-[22%]  flex-col gap-2 ">
+      <div className="flex w-full gap-2 px-2">
         <StyledInput
           placeholder="Search template..."
           onChange={onSearch}
@@ -53,7 +53,7 @@ const Sidebar = ({
         <NewButton onClick={onNewTemplate} />
       </div>
       <Divider />
-      <ul className="list-none text-md flex flex-col grow h-0 overflow-y-scroll dashboard-scrollbar px-2">
+      <ul className="text-md dashboard-scrollbar flex h-0 grow list-none flex-col overflow-y-scroll px-2">
         {filteredList
           ?.sort((a: TTemplate, b: TTemplate) => {
             if (a?.title < b?.title) {
@@ -91,7 +91,7 @@ const TemplateListItem = ({
 
   return (
     <li
-      className={`p-2 cursor-pointer hover:bg-slate-200 relative rounded-md 
+      className={`relative cursor-pointer rounded-md p-2 hover:bg-slate-200 
       ${
         template.id === selectedTemplate?.id
           ? darkMode

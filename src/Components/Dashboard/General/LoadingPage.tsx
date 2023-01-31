@@ -9,7 +9,7 @@ const LoadingPage = () => {
   const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
   return (
     <div
-      className={`w-full h-full flex items-center justify-center bg-transparent`}
+      className={`flex h-full w-full items-center justify-center bg-transparent`}
     >
       <CircularProgress sx={{ color: darkMode ? "#fff" : "#aaa" }} />
     </div>

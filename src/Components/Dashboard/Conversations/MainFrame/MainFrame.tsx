@@ -18,7 +18,7 @@ const MainFrame = () => {
 
   return (
     <section
-      className={`h-full grow relative flex ${
+      className={`relative flex h-full grow ${
         darkMode ? "bg-darkPrimary" : "bg-primary"
       }`}
     >
@@ -28,7 +28,7 @@ const MainFrame = () => {
           <InfoSidebar currentChatData={currentChatData} />
         </>
       ) : (
-        <div className="w-full h-full flex justify-center items-center">
+        <div className="flex h-full w-full items-center justify-center">
           no chat selected
         </div>
       )}

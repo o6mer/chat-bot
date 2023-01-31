@@ -23,10 +23,10 @@ const LoginPage = () => {
 
   return (
     <main
-      className={`h-screen flex flex-col items-center justify-center relative`}
+      className={`relative flex h-screen flex-col items-center justify-center`}
     >
-      <nav className="w-full absolute top-0 right-0 px-4 py-2 z-10 text-xl font-bold flex justify-center">
-        <div className="max-w-4xl w-full">
+      <nav className="absolute top-0 right-0 z-10 flex w-full justify-center px-4 py-2 text-xl font-bold">
+        <div className="w-full max-w-4xl">
           <Link to="/" className="flex items-center text-black ">
             <img src={logo} className="w-12" />
             <p>Helpster</p>
@@ -36,17 +36,17 @@ const LoginPage = () => {
       <img
         src={logo}
         alt=""
-        className="absolute aspect-square w-full h-full top-0 left-[50%] -translate-x-[50%] z-0 opacity-10"
+        className="absolute top-0 left-[50%] z-0 aspect-square h-full w-full -translate-x-[50%] opacity-10"
       />
-      <div className="w-full max-w-3xl flex z-10 bg-darkPrimary shadow-lg rounded-lg text-white ">
-        <div className="w-full lg:w-[50%] h-full p-4 flex flex-col justify-center">
+      <div className="z-10 flex w-full max-w-3xl rounded-lg bg-darkPrimary text-white shadow-lg ">
+        <div className="flex h-full w-full flex-col justify-center p-4 lg:w-[50%]">
           <p className="text-4xl font-bold">Login to get Started</p>
           <form
             onSubmit={loginHandler}
-            className="w-full h-full flex flex-col gap-2 justify-center"
+            className="flex h-full w-full flex-col justify-center gap-2"
           >
             {isLoading ? (
-              <div className="w-full h-full py-4">
+              <div className="h-full w-full py-4">
                 <LoadingPage />
               </div>
             ) : (
@@ -88,7 +88,7 @@ const LoginPage = () => {
             )}
             <Link
               to="/signup"
-              className="underline hover:text-secondary transition-all"
+              className="underline transition-all hover:text-secondary"
             >
               Don't have an account?
             </Link>
@@ -97,7 +97,7 @@ const LoginPage = () => {
         <img
           src={callCenterImage}
           alt=""
-          className="w-[50%] h-min lg:inline-block hidden"
+          className="hidden h-min w-[50%] lg:inline-block"
         />
       </div>
     </main>

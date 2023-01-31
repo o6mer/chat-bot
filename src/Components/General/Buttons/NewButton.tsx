@@ -14,7 +14,7 @@ const NewButton = ({
 
   return (
     <button
-      className={`border-secondary border border-solid px-2 py-1 rounded-lg flex items-center transition-all font-bold ${
+      className={`flex items-center rounded-lg border border-solid border-secondary px-2 py-1 font-bold transition-all ${
         darkMode
           ? "bg-darkPrimary hover:bg-darkSecondary"
           : "bg-primary hover:bg-secondary"

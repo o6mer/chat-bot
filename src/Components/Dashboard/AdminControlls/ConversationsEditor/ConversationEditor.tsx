@@ -31,9 +31,9 @@ const ConversationEditor = () => {
 
   return (
     <div
-      className={`w-full grow m-12 p-4 flex flex-col  ${
+      className={`m-12 flex w-full grow flex-col p-4  ${
         darkMode ? "bg-darkPrimary" : "bg-primary"
-      }  shadow-[0px_0px_25px_3px_rgba(0,0,0,0.07)] rounded-lg`}
+      }  rounded-lg shadow-[0px_0px_25px_3px_rgba(0,0,0,0.07)]`}
     >
       <header className="flex gap-2">
         <NewButton onClick={addNewCovnersation} />
@@ -42,7 +42,7 @@ const ConversationEditor = () => {
       {isLoading ? (
         <LoadingPage />
       ) : (
-        <ul className="w-full h-full flex shrink-0 gap-4 box relative">
+        <ul className="box relative flex h-full w-full shrink-0 gap-4">
           {conversations.map((conversation: TConversation) => {
             return (
               <ListItem

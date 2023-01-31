@@ -10,12 +10,12 @@ const ChatMessage = ({ writer, time, children }: TMessage) => {
 
   return (
     <div
-      className={`flex flex-col max-w-[80%] w-fit flex-wrap ${
+      className={`flex w-fit max-w-[80%] flex-col flex-wrap ${
         writer === "Customer" ? "self-end " : ""
       }`}
     >
       <div
-        className={`p-2 rounded-md  ${
+        className={`rounded-md p-2  ${
           writer === "Customer"
             ? darkMode
               ? "bg-darkSecondary"
@@ -27,7 +27,7 @@ const ChatMessage = ({ writer, time, children }: TMessage) => {
       >
         <>{children}</>
       </div>
-      <div className="flex text-darkThird text-xs">
+      <div className="flex text-xs text-darkThird">
         <p className="">{writer} - </p>
         <p>{time.toString()}</p>
       </div>

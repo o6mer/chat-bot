@@ -54,14 +54,14 @@ const Editor = ({
   };
 
   return (
-    <main className="flex flex-col justify-between w-full grow p-6 ">
-      <section className="flex flex-col gap-4 grow py-4">
-        <div className="flex flex-col w-full  justify-start gap-2">
+    <main className="flex w-full grow flex-col justify-between p-6 ">
+      <section className="flex grow flex-col gap-4 py-4">
+        <div className="flex w-full flex-col  justify-start gap-2">
           <label htmlFor="template-title_input" className="text-lg">
             Title:
           </label>
           <input
-            className="border-secondary border border-solid grow rounded-lg text-black"
+            className="grow rounded-lg border border-solid border-secondary text-black"
             type="text"
             id="template-title_input"
             placeholder={"Current Title"}
@@ -71,7 +71,7 @@ const Editor = ({
             }
           />
         </div>
-        <div className="flex flex-col gap-2 grow">
+        <div className="flex grow flex-col gap-2">
           <label htmlFor="template-content_textarea" className="text-lg">
             Content:
           </label>
@@ -79,7 +79,7 @@ const Editor = ({
             name=""
             id="template-content_textarea"
             placeholder="Current Content"
-            className="flex self-stretch resize-none border-secondary border border-solid rounded-lg h-full text-black"
+            className="flex h-full resize-none self-stretch rounded-lg border border-solid border-secondary text-black"
             value={content}
             onChange={(e: React.FormEvent<HTMLTextAreaElement>) =>
               setContent(e.currentTarget.value)
@@ -89,7 +89,7 @@ const Editor = ({
       </section>
       <section className="flex justify-between font-bold">
         <button
-          className="gap-1 flex items-center transition-all bg-red-600 hover:bg-red-500 px-2 py-1 rounded-lg m-w-16"
+          className="m-w-16 flex items-center gap-1 rounded-lg bg-red-600 px-2 py-1 transition-all hover:bg-red-500"
           onClick={onDeleteClicked}
         >
           <DeleteOutlineOutlinedIcon fontSize="small" />

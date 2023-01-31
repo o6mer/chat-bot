@@ -10,7 +10,7 @@ const LabeldInput = ({
   setState: (value: string) => void;
 }) => {
   return (
-    <div className="w-full flex flex-col justify-between">
+    <div className="flex w-full flex-col justify-between">
       <label htmlFor={`${label}-input`}>{label}</label>
       <input
         type={type}

@@ -63,7 +63,7 @@ const ListItemEditMode = ({
   return (
     <>
       <div
-        className={`flex flex-col w-min gap-2 ${
+        className={`flex w-min flex-col gap-2 ${
           darkMode ? "text-white" : "text-black"
         }`}
       >
@@ -71,26 +71,26 @@ const ListItemEditMode = ({
           placeholder="Question..."
           type="text"
           value={updatedQuestion}
-          className=" border-secondary border border-solid"
+          className=" border border-solid border-secondary"
           onChange={(e) => setUpdatedQuestion(e.currentTarget.value)}
         />
         <input
           placeholder="Response..."
           type="text"
           value={updatedResponse}
-          className="border-secondary border border-solid"
+          className="border border-solid border-secondary"
           onChange={(e) => setUpdatedResponse(e.currentTarget.value)}
         />
         {updatedFollowUps.map((followUp, index) => (
           <div
-            className="w-full flex gap-2"
+            className="flex w-full gap-2"
             key={"edit_follow-up" + conversation.id + index}
           >
             <input
               placeholder="Follow-up title..."
               type="text"
               value={followUp.input}
-              className="border-secondary border border-solid grow"
+              className="grow border border-solid border-secondary"
               onChange={(e) => {
                 const value = e.currentTarget.value;
                 setUpdatedFollowUps((prev) => {
@@ -138,11 +138,11 @@ const ListItemEditMode = ({
             </Tooltip>
           </div>
         ))}
-        <div className="flex w-full justify-center items-center ">
+        <div className="flex w-full items-center justify-center ">
           <Tooltip title="Add Follow-up" arrow>
             <button
               onClick={onAddFollowUpClicked}
-              className={`border-secondary border border-solid w-max p-1 rounded-lg flex justify-center items-center ${
+              className={`flex w-max items-center justify-center rounded-lg border border-solid border-secondary p-1 ${
                 darkMode ? "hover:bg-darkThird" : "hover:bg-secondary"
               }  transition-all`}
             >
@@ -151,14 +151,14 @@ const ListItemEditMode = ({
           </Tooltip>
         </div>
       </div>
-      <div className={`flex gap-1 absolute bottom-2 right-2 transition-all  `}>
+      <div className={`absolute bottom-2 right-2 flex gap-1 transition-all  `}>
         <Tooltip title="Cancel" arrow>
           <button
-            className={`gap-1 flex items-center text-sm transition-all ${
+            className={`flex items-center gap-1 text-sm transition-all ${
               darkMode
                 ? "bg-darkPrimary hover:bg-darkSecondary"
                 : "bg-primary hover:bg-third"
-            }  border px-1 py-1 rounded-lg`}
+            }  rounded-lg border px-1 py-1`}
             onClick={onCancelClicked}
           >
             <CloseOutlinedIcon fontSize="small" />
@@ -167,7 +167,7 @@ const ListItemEditMode = ({
         <Tooltip title="Save" arrow>
           <button
             onClick={onSaveClicked}
-            className="gap-1 flex items-center text-sm transition-all bg-green-600 hover:bg-green-500 px-1 py-1 rounded-lg text-white"
+            className="flex items-center gap-1 rounded-lg bg-green-600 px-1 py-1 text-sm text-white transition-all hover:bg-green-500"
           >
             <SaveAltOutlinedIcon fontSize="small" />
           </button>

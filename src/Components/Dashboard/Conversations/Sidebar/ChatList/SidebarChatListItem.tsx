@@ -50,7 +50,7 @@ const SidebarChatListItem = ({
     <li
       onMouseDown={onRippleStart}
       onMouseUp={onRippleStop}
-      className={`flex gap-2 w-full p-2 rounded-md cursor-pointer items-center transition-all relative 
+      className={`relative flex w-full cursor-pointer items-center gap-2 rounded-md p-2 transition-all 
       ${
         currentChatId === id
           ? darkMode
@@ -80,7 +80,7 @@ const SidebarChatListItem = ({
           {assignedAdmin?.slice(0, 2)}
         </Avatar>
       </div>
-      <div className="flex flex-col w-full ">
+      <div className="flex w-full flex-col ">
         <p>{customerName || "New Customer"}</p>
         <div className={`flex justify-between   `}>
           {renderMessage(lastMessage?.type, lastMessage?.content)}

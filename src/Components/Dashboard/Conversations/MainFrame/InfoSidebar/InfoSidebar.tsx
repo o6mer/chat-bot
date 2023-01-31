@@ -21,7 +21,7 @@ const InfoSidebar = ({ currentChatData }: { currentChatData?: TChat }) => {
         <aside
           className={`${
             darkMode ? "bg-darkPrimary" : "bg-primary"
-          } outline-[3px] outline-secondary w-[90%] lg:w-[20%] flex flex-col h-full p-2 absolute lg:static right-0 z-20`}
+          } absolute right-0 z-20 flex h-full w-[90%] flex-col p-2 outline-[3px] outline-secondary lg:static lg:w-[20%]`}
         >
           <InfoSidebarHeader setIsOpen={setIsOpen} />
 
@@ -36,7 +36,7 @@ const InfoSidebar = ({ currentChatData }: { currentChatData?: TChat }) => {
         <button
           className={`absolute top-[50%] right-0 p-1 ${
             darkMode ? "bg-darkSecondary" : "bg-secondary "
-          } rounded-xl shadow-lg hover:bg-gray-300 transition-all`}
+          } rounded-xl shadow-lg transition-all hover:bg-gray-300`}
           onClick={() => setIsOpen(true)}
         >
           <ChevronLeftOutlinedIcon />

@@ -12,7 +12,7 @@ const AddFileKeyboard = () => {
       <Tooltip title="Files" arrow>
         <label
           htmlFor="fileInput"
-          className="cursor-pointer hover:text-gray-500 transition-all"
+          className="cursor-pointer transition-all hover:text-gray-500"
         >
           <AttachFileOutlinedIcon fontSize="small" />
           <input

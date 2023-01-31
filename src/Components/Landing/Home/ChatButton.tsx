@@ -31,7 +31,7 @@ const ChatButton = () => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        className="bg-darkPrimary text-white p-2 rounded-xl fixed bottom-4 right-4 transition-all hover:scale-[1.04]"
+        className="fixed bottom-4 right-4 rounded-xl bg-darkPrimary p-2 text-white transition-all hover:scale-[1.04]"
       >
         {open ? (
           <KeyboardArrowDownOutlinedIcon fontSize="large" />

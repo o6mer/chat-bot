@@ -14,11 +14,11 @@ const CancelButton = ({
 
   return (
     <button
-      className={`gap-1 flex items-center transition-all ${
+      className={`flex items-center gap-1 transition-all ${
         darkMode
           ? "bg-darkPrimary hover:bg-darkSecondary"
           : "bg-primary hover:bg-secondary"
-      }  border-secondary border border-solid px-2 py-1 rounded-lg m-w-16`}
+      }  m-w-16 rounded-lg border border-solid border-secondary px-2 py-1`}
       onClick={onClick}
     >
       <CloseOutlinedIcon fontSize="small" />

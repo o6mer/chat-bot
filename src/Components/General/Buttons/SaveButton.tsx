@@ -8,7 +8,7 @@ const SaveButton = ({
 }) => {
   return (
     <button
-      className="gap-1 flex items-center transition-all bg-green-600 hover:bg-green-500 px-2 py-1 rounded-lg m-w-16 font-bold text-white"
+      className="m-w-16 flex items-center gap-1 rounded-lg bg-green-600 px-2 py-1 font-bold text-white transition-all hover:bg-green-500"
       onClick={onClick}
     >
       <SaveAltOutlinedIcon fontSize="small" />

@@ -22,12 +22,12 @@ const ChatHeader = ({
   const { setChatStatus } = useContext(SocketContext) as TSocketContext;
 
   return (
-    <header className="w-full text-lg p-2 font-bold flex justify-between items-center">
+    <header className="flex w-full items-center justify-between p-2 text-lg font-bold">
       <p>{customerName || "New Customer"}</p>
       <div className="flex items-center gap-2">
         {chatStatus !== "close" && (
           <div
-            className={`px-2 py-1 transition-all rounded-lg flex justify-between items-center gap-1 cursor-pointer text-white ${
+            className={`flex cursor-pointer items-center justify-between gap-1 rounded-lg px-2 py-1 text-white transition-all ${
               darkMode
                 ? "bg-darkSecondary hover:bg-darkThird"
                 : "bg-darkPrimary hover:bg-darkSecondary"
@@ -40,9 +40,9 @@ const ChatHeader = ({
         )}
         {chatStatus !== "open" && (
           <div
-            className={`px-2 py-1 bg-green-600 text-white hover:bg-green-500 transition-all  rounded-lg ${
+            className={`rounded-lg bg-green-600 px-2 py-1 text-white transition-all  hover:bg-green-500 ${
               chatStatus === "open" ? "hidden" : "flex"
-            } justify-between items-center gap-1 cursor-pointer`}
+            } cursor-pointer items-center justify-between gap-1`}
             onClick={() => setChatStatus("open", currentChatId)}
           >
             <LockOpenOutlinedIcon fontSize="small" />

@@ -6,7 +6,7 @@ import Divider from "@mui/material/Divider";
 
 const Chat = ({ currentChatData }: { currentChatData?: TChat }) => {
   return (
-    <div className="h-full p-2 flex flex-col lg:grow">
+    <div className="flex h-full flex-col p-2 lg:grow">
       <ChatHeader
         customerName={currentChatData?.customerName}
         chatStatus={currentChatData?.status}

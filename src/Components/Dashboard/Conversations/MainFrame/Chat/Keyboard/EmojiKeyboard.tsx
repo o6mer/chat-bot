@@ -26,7 +26,7 @@ const EmojiKeyboard = ({
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
-          className="hover:text-gray-500 transition-all"
+          className="transition-all hover:text-gray-500"
         >
           <EmojiEmotionsOutlinedIcon fontSize="small" />
         </button>

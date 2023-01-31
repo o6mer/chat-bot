@@ -3,8 +3,8 @@ import ChatHeader from "./Header/ChatHeader";
 
 const Chat = ({ handleClose }: { handleClose: () => void }) => {
   return (
-    <div className="w-full h-full flex justify-center items-center">
-      <main className="max-w-xs lg:max-w-sm bg-primary">
+    <div className="flex h-full w-full items-center justify-center">
+      <main className="max-w-xs bg-primary lg:max-w-sm">
         <ChatHeader handleClose={handleClose} />
         <ChatField />
       </main>

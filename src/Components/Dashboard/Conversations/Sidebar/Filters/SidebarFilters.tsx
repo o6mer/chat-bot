@@ -49,15 +49,15 @@ const SidebarFilters = ({
   };
 
   return (
-    <section className="w-full flex justify-between px-4 py-2">
-      <div className="flex gap-1 text-sm font-bold items-center cursor-pointer">
+    <section className="flex w-full justify-between px-4 py-2">
+      <div className="flex cursor-pointer items-center gap-1 text-sm font-bold">
         <button
           id="filter"
           aria-controls={filterOpen ? "filter-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={filterOpen ? "true" : undefined}
           onClick={handleClick}
-          className="flex gap-1 text-sm font-bold items-center capitalize"
+          className="flex items-center gap-1 text-sm font-bold capitalize"
         >
           <p className="">{chatListLength}</p>
           <p>{filter}</p>
@@ -85,14 +85,14 @@ const SidebarFilters = ({
         {/* <p>Open</p>
         <TuneOutlinedIcon fontSize="small" /> */}
       </div>
-      <div className="flex gap-1 text-sm font-bold items-center cursor-pointer">
+      <div className="flex cursor-pointer items-center gap-1 text-sm font-bold">
         <button
           id="sort"
           aria-controls={sortOpen ? "sort-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={sortOpen ? "true" : undefined}
           onClick={handleClick}
-          className="flex gap-1 text-sm font-bold items-center capitalize"
+          className="flex items-center gap-1 text-sm font-bold capitalize"
         >
           <p>{sortBy}</p>
           <ExpandMoreOutlinedIcon fontSize="small" />

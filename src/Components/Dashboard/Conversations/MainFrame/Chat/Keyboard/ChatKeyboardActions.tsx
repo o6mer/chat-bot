@@ -11,14 +11,14 @@ const ChatKeyboardActions = ({
   setMessage: React.Dispatch<React.SetStateAction<string | undefined>>;
 }) => {
   return (
-    <div className="w-full flex justify-between  items-center text-gray-600">
+    <div className="flex w-full items-center  justify-between text-gray-600">
       <div className="flex gap-1">
         <AddFileKeyboard />
         <EmojiKeyboard setMessage={setMessage} />
         <TemplatesKeyboard setMessage={setMessage} />
       </div>
       <Tooltip title="Send" arrow>
-        <button type="submit" className="hover:text-gray-500 transition-all">
+        <button type="submit" className="transition-all hover:text-gray-500">
           <SendOutlinedIcon fontSize="small" />
         </button>
       </Tooltip>

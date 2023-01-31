@@ -34,7 +34,7 @@ const TemplateEditor = () => {
           setSelectedTemplate={setSelectedTemplate}
         />
       ) : (
-        <div className="flex grow h-full justify-center items-center">
+        <div className="flex h-full grow items-center justify-center">
           Please Select a Template
         </div>
       )}

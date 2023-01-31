@@ -23,7 +23,7 @@ const ChatKeyboard = ({
 
   return (
     <form action="" onSubmit={submitHandler}>
-      <div className="w-full flex justify-between gap-2 p-2">
+      <div className="flex w-full justify-between gap-2 p-2">
         <StyledInput
           placeholder="Write a message..."
           type="text"
@@ -32,7 +32,7 @@ const ChatKeyboard = ({
           styles="w-full"
         />
         <Tooltip title="Send" arrow>
-          <button type="submit" className="hover:text-gray-500 transition-all">
+          <button type="submit" className="transition-all hover:text-gray-500">
             <SendOutlinedIcon fontSize="small" />
           </button>
         </Tooltip>

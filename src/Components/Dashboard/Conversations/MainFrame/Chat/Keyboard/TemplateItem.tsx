@@ -26,7 +26,7 @@ const TemplateItem = ({
 
   return (
     <li
-      className={`w-full p-1 cursor-pointer hover:bg-gray-200 transition-all rounded-lg${
+      className={`w-full cursor-pointer p-1 transition-all hover:bg-gray-200 rounded-lg${
         selectedTemplate?.id === id && "bg-gray-200 hover:bg-gray-300"
       }`}
       onClick={(e) => {

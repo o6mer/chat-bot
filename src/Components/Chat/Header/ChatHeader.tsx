@@ -2,13 +2,13 @@ import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 const ChatHeader = ({ handleClose }: { handleClose: () => void }) => {
   return (
-    <section className="flex justify-between items-center bg-darkPrimary text-white px-4 py-2 ">
+    <section className="flex items-center justify-between bg-darkPrimary px-4 py-2 text-white ">
       <div className="flex items-center">
         <SupportAgentOutlinedIcon fontSize="medium" />
         <p className="text-lg">Helpster</p>
       </div>
       <button
-        className="cursor-pointer hover:text-third transition-all"
+        className="cursor-pointer transition-all hover:text-third"
         onClick={handleClose}
       >
         <CloseOutlinedIcon fontSize="medium" />

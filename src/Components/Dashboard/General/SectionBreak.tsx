@@ -1,6 +1,6 @@
 const SectionBreak = () => {
   return (
-    <div className="w-full h-[1px] bg-[#cccccc2c] px-1 my-2 rounded-xl "></div>
+    <div className="my-2 h-[1px] w-full rounded-xl bg-[#cccccc2c] px-1 "></div>
   );
 };
 

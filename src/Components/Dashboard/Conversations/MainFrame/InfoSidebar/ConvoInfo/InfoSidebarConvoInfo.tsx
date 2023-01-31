@@ -17,8 +17,8 @@ const InfoSidebarConvoInfo = ({
   };
 
   return (
-    <div className="w-full flex flex-col grow">
-      <header className="w-full flex justify-between items-center p-2">
+    <div className="flex w-full grow flex-col">
+      <header className="flex w-full items-center justify-between p-2">
         <p className="text-sm font-bold">Conversation Details</p>
         <button type="button" onClick={toggleExpand}>
           {isExpand ? (
@@ -29,12 +29,12 @@ const InfoSidebarConvoInfo = ({
         </button>
       </header>
       <Collapse in={isExpand} timeout="auto" unmountOnExit>
-        <div className="w-full p-2 flex flex-col  text-sm">
-          <div className="w-full flex justify-between items-center p-2 gap-2">
+        <div className="flex w-full flex-col p-2  text-sm">
+          <div className="flex w-full items-center justify-between gap-2 p-2">
             <p>id</p>
             <p>{id}</p>
           </div>
-          <div className="w-full flex justify-between items-center p-2">
+          <div className="flex w-full items-center justify-between p-2">
             <p>Creation Time</p>
             <p>{creationTime?.toString()}</p>
           </div>

@@ -12,7 +12,7 @@ const ChatMain = ({ messages }: { messages?: Array<TMessage> }) => {
   }, [messages]);
 
   return (
-    <div className=" h-full flex flex-col gap-1 overflow-y-scroll dashboard-scrollbar p-2">
+    <div className=" dashboard-scrollbar flex h-full flex-col gap-1 overflow-y-scroll p-2">
       {messages?.map((message: TMessage, index) => {
         if (!message) return;
         if (message?.type === "text")

@@ -15,14 +15,14 @@ const SideBar = ({
   const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
 
   return (
-    <aside className="w-[15%] h-full hidden lg:block">
+    <aside className="hidden h-full w-[15%] lg:block">
       <header className="p-2">
-        <p className="font-bold text-xl">Settings</p>
+        <p className="text-xl font-bold">Settings</p>
       </header>
       <Divider />
-      <ul className="h-full flex flex-col p-2">
+      <ul className="flex h-full flex-col p-2">
         <li
-          className={`p-2 cursor-pointer ${
+          className={`cursor-pointer p-2 ${
             "general" === selectedCategory
               ? darkMode
                 ? "bg-darkSecondary hover:bg-darkThird"
@@ -38,7 +38,7 @@ const SideBar = ({
           General
         </li>
         <li
-          className={`p-2 cursor-pointer ${
+          className={`cursor-pointer p-2 ${
             "user" === selectedCategory
               ? darkMode
                 ? "bg-darkSecondary hover:bg-darkThird"

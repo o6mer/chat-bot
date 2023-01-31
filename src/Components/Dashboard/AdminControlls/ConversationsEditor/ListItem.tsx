@@ -57,16 +57,16 @@ const ListItem = ({
     >
       <div
         ref={nodeRef}
-        className={`flex flex-col flex-wrap max-w-md p-8 shadow-lg absolute transition-all h-min  rounded-lg  ${
+        className={`absolute flex h-min max-w-md flex-col flex-wrap rounded-lg p-8 shadow-lg  transition-all  ${
           darkMode ? "bg-darkSecondary text-white" : "bg-secondary text-black"
         }  w-fit ${
-          conversation.id === "main" && "border-secondary  border-solid border"
+          conversation.id === "main" && "border  border-solid border-secondary"
         }`}
         onMouseEnter={() => !editMode && setIsHover(true)}
         onMouseLeave={() => !editMode && setIsHover(false)}
       >
         <strong
-          className="cursor-move absolute top-0 left-[50%] rotate-90"
+          className="absolute top-0 left-[50%] rotate-90 cursor-move"
           ref={nodeRef}
         >
           <DragIndicatorOutlinedIcon />
@@ -84,7 +84,7 @@ const ListItem = ({
             <div>
               <p>Question: {conversation.question}</p>
               <p>Response: {conversation.response}</p>
-              <ul className="flex flex-col list-disc ">
+              <ul className="flex list-disc flex-col ">
                 {conversation.followUp.length ? (
                   conversation.followUp.map((followUp, index) => {
                     return (
@@ -112,11 +112,11 @@ const ListItem = ({
               <div
                 className={`${
                   isHover ? "opacity-100" : "opacity-0"
-                } absolute top-2 right-2 justify-end h-max  transition-all `}
+                } absolute top-2 right-2 h-max justify-end  transition-all `}
               >
                 <Tooltip title="Edit" arrow>
                   <button
-                    className="transition-all hover:text-gray-700 fill-white"
+                    className="fill-white transition-all hover:text-gray-700"
                     onClick={onEditClicked}
                   >
                     <EditOutlinedIcon fontSize="small" />
@@ -124,7 +124,7 @@ const ListItem = ({
                 </Tooltip>
                 <Tooltip title="Delete" arrow>
                   <button
-                    className="transition-all hover:text-gray-700 fill-white"
+                    className="fill-white transition-all hover:text-gray-700"
                     onClick={onDeleteClicked}
                   >
                     <DeleteOutlineOutlinedIcon fontSize="small" />

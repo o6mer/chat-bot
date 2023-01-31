@@ -58,7 +58,7 @@ const TemplatesKeyboard = ({
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
-          className="hover:text-gray-500 transition-all"
+          className="transition-all hover:text-gray-500"
         >
           <BookOutlinedIcon fontSize="small" />
         </button>
@@ -81,10 +81,10 @@ const TemplatesKeyboard = ({
           horizontal: "left",
         }}
       >
-        <div className="w-96 flex flex-col p-2 gap-2 h-80">
+        <div className="flex h-80 w-96 flex-col gap-2 p-2">
           <div>
             <input
-              className="border-secondary border border-solid w-full"
+              className="w-full border border-solid border-secondary"
               type="text"
               placeholder="Search template..."
               onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -95,7 +95,7 @@ const TemplatesKeyboard = ({
             />
           </div>
           <div className="flex overflow-y-hidden">
-            <ul className=" flex flex-col w-[30%] overflow-y-scroll dashboard-scrollbar px-1">
+            <ul className=" dashboard-scrollbar flex w-[30%] flex-col overflow-y-scroll px-1">
               {filteredTemplateList?.length ? (
                 filteredTemplateList
                   ?.sort((a: TTemplate, b: TTemplate) => {
@@ -120,7 +120,7 @@ const TemplatesKeyboard = ({
                 <p>template not found...</p>
               )}
             </ul>
-            <div className="flex flex-wrap grow p-2">
+            <div className="flex grow flex-wrap p-2">
               {filteredTemplateList?.length ? selectedTemplate?.content : ""}
             </div>
           </div>

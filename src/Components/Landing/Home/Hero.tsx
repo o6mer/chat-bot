@@ -4,10 +4,10 @@ import logo from "../../../Assets/logo.svg";
 
 const Hero = () => {
   return (
-    <section className="w-full h-screen text-black flex flex-col  flex-grow items-center">
-      <div className="flex flex-col h-full justify-center items-center max-w-3xl gap-8">
-        <div className="flex flex-col justify-center text-center gap-4">
-          <header className="font-bold text-7xl">
+    <section className="flex h-screen w-full flex-grow flex-col  items-center text-black">
+      <div className="flex h-full max-w-3xl flex-col items-center justify-center gap-8">
+        <div className="flex flex-col justify-center gap-4 text-center">
+          <header className="text-7xl font-bold">
             Support customers at exactly the right moment
           </header>
           <p className="text-2xl">
@@ -16,10 +16,10 @@ const Hero = () => {
             they’re already using your product, app, or website.
           </p>
         </div>
-        <div className="flex text-2xl font-bold gap-2">
+        <div className="flex gap-2 text-2xl font-bold">
           <Link
             to={"/login"}
-            className="bg-darkPrimary text-white hover:bg-darkSecondary text-3xl px-4 py-2 rounded-lg transition-all"
+            className="rounded-lg bg-darkPrimary px-4 py-2 text-3xl text-white transition-all hover:bg-darkSecondary"
           >
             Get Started{" "}
           </Link>

@@ -24,7 +24,7 @@ const StyledInput = ({
       onChange={onChange}
       value={value}
       type={type}
-      className={`min-w-0 p-1 border-secondary border border-solid rounded-lg ${styles}`}
+      className={`min-w-0 rounded-lg border border-solid border-secondary p-1 ${styles}`}
       placeholder={placeholder}
     />
   );

@@ -83,12 +83,12 @@ const Options = ({ selectedCategory }: { selectedCategory: string }) => {
 
   return (
     <ThemeProvider theme={switchTheme}>
-      <div className="flex flex-col h-fit px-2 lg:px-16 py-4 w-full overflow-y-scroll dashboard-scrollbar">
+      <div className="dashboard-scrollbar flex h-fit w-full flex-col overflow-y-scroll px-2 py-4 lg:px-16">
         <section className="py-2" id="general">
-          <p className="uppercase font-bold text-lg" id="general">
+          <p className="text-lg font-bold uppercase" id="general">
             General
           </p>
-          <div className=" px-4 py-2 flex items-center justify-between w-full">
+          <div className=" flex w-full items-center justify-between px-4 py-2">
             <p>Dark Mode </p>
             <Switch
               checked={darkMode}
@@ -104,10 +104,10 @@ const Options = ({ selectedCategory }: { selectedCategory: string }) => {
             <LoadingPage />
           ) : (
             <>
-              <p className="uppercase font-bold text-lg" id="general">
+              <p className="text-lg font-bold uppercase" id="general">
                 User
               </p>
-              <div className="flex items-center gap-1 justify-between w-full px-4 py-2">
+              <div className="flex w-full items-center justify-between gap-1 px-4 py-2">
                 <label htmlFor="email" className="">
                   Email
                 </label>
@@ -124,7 +124,7 @@ const Options = ({ selectedCategory }: { selectedCategory: string }) => {
                   <p>{user?.email}</p>
                 )}
               </div>
-              <div className="flex items-center gap-1 justify-between w-full px-4 py-2">
+              <div className="flex w-full items-center justify-between gap-1 px-4 py-2">
                 <label htmlFor="email" className="">
                   User Name
                 </label>
@@ -141,7 +141,7 @@ const Options = ({ selectedCategory }: { selectedCategory: string }) => {
                   <p>{user?.username}</p>
                 )}
               </div>
-              <div className="flex items-center gap-1 justify-between w-full px-4 py-2">
+              <div className="flex w-full items-center justify-between gap-1 px-4 py-2">
                 <label htmlFor="email" className="">
                   Role
                 </label>

@@ -50,14 +50,14 @@ const SidebarChatsList = ({
   }
 
   return (
-    <section className={`w-full h-full overflow-y-scroll dashboard-scrollbar `}>
-      <ul className="h-full flex flex-col ">
+    <section className={`dashboard-scrollbar h-full w-full overflow-y-scroll `}>
+      <ul className="flex h-full flex-col ">
         {sortedList?.length ? (
           sortedList?.map((chat, index) => {
             return <SidebarChatListItem {...chat} key={chat.id || index} />;
           })
         ) : (
-          <p className="flex w-full h-full justify-center items-center">
+          <p className="flex h-full w-full items-center justify-center">
             No new chats
           </p>
         )}

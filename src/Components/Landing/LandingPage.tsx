@@ -8,7 +8,7 @@ import { Fade } from "react-awesome-reveal";
 
 const LandingPage = () => {
   return (
-    <main className="flex flex-col h-max relative z-0">
+    <main className="relative z-0 flex h-max flex-col">
       <NavigationBar />
       <Fade>
         <Hero />

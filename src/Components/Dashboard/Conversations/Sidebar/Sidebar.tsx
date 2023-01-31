@@ -29,7 +29,7 @@ const SideBar = ({
     <>
       {isSideBarOpen ? (
         <aside
-          className={`flex flex-col h-full w-[90%] absolute lg:static left-0 z-20 lg:w-[20%] p-2 outline-[3px] outline-secondary  ${
+          className={`absolute left-0 z-20 flex h-full w-[90%] flex-col p-2 outline-[3px] outline-secondary lg:static lg:w-[20%]  ${
             darkMode ? "bg-darkPrimary" : "bg-primary"
           }`}
         >
@@ -47,9 +47,9 @@ const SideBar = ({
         </aside>
       ) : (
         <button
-          className={`absolute top-[50%] left-0 p-1 z-10 ${
+          className={`absolute top-[50%] left-0 z-10 p-1 ${
             darkMode ? "bg-darkSecondary" : "bg-secondary "
-          } rounded-xl shadow-lg hover:bg-gray-300 transition-all`}
+          } rounded-xl shadow-lg transition-all hover:bg-gray-300`}
           onClick={() => setIsSideBarOpen(true)}
         >
           <ChevronRightOutlinedIcon />
