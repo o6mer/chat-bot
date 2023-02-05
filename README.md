@@ -13,7 +13,7 @@ https://helpster-bot.netlify.app/
 * [Setup](#setup)
 
 ## General Info
-Helpster is a platform for companies to easly monitor it's customers questions and requests. With an easy to use chat-bot that can answer frequently asked questions. Also, for your representatives, a complete dashboard to answer and monitor all the conversations, easily change that bot conversation and advanced messeging options.
+Helpster is a platform for companies to easily monitor its customers' questions and requests. With an easy-to-use chatbot that can answer frequently asked questions, and for your representatives, a complete dashboard to answer and monitor all conversations, easily change the bot's conversation and advanced messaging options.
 
 ## Technologies
 * React.js
