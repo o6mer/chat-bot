@@ -5,7 +5,7 @@ import {
 } from "../../Contexts/DashbaordContext";
 import { TMessage } from "../../Types/Types";
 
-const ChatMessage = ({ writer, time, children }: TMessage) => {
+const ChatMessage = ({ writer, time, content, children }: TMessage) => {
   const { darkMode } = useContext(DashboardContext) as TDashbaordContext;
 
   return (
@@ -25,8 +25,9 @@ const ChatMessage = ({ writer, time, children }: TMessage) => {
             : "bg-secondary"
         }`}
       >
-        <>{children}</>
+        <p>{content}</p>
       </div>
+      {children}
       <div className="flex text-xs text-darkThird">
         <p className="">{writer} - </p>
         <p>{time.toString()}</p>
