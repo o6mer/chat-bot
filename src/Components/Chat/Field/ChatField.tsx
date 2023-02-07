@@ -56,7 +56,9 @@ const ChatField = () => {
           <ChatKeyboard sendMessage={sendMessage} />
         </>
       ) : (
-        <LoadingPage />
+        <div className="w-full max-w-xs">
+          <LoadingPage />
+        </div>
       )}
     </section>
   );
