@@ -8,6 +8,7 @@ import {
   SocketContextUser,
   TSocketContextUser,
 } from "../../../Contexts/SocketContextUser";
+import LoadingPage from "../../Dashboard/General/LoadingPage";
 
 const ChatField = () => {
   const { socket, messagesList, chooseFollowUp, sendMessage } = useContext(
@@ -23,7 +24,7 @@ const ChatField = () => {
 
   return (
     <section className="">
-      {socket ? (
+      {messagesList.length ? (
         <>
           <div className="dashboard-scrollbar flex h-80 w-full flex-col gap-1 overflow-y-scroll p-2">
             {messagesList?.map((message: TMessage, index: number) => {
@@ -55,7 +56,7 @@ const ChatField = () => {
           <ChatKeyboard sendMessage={sendMessage} />
         </>
       ) : (
-        <h1>Loading...</h1>
+        <LoadingPage />
       )}
     </section>
   );
